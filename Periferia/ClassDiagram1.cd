@@ -10,7 +10,7 @@
   <Class Name="Periferia.Kartta">
     <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAAAAgAAgAAAAAAAIAgAAAAAAAJAAAAAAAgA=</HashCode>
       <FileName>Kartta.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -24,58 +24,58 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAQAAQAAAAAAAA=</HashCode>
+      <HashCode>QAAAAAAAAAQIAAAgAAAAAAAAAEAAAAAQAAQAgAAAAAA=</HashCode>
       <FileName>Karttaruutu.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Periferia.Pelaaja">
-    <Position X="5.25" Y="0.75" Width="1.5" />
+    <Position X="4.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <HashCode>QAADAAAAAAQAAAAgAAAAAAAIQEAAAAAgAAAAgAACAAA=</HashCode>
       <FileName>Pelaaja.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Periferia.Vihollinen">
-    <Position X="5.25" Y="2.75" Width="1.5" />
+    <Position X="6.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>QAACAAAAAAQAAAAgAAAACAAIQEAAAAAgAAAAgAAAAAA=</HashCode>
       <FileName>Vihollinen.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Periferia.Tavara">
-    <Position X="5.25" Y="4.5" Width="1.5" />
+    <Position X="8" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>QAAAAAAAAAQAAAAgAAAAAAAAAEAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>Tavara.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Periferia.Konsoli">
-    <Position X="0.5" Y="4" Width="1.5" />
+    <Position X="0.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABACAAAABQAgAAAAAAAAAIACAgAAAAIAAAAAAAAAA=</HashCode>
+      <HashCode>AAEBACAAAABQAgAAAAAAAAAIACAgAAAAIAAAAAAAAAA=</HashCode>
       <FileName>Konsoli.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="Periferia.IHahmo">
-    <Position X="9" Y="3" Width="1.5" />
+    <Position X="10.75" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAAIQAAAAAAgAAAAAAAAAAA=</HashCode>
       <FileName>IHahmo.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Periferia.IPiirrettävä">
-    <Position X="9" Y="0.5" Width="1.5" />
+    <Position X="10.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAAAAAAAAAAAAgAAAAAAAAAEAAAAAAAAAAgAAAYAA=</HashCode>
+      <HashCode>QAAAAAAAAAQAAAAgAAAAAAAAAEAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>IPiirrettävä.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Periferia.ITavara">
-    <Position X="10.75" Y="0.5" Width="1.5" />
+    <Position X="10.75" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ITavara.cs</FileName>

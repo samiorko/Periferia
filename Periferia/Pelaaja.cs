@@ -14,8 +14,8 @@ namespace Periferia
         public int HP { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool OnkoYstävä { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool OnkoTekoäly { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int X { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Y { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Sarake { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Rivi { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public char Merkki { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public ConsoleColor Väri { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string Nimi { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

@@ -7,18 +7,30 @@ namespace Periferia
 {
     public class Karttaruutu : IPiirrettävä
     {
-        public bool Käveltävä { get; set; }
+        public bool Käveltävä
+        {
+            get
+            {
+                if (Tyyppi != Ruututyypit.TYHJÄ)
+                    return false;
+                if (Entiteetti is IHahmo)
+                    return false;
+                return true;
+            }
+        }
+
         public Ruututyypit Tyyppi { get; set; }
         public IPiirrettävä Entiteetti { get; set; }
-        public int X { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Y { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public char Merkki { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ConsoleColor Väri { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Nimi { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Sarake { get; set; }
+        public int Rivi { get; set; }
+        public char Merkki { get; set; }
+        public ConsoleColor Väri { get; set; } = ConsoleColor.White;
+        public string Nimi { get; set; }
 
         public void Piirrä(Kartta k)
         {
-            throw new NotImplementedException();
+            Console.ForegroundColor = Väri;
+            Console.Write(Merkki);
         }
 
         public enum Ruututyypit

@@ -7,8 +7,8 @@ namespace Periferia
 {
     public interface IPiirrettävä
     {
-        int X { get; set; } 
-        int Y { get; set; }
+        int Rivi { get; set; }
+        int Sarake { get; set; } 
         char Merkki { get; set; }
         ConsoleColor Väri { get; set; }
         string Nimi { get; set; }

@@ -20,7 +20,7 @@ namespace Periferia
 
         public void PiirräTyhjäKartta(Kartta k)
         {
-
+            k.Piirrä(0, 0);
         }
 
         public void PiirräKartalle(Kartta k, IPiirrettävä p)
