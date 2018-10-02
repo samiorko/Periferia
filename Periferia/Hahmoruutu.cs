@@ -48,7 +48,7 @@ namespace Periferia
             {
                 if (i < PropertynKoko / 10)
                 {
-                    palkki += "|";
+                    palkki += '▮';
                 }
                 else
                     palkki += " ";

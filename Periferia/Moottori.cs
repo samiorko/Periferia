@@ -29,6 +29,7 @@ namespace Periferia
             Konsoli k = new Konsoli();
             Konsoli.AlustaKonsoli();
             Moottori.NykyinenKartta = Kartta.LuoKartta();
+            
 
 
             bool pelijatkuu = true;
@@ -39,10 +40,13 @@ namespace Periferia
 
                 k.PiirräKartta(Moottori.NykyinenKartta);
                 k.PiirräHahmoRuutu();
+                k.PiirräLoki();
 
                 Konsoli.NollaaKursori();
 
                 pelaajanVuoro();
+                Konsoli.Viestiloki.Lisää("Vihollisen vuoro, paina space");
+                
                 vihollistenVuoro();
 
             }
