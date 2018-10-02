@@ -74,9 +74,77 @@ namespace Periferia
             Console.SetCursorPosition(0, 0);
         }
 
-        static public void PiirräReunat()
-        {
-            //Periferia.Hahmoruutu.
+        static public void PiirräReunatStringWriter(int vasenYläkulma_SarakeNro, int vasenYläkulma_RiviNro, int rivimäärä, int sarakemäärä)
+        {  // Piirtää reunat objekteille StringWriterin avulla
+
+            StringBuilder reunanpiirtäjä = new StringBuilder();
+
+            Console.SetCursorPosition(vasenYläkulma_SarakeNro - 2, vasenYläkulma_RiviNro - 1);
+            reunanpiirtäjä.Append("╔");
+            for (int i = 0; i < sarakemäärä; i++)
+            {
+                reunanpiirtäjä.Append("═");                         // yläreuna
+            }
+            reunanpiirtäjä.Append("╗" + Environment.NewLine);
+            LisääSisennys(vasenYläkulma_SarakeNro - 2);
+            for (int j = 0; j <= rivimäärä - 1; j++)
+            {
+                reunanpiirtäjä.Append("║");                         // vasen reuna
+                for (int k = 0; k < sarakemäärä; k++)
+                {
+                    reunanpiirtäjä.Append(" ");
+                }
+                reunanpiirtäjä.Append("║" + Environment.NewLine);   // oikea reuna
+                LisääSisennys(vasenYläkulma_SarakeNro - 2);
+            }
+            reunanpiirtäjä.Append("╚");
+            for (int i = 0; i < sarakemäärä; i++)
+            {
+                reunanpiirtäjä.Append("═");                         // alarauna
+            }
+            reunanpiirtäjä.Append("╝");
+            Console.Write(reunanpiirtäjä);
+
+            // apumuuttuja sisennysten tekoon:
+            void LisääSisennys(int sisennys)
+            {
+                for (int i = 0; i < vasenYläkulma_SarakeNro - 2; i++)
+                    reunanpiirtäjä.Append(" ");
+            }
+        }
+
+        static public void PiirräReunatConsole(int vasenYläkulma_SarakeNro, int vasenYläkulma_RiviNro, int rivimäärä, int sarakemäärä)
+        {  // Piirtää reunat objekteille suoraan Consolella
+
+            Console.SetCursorPosition(vasenYläkulma_SarakeNro - 2, vasenYläkulma_RiviNro - 1);
+
+            Console.Write("╔");                             
+            for (int i = 0; i < sarakemäärä; i++)
+            {
+                Console.Write("═");                         // yläreuna
+            }
+            Console.Write("╗");
+            for (int j = 0; j <= rivimäärä; j++)
+            {
+                Konsoli.UusiRivi(vasenYläkulma_SarakeNro - 2);
+                Console.Write("║");                         // vasen reuna
+
+                for (int k = 0; k < sarakemäärä; k++)
+                {
+                    Console.Write(" ");
+                }
+                Console.Write("║");                         // oikea reuna
+            }
+            Konsoli.UusiRivi(vasenYläkulma_SarakeNro - 2);
+            Console.Write("╚");
+            for (int i = 0; i < sarakemäärä; i++)
+            {
+                Console.Write("═");                         // alareuna
+            }
+            Console.Write("╝");
         }
     }
+
+
+
 }

@@ -14,7 +14,7 @@ namespace Periferia
         {
             Väri = ConsoleColor.Yellow,
             Merkki = '@',
-            HP = 25,
+            HP = 71,
             Nesteytys = 100,
             Nimi = "Pekka",
             Voima = 50,
@@ -37,11 +37,11 @@ namespace Periferia
             while (pelijatkuu)
             {
                 Konsoli.TyhjennäKonsoli();
-
-
-                k.PiirräKartta(Moottori.NykyinenKartta);
+                
                 k.PiirräHahmoRuutu();
                 k.PiirräLoki();
+                k.PiirräKartta(Moottori.NykyinenKartta);
+                //Konsoli.PiirräReunat();
 
                 Konsoli.NollaaKursori();
 

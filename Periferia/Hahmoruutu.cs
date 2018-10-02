@@ -10,7 +10,11 @@ namespace Periferia
     {
         public void Piirrä(int kursoriVasen, int kursoriYlä)
         {
+            int hahmoruudunMaxLeveys = 25;
+
             Console.SetCursorPosition(kursoriVasen, kursoriYlä); // Asetetaan kursorin aloituspaikka
+            Konsoli.PiirräReunatStringWriter(kursoriVasen, kursoriYlä, 19, hahmoruudunMaxLeveys);
+            Console.SetCursorPosition(kursoriVasen, kursoriYlä);
 
             Console.Write("Pelaaja " + Moottori.Pelaaja.Merkki + ": " + Moottori.Pelaaja.Nimi);
             Konsoli.UusiRivi(kursoriVasen);
@@ -47,32 +51,41 @@ namespace Periferia
                 Console.Write(" = " + entiteetti.Nimi);
                 Konsoli.UusiRivi(kursoriVasen);
             }
+
         }
 
         public string PiirräPalkki(int PropertynKoko)
         {
-            string palkki = "[";
+            //Console.OutputEncoding = System.Text.Encoding.UTF8;
+            string palkki = "\u2502";
             //Console.ForegroundColor = ConsoleColor.Magenta;
 
             for (int i = 0; i < 10; i++)
             {
-                if (i < PropertynKoko / 10)
+                if (PropertynKoko >= 10)
                 {
-                    palkki += '▮';
+                    palkki += '\u2588';
+                    PropertynKoko -= 10;
+
+                }
+                else if (PropertynKoko < 10 && PropertynKoko > 0)
+                {
+                    palkki += '\u258C';
+                    PropertynKoko = 0;
                 }
                 else
                     palkki += " ";
             }
             //Console.ResetColor();
 
-            return palkki += "]";
+            return palkki += "\u2502";
         }
 
         public void NäytäSisältö(int kursoriVasen)
         {
             // Miten tulostus, jos repussa paljon tavaraa??
             if (Moottori.Pelaaja.Reppu.Count > 0)
-            {               
+            {
                 int i = 0;
                 while (i < 3)
                 {
