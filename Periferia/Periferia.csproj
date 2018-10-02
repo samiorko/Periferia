@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="Hahmo.cs" />
     <Compile Include="Hahmoruutu.cs" />
-    <Compile Include="IHahmo.cs" />
     <Compile Include="IPiirrettävä.cs" />
     <Compile Include="ITavara.cs" />
     <Compile Include="Kartta.cs" />

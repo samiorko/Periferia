@@ -13,7 +13,7 @@ namespace Periferia
             {
                 if (Tyyppi != Ruututyypit.TYHJÄ)
                     return false;
-                if (Entiteetti is IHahmo)
+                if (Entiteetti is Hahmo)
                     return false;
                 return true;
             }

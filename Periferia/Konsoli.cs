@@ -24,12 +24,14 @@ namespace Periferia
 
         public void PiirräKartta(Kartta k)
         {
+            Console.ResetColor();
             k.Piirrä();
         }
 
 
         public void PiirräLoki()
         {
+            Console.ResetColor();
             // alustetaan kursorin sijainti
             int KursoriVasen = 2;
             int KursoriYlä = 0;
@@ -40,6 +42,7 @@ namespace Periferia
 
         public void PiirräHahmoRuutu()
         {
+            Console.ResetColor();
             Hahmoruutu.Piirrä(HahmoRuutuOffset_Vasen, HahmoRuutuOffset_Ylä);
         }
 
@@ -55,6 +58,7 @@ namespace Periferia
             Console.SetBufferSize(KonsoliLeveys, KonsoliKorkeus);
             Console.SetCursorPosition(0, 0);
             TyhjennäKonsoli();
+            Console.ResetColor();
         }
 
         static public void TyhjennäKonsoli()
