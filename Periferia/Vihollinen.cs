@@ -72,6 +72,17 @@ namespace Periferia
                     if (!liikeY(etäisyysY))
                         liikeX(etäisyysX);
                 }
+                else
+                {
+                    if(Moottori.Pelaaja.ViimeisinSuunta == Liikesuunnat.VASEN || Moottori.Pelaaja.ViimeisinSuunta == Liikesuunnat.OIKEA)
+                    {
+                        liikeY(etäisyysY);
+                    }
+                    else
+                    {
+                        liikeX(etäisyysX);
+                    }
+                }
                 
             }
 
