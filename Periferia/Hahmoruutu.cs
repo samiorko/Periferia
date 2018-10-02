@@ -10,7 +10,7 @@ namespace Periferia
     {
         public void Piirrä(int kursoriVasen, int kursoriYlä)
         {
-
+             
         }
     }
 }
