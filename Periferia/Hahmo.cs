@@ -70,5 +70,11 @@ namespace Periferia
 
             return true;
         }
+
+        public void Piirrä()
+        {
+            Console.ForegroundColor = this.Väri;
+            Console.Write(this.Merkki);
+        }
     }
 }

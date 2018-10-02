@@ -30,7 +30,7 @@ namespace Periferia
                 int KursoriYlä = r.Rivi + Konsoli.KarttaOffset_Ylä;
                 int KursoriVasen = r.Sarake + Konsoli.KarttaOffset_Vasen;
                 Console.SetCursorPosition(KursoriVasen, KursoriYlä);
-                r.Piirrä(this);
+                r.Piirrä();
             }
 
             PiirräEntiteetit();
@@ -53,8 +53,7 @@ namespace Periferia
         private void PiirräEntiteetti(IPiirrettävä p)
         {
             Console.SetCursorPosition(Konsoli.KarttaOffset_Vasen + p.Sarake, Konsoli.KarttaOffset_Ylä + p.Rivi);
-            Console.ForegroundColor = p.Väri;
-            Console.Write(p.Merkki);
+            p.Piirrä();
         }
             
         static public Kartta LuoKartta()

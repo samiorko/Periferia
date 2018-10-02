@@ -27,7 +27,7 @@ namespace Periferia
         public ConsoleColor Väri { get; set; } = ConsoleColor.White;
         public string Nimi { get; set; }
 
-        public void Piirrä(Kartta k)
+        public void Piirrä()
         {
             Console.ForegroundColor = Väri;
             Console.Write(Merkki);

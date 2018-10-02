@@ -13,6 +13,5 @@ namespace Periferia
         public List<Tavara> Reppu { get; set; }
 
 
-
     }
 }
