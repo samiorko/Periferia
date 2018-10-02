@@ -7,7 +7,7 @@ namespace Periferia
 {
     public interface IPiirrettävä
     {
-        int X { get; set; }
+        int X { get; set; } 
         int Y { get; set; }
         char Merkki { get; set; }
         ConsoleColor Väri { get; set; }
