@@ -7,12 +7,17 @@ namespace Periferia
 {
     public class Vihollinen : Hahmo, IHahmo, IPiirrettävä
     {
-      
 
+        public Vihollinen()
+        {
+            OnkoTekoäly = true;
+        }
 
         public void Tekoäly()
         {
-            throw new System.NotImplementedException();
+            int etäisyysX = Math.Abs(Moottori.Pelaaja.Sarake - this.Sarake);
+            int etäisyysY = Math.Abs(Moottori.Pelaaja.Rivi - this.Rivi);
+            
         }
     }
 }
