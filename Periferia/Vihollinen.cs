@@ -17,10 +17,6 @@ namespace Periferia
         public ConsoleColor Väri { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string Nimi { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public void Piirrä(Kartta k)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Tekoäly()
         {

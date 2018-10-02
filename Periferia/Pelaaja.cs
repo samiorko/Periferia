@@ -10,19 +10,16 @@ namespace Periferia
         public int Nesteytys { get; set; }
 
         public List<Tavara> Reppu { get; set; }
-        public int Voima { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int HP { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool OnkoYstävä { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool OnkoTekoäly { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Sarake { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Rivi { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public char Merkki { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ConsoleColor Väri { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Nimi { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Voima { get; set; }
+        public int HP { get; set; }
+        public bool OnkoYstävä { get; set; }
+        public bool OnkoTekoäly { get; set; }
+        public int Sarake { get; set; }
+        public int Rivi { get; set; }
+        public char Merkki { get; set; }
+        public ConsoleColor Väri { get; set; }
+        public string Nimi { get; set; }
 
-        public void Piirrä(Kartta k)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

@@ -13,6 +13,8 @@ namespace Periferia
             Konsoli k = new Konsoli();
             Kartta kartta = Kartta.LuoKartta();
 
+            Konsoli.AlustaKonsoli();
+
             k.Piirr‰Tyhj‰Kartta(kartta);
 
 
@@ -38,6 +40,8 @@ namespace Periferia
 
 
 
+
+            Konsoli.NollaaKursori();
 
             Console.ReadKey();
         }

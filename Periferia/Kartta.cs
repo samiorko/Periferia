@@ -10,6 +10,7 @@ namespace Periferia
     {
         const int KARTTALEVEYS = 20;
         const int KARTTAKORKEUS = 10;
+
         static int seuraavaVapaaId = 0;
         
         public int Id { get; set; }
@@ -31,6 +32,26 @@ namespace Periferia
                 Console.SetCursorPosition(KursoriVasen, KursoriYlä);
                 r.Piirrä(this);
             }
+
+            PiirräEntiteetit();
+        }
+
+        public void PiirräEntiteetit()
+        {
+            PiirräEntiteetti(Moottori.Pelaaja);
+
+            if(Entiteetit != null)
+                foreach(IPiirrettävä p in Entiteetit)
+                {
+                    PiirräEntiteetti(p);
+                }
+        }
+
+        private void PiirräEntiteetti(IPiirrettävä p)
+        {
+            Console.SetCursorPosition(Konsoli.KarttaOffset_Vasen + p.Sarake, Konsoli.KarttaOffset_Ylä + p.Rivi);
+            Console.ForegroundColor = p.Väri;
+            Console.Write(p.Merkki);
         }
             
         static public Kartta LuoKartta()
@@ -81,9 +102,15 @@ namespace Periferia
 
                     rivi++;
                 }
+                
             }
 
             return k;
+        }
+
+        static public void PiirräKartalle(Kartta k, IPiirrettävä p)
+        {
+
         }
 
     }

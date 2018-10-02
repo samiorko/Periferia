@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace Periferia
 {
-    class Moottori
+    static class Moottori
     {
-        List<Kartta> Kartat;
+        static public List<Kartta> Kartat;
+        static public Pelaaja Pelaaja = new Pelaaja()
+        {
+            Väri = ConsoleColor.Yellow,
+            Merkki = '@',
+            HP = 100,
+            Nesteytys = 100,
+            Nimi = "Pekka",
+            Voima = 50,
+            Reppu = new List<Tavara>()
+        };
     }
 }

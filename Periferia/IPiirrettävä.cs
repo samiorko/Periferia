@@ -13,6 +13,5 @@ namespace Periferia
         ConsoleColor Väri { get; set; }
         string Nimi { get; set; }
 
-        void Piirrä(Kartta k);
     }
 }
