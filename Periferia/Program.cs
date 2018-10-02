@@ -10,41 +10,7 @@ namespace Periferia
     {
         static void Main(string[] args)
         {
-            Konsoli k = new Konsoli();
-            Konsoli.AlustaKonsoli();
-            Moottori.NykyinenKartta = Kartta.LuoKartta();
-            
-
-            bool pelijatkuu = true;
-            while(pelijatkuu){
-                Konsoli.TyhjennäKonsoli();
-
-
-                k.PiirräKartta(Moottori.NykyinenKartta);
-
-
-                Konsoli.NollaaKursori();
-
-                ConsoleKeyInfo näppäin = Console.ReadKey();
-                switch (näppäin.Key)
-                {
-                    case ConsoleKey.RightArrow:
-                        Moottori.Pelaaja.LiikuOikealle();
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        Moottori.Pelaaja.LiikuVasemmalle();
-                        break;
-                    case ConsoleKey.UpArrow:
-                        Moottori.Pelaaja.LiikuYlös();
-                        break;
-                    case ConsoleKey.DownArrow:
-                        Moottori.Pelaaja.LiikuAlas();
-                        break;
-
-                }
-
-                
-            }
+            Moottori.Peli();
 
 
             //for (int i = 0; i < 10; i++)

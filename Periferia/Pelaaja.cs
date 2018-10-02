@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Periferia
 {
-    public class Pelaaja : Hahmo, IHahmo, IPiirrettävä
+    public class Pelaaja : Hahmo, IPiirrettävä
     {
        
         public int Nesteytys { get; set; }
