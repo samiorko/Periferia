@@ -19,13 +19,18 @@ namespace Periferia
         public bool OnkoTekoäly { get; set; }
         public Liikesuunnat ViimeisinSuunta { get; private set; }
 
+        public int ViimeSarake { get; set; }
+        public int ViimeRivi { get; set; }
+
         public bool LiikuOikealle()
         {
             Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake+1];
             if (!liiku(ur))
                 return false;
+            ViimeSarake = Sarake;
             Sarake++;
             ViimeisinSuunta = Liikesuunnat.OIKEA;
+
             return true;
         }
 
@@ -34,6 +39,7 @@ namespace Periferia
             Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake - 1];
             if (!liiku(ur))
                 return false;
+            ViimeSarake = Sarake;
             Sarake--;
             ViimeisinSuunta = Liikesuunnat.VASEN;
             return true;
@@ -44,6 +50,7 @@ namespace Periferia
             Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi+1, this.Sarake];
             if (!liiku(ur))
                 return false;
+            ViimeRivi = Rivi;
             Rivi++;
             ViimeisinSuunta = Liikesuunnat.ALAS;
             return true;
@@ -54,6 +61,7 @@ namespace Periferia
             Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi - 1, this.Sarake];
             if (!liiku(ur))
                 return false;
+            ViimeRivi = Rivi;
             Rivi--;
             ViimeisinSuunta = Liikesuunnat.YLÖS;
             return true;
