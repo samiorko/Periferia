@@ -42,11 +42,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hahmoruutu.cs" />
+    <Compile Include="IHahmo.cs" />
+    <Compile Include="IPiirrettävä.cs" />
+    <Compile Include="ITavara.cs" />
+    <Compile Include="Kartta.cs" />
+    <Compile Include="Karttaruutu.cs" />
+    <Compile Include="Konsoli.cs" />
+    <Compile Include="Moottori.cs" />
+    <Compile Include="Pelaaja.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sijainti.cs" />
+    <Compile Include="Tavara.cs" />
+    <Compile Include="Viestiloki.cs" />
+    <Compile Include="Vihollinen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Graph1.dgml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

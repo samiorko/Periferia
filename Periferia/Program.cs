@@ -9,13 +9,30 @@ namespace Periferia
     class Program
     {
         static void Main(string[] args)
-        {
-            // The code provided will print â€˜Hello Worldâ€™ to the console.
-            // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
+        {  
 
-            // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXX");
+            }
+            Console.SetWindowSize(150, 35);
+            Console.SetCursorPosition(1, 1);
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("Y");
+
+
+            Console.SetCursorPosition(2, 2);
+
+            Konsoli k = new Konsoli();
+            k.Viestiloki.Lisää("Moi");
+            k.Viestiloki.Lisää("Moi 2");
+            k.Viestiloki.Lisää("Moi 3");
+
+            k.PiirräLoki();
+            
+
+            Console.ReadKey();
         }
     }
 }
