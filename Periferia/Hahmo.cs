@@ -17,6 +17,7 @@ namespace Periferia
         public string Nimi { get; set; }
         public bool OnkoYstävä { get; set; }
         public bool OnkoTekoäly { get; set; }
+        public Liikesuunnat ViimeisinSuunta { get; private set; }
 
         public bool LiikuOikealle()
         {
@@ -24,7 +25,7 @@ namespace Periferia
             if (!liiku(ur))
                 return false;
             Sarake++;
-
+            ViimeisinSuunta = Liikesuunnat.OIKEA;
             return true;
         }
 
@@ -34,7 +35,7 @@ namespace Periferia
             if (!liiku(ur))
                 return false;
             Sarake--;
-
+            ViimeisinSuunta = Liikesuunnat.VASEN;
             return true;
         }
 
@@ -44,7 +45,7 @@ namespace Periferia
             if (!liiku(ur))
                 return false;
             Rivi++;
-
+            ViimeisinSuunta = Liikesuunnat.ALAS;
             return true;
         }
 
@@ -54,7 +55,7 @@ namespace Periferia
             if (!liiku(ur))
                 return false;
             Rivi--;
-
+            ViimeisinSuunta = Liikesuunnat.YLÖS;
             return true;
         }
 
@@ -75,6 +76,14 @@ namespace Periferia
         {
             Console.ForegroundColor = this.Väri;
             Console.Write(this.Merkki);
+        }
+
+        public enum Liikesuunnat
+        {
+            VASEN,
+            OIKEA,
+            YLÖS,
+            ALAS
         }
     }
 }

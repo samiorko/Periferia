@@ -105,7 +105,7 @@ namespace Periferia
                                 break;
                             case ' ':
                                 r.Tyyppi = Karttaruutu.Ruututyypit.TYHJÄ;
-                                r.Merkki = '.';
+                                r.Merkki = '░';
                                 r.Väri = ConsoleColor.DarkGray;
                                 break;
                         }

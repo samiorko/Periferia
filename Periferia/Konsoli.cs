@@ -19,7 +19,7 @@ namespace Periferia
         public static int KonsoliLeveys { get; } = 150;
         public static int KonsoliKorkeus { get; } = 35;
 
-        public Viestiloki Viestiloki = new Viestiloki();
+        public static Viestiloki Viestiloki = new Viestiloki();
         public Hahmoruutu Hahmoruutu = new Hahmoruutu();
 
         public void PiirräKartta(Kartta k)
@@ -35,7 +35,7 @@ namespace Periferia
             int KursoriVasen = 2;
             int KursoriYlä = 0;
 
-            Viestiloki.Piirrä(KursoriVasen, KursoriYlä);
+            Viestiloki.Piirrä();
 
         }
 
@@ -52,6 +52,8 @@ namespace Periferia
 
         static public void AlustaKonsoli()
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.CursorVisible = false;
             Console.SetWindowSize(KonsoliLeveys, KonsoliKorkeus);
             Console.SetBufferSize(KonsoliLeveys, KonsoliKorkeus);
             Console.SetCursorPosition(0, 0);
@@ -68,7 +70,8 @@ namespace Periferia
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.SetCursorPosition(KonsoliLeveys - 1, KonsoliKorkeus - 1);
+            //Console.SetCursorPosition(KonsoliLeveys - 1, KonsoliKorkeus - 1);
+            Console.SetCursorPosition(0, 0);
         }
 
         static public void PiirräReunat()
