@@ -19,6 +19,7 @@ namespace Periferia
             while(pelijatkuu){
                 Konsoli.Tyhjenn‰Konsoli();
 
+                k.Piirr‰HahmoRuutu();
 
                 k.Piirr‰Kartta(Moottori.NykyinenKartta);
 
@@ -46,7 +47,6 @@ namespace Periferia
                 
             }
 
-            k.Piirr‰HahmoRuutu();
 
             //for (int i = 0; i < 10; i++)
             //{

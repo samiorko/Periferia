@@ -8,10 +8,10 @@ namespace Periferia
     public class Konsoli
     {
         public static int KarttaOffset_Vasen { get; } = 40;
-        public static int KarttaOffset_Ylä { get;  } = 2;
+        public static int KarttaOffset_Ylä { get; } = 2;
 
-        public static int HahmoRuutuOffset_Vasen { get; } = 25;
-        public static int HahmoRuutuOffset_Ylä { get; } = 2;
+        public static int HahmoRuutuOffset_Vasen { get; } = KarttaOffset_Vasen + Kartta.KARTTALEVEYS + 5;
+        public static int HahmoRuutuOffset_Ylä { get; } = KarttaOffset_Ylä;
 
         public static int ViestiLokiOffset_Vasen { get; } = 2;
         public static int ViestiLokiOffset_Ylä { get; } = 16;
@@ -26,7 +26,7 @@ namespace Periferia
         {
             k.Piirrä();
         }
-        
+
 
         public void PiirräLoki()
         {
@@ -35,12 +35,12 @@ namespace Periferia
             int KursoriYlä = 0;
 
             Viestiloki.Piirrä(KursoriVasen, KursoriYlä);
-            
+
         }
-        
+
         public void PiirräHahmoRuutu()
         {
-            Hahmoruutu.Piirrä(22,2);
+            Hahmoruutu.Piirrä(HahmoRuutuOffset_Vasen, HahmoRuutuOffset_Ylä);
         }
 
 
@@ -53,7 +53,7 @@ namespace Periferia
         {
             Console.SetWindowSize(KonsoliLeveys, KonsoliKorkeus);
             Console.SetBufferSize(KonsoliLeveys, KonsoliKorkeus);
-            Console.SetCursorPosition(0,0);
+            Console.SetCursorPosition(0, 0);
             TyhjennäKonsoli();
         }
 
@@ -66,7 +66,7 @@ namespace Periferia
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.SetCursorPosition(KonsoliLeveys-1, KonsoliKorkeus-1);
+            Console.SetCursorPosition(KonsoliLeveys - 1, KonsoliKorkeus - 1);
         }
     }
 }

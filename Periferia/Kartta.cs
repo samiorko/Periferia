@@ -8,8 +8,8 @@ namespace Periferia
 {
     public class Kartta
     {
-        const int KARTTALEVEYS = 20;
-        const int KARTTAKORKEUS = 10;
+        public const int KARTTALEVEYS = 20;
+        public const int KARTTAKORKEUS = 10;
 
         static int seuraavaVapaaId = 0;
         
