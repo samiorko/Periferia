@@ -17,6 +17,7 @@ namespace Periferia
 
             k.PiirräTyhjäKartta(kartta);
 
+            k.PiirräHahmoRuutu();
 
             //for (int i = 0; i < 10; i++)
             //{

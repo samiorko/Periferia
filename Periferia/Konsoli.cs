@@ -20,6 +20,7 @@ namespace Periferia
         public static int KonsoliKorkeus { get; } = 35;
 
         public Viestiloki Viestiloki = new Viestiloki();
+        public Hahmoruutu Hahmoruutu = new Hahmoruutu();
 
         public void PiirräTyhjäKartta(Kartta k)
         {
@@ -37,9 +38,9 @@ namespace Periferia
             
         }
         
-        public void PiirräHahmoRuutu(Hahmoruutu r)
+        public void PiirräHahmoRuutu()
         {
-            
+            Hahmoruutu.Piirrä(22,2);
         }
 
 
