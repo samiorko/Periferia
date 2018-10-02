@@ -21,6 +21,11 @@ namespace Periferia
             Console.Write("Nesteytys: " + PiirräPalkki(Moottori.Pelaaja.Nesteytys));
             //Console.ResetColor();
             Konsoli.UusiRivi(kursoriVasen);
+            Console.Write("Repun sisältö: ");
+            NäytäSisältö(kursoriVasen);
+            NäytäSisältö(kursoriVasen);
+            NäytäSisältö(kursoriVasen);
+            Konsoli.UusiRivi(kursoriVasen);
             Konsoli.UusiRivi(kursoriVasen);
 
             foreach (Hahmo entiteetti in Moottori.NykyinenKartta.Entiteetit.Where(e => e is Hahmo))
@@ -28,7 +33,14 @@ namespace Periferia
                 entiteetti.Piirrä();
                 Console.Write(" = " + entiteetti.Nimi);
                 Konsoli.UusiRivi(kursoriVasen);
-                Console.Write(entiteetti.HP);
+
+                if (entiteetti is Vihollinen)
+                {
+                    Console.Write("Voima: " + entiteetti.Voima);
+                    Konsoli.UusiRivi(kursoriVasen);
+                    Console.Write("HP:        " + PiirräPalkki(entiteetti.HP));
+                    Konsoli.UusiRivi(kursoriVasen);
+                }
             }
 
             foreach (Tavara entiteetti in Moottori.NykyinenKartta.Entiteetit.Where(e => e is Tavara))
@@ -58,5 +70,25 @@ namespace Periferia
             return palkki += "]";
         }
 
+        public void NäytäSisältö(int kursoriVasen)
+        {
+            // Miten tulostus, jos repussa paljon tavaraa??
+            if (Moottori.Pelaaja.Reppu.Count > 0)
+            {
+                foreach (Tavara item in Moottori.Pelaaja.Reppu)
+                {
+                    Konsoli.UusiRivi(kursoriVasen);
+                    Console.Write("  [ " + item.Nimi + " ]");
+                    Konsoli.UusiRivi(kursoriVasen);
+                }
+            }
+            else
+            {
+                Konsoli.UusiRivi(kursoriVasen);
+                Console.Write("  [        ]");
+            }
+        }
     }
+
 }
+

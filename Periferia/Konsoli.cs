@@ -28,7 +28,6 @@ namespace Periferia
             k.Piirrä();
         }
 
-
         public void PiirräLoki()
         {
             Console.ResetColor();
@@ -45,7 +44,6 @@ namespace Periferia
             Console.ResetColor();
             Hahmoruutu.Piirrä(HahmoRuutuOffset_Vasen, HahmoRuutuOffset_Ylä);
         }
-
 
         static public void UusiRivi(int offsetVasen)
         {
@@ -71,6 +69,11 @@ namespace Periferia
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.SetCursorPosition(KonsoliLeveys - 1, KonsoliKorkeus - 1);
+        }
+
+        static public void PiirräReunat()
+        {
+            //Periferia.Hahmoruutu.
         }
     }
 }
