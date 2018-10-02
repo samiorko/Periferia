@@ -37,7 +37,7 @@ namespace Periferia
         {
             Kartta k = new Kartta();
 
-            using (StreamReader sr = new StreamReader(@"C:\Users\samio\source\repos\Periferia\Periferia\DummyKartta.txt"))
+            using (StreamReader sr = new StreamReader(@"DummyKartta.txt"))
             {
                 string row;
                 int rivi = 0;

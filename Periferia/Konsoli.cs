@@ -34,13 +34,13 @@ namespace Periferia
             int KursoriVasen = 2;
             int KursoriYlä = 0;
 
-            Viestiloki.Piirrä(KursoriVasen);
+            Viestiloki.Piirrä(KursoriVasen, KursoriYlä);
             
         }
         
         public void PiirräHahmoRuutu(Hahmoruutu r)
         {
-
+            
         }
 
 

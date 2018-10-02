@@ -8,5 +8,9 @@ namespace Periferia
 {
     public class Hahmoruutu
     {
+        public void Piirrä(int kursoriVasen, int kursoriYlä)
+        {
+
+        }
     }
 }
