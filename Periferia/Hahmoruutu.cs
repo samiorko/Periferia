@@ -23,8 +23,6 @@ namespace Periferia
             Konsoli.UusiRivi(kursoriVasen);
             Console.Write("Repun sisältö: ");
             NäytäSisältö(kursoriVasen);
-            NäytäSisältö(kursoriVasen);
-            NäytäSisältö(kursoriVasen);
             Konsoli.UusiRivi(kursoriVasen);
             Konsoli.UusiRivi(kursoriVasen);
 
@@ -74,13 +72,23 @@ namespace Periferia
         {
             // Miten tulostus, jos repussa paljon tavaraa??
             if (Moottori.Pelaaja.Reppu.Count > 0)
-            {
-                foreach (Tavara item in Moottori.Pelaaja.Reppu)
+            {               
+                int i = 0;
+                while (i < 3)
                 {
                     Konsoli.UusiRivi(kursoriVasen);
-                    Console.Write("  [ " + item.Nimi + " ]");
-                    Konsoli.UusiRivi(kursoriVasen);
+                    if (i < Moottori.Pelaaja.Reppu.Count)
+                    {
+                        Console.Write("  [ " + Moottori.Pelaaja.Reppu[i].Nimi + " ]");
+                    }
+                    else
+                    {
+                        Console.Write("  [        ]");
+                    }
+
+                    i++;
                 }
+
             }
             else
             {

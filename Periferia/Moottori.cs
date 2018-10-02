@@ -29,7 +29,8 @@ namespace Periferia
             Konsoli k = new Konsoli();
             Konsoli.AlustaKonsoli();
             Moottori.NykyinenKartta = Kartta.LuoKartta();
-            
+            //Pelaaja.Reppu.Add(new Tavara("kirves"));
+            //Pelaaja.Reppu.Add(new Tavara("leka"));
 
 
             bool pelijatkuu = true;

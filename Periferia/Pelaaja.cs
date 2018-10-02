@@ -10,7 +10,7 @@ namespace Periferia
        
         public int Nesteytys { get; set; }
 
-        public List<Tavara> Reppu { get; set; }
+        public List<Tavara> Reppu { get; set ; }
 
 
     }
