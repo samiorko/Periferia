@@ -14,7 +14,7 @@ namespace Periferia
         static int seuraavaVapaaId = 0;
         
         public int Id { get; set; }
-        public List<IPiirrettävä> Entiteetit; // Kartalle piirrettävät objektit (tavarat, olennot ym.)
+        public List<IPiirrettävä> Entiteetit = new List<IPiirrettävä>(); // Kartalle piirrettävät objektit (tavarat, olennot ym.)
         public Karttaruutu[,] Ruudut = new Karttaruutu[KARTTAKORKEUS, KARTTALEVEYS];
 
         public Kartta()
@@ -23,12 +23,12 @@ namespace Periferia
             seuraavaVapaaId++;
         }
 
-        public void Piirrä(int offsetYlä, int offsetVasen)
+        public void Piirrä()
         {
             foreach(Karttaruutu r in Ruudut)
             {
-                int KursoriYlä = r.Rivi + offsetYlä;
-                int KursoriVasen = r.Sarake + offsetVasen;
+                int KursoriYlä = r.Rivi + Konsoli.KarttaOffset_Ylä;
+                int KursoriVasen = r.Sarake + Konsoli.KarttaOffset_Vasen;
                 Console.SetCursorPosition(KursoriVasen, KursoriYlä);
                 r.Piirrä(this);
             }
@@ -43,9 +43,12 @@ namespace Periferia
             if(Entiteetit != null)
                 foreach(IPiirrettävä p in Entiteetit)
                 {
+                    Ruudut[p.Rivi, p.Sarake].Entiteetti = p;
                     PiirräEntiteetti(p);
                 }
         }
+
+ 
 
         private void PiirräEntiteetti(IPiirrettävä p)
         {
@@ -57,6 +60,18 @@ namespace Periferia
         static public Kartta LuoKartta()
         {
             Kartta k = new Kartta();
+
+            k.Entiteetit.Add(new Vihollinen()
+            {
+                Nimi = "Karhu",
+                HP = 200,
+                Voima = 100,
+                Merkki = 'K',
+                Väri = ConsoleColor.DarkRed,
+                Rivi = 1,
+                Sarake = 1
+            });
+            
 
             using (StreamReader sr = new StreamReader(@"DummyKartta.txt"))
             {
@@ -77,7 +92,7 @@ namespace Periferia
                         {
                             case '#':
                                 r.Tyyppi = Karttaruutu.Ruututyypit.SEINÄ;
-                                r.Väri = ConsoleColor.DarkGreen;
+                                r.Väri = ConsoleColor.DarkGray;
                                 r.Merkki = '#';
                                 break;
                             case '>':

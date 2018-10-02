@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hahmo.cs" />
     <Compile Include="Hahmoruutu.cs" />
     <Compile Include="IHahmo.cs" />
     <Compile Include="IPiirrettävä.cs" />

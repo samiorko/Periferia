@@ -7,7 +7,7 @@ namespace Periferia
 {
     public class Konsoli
     {
-        public static int KarttaOffset_Vasen { get; } = 2;
+        public static int KarttaOffset_Vasen { get; } = 40;
         public static int KarttaOffset_Ylä { get;  } = 2;
 
         public static int HahmoRuutuOffset_Vasen { get; } = 25;
@@ -21,9 +21,9 @@ namespace Periferia
 
         public Viestiloki Viestiloki = new Viestiloki();
 
-        public void PiirräTyhjäKartta(Kartta k)
+        public void PiirräKartta(Kartta k)
         {
-            k.Piirrä(0, 0);
+            k.Piirrä();
         }
         
 
@@ -52,8 +52,13 @@ namespace Periferia
         {
             Console.SetWindowSize(KonsoliLeveys, KonsoliKorkeus);
             Console.SetBufferSize(KonsoliLeveys, KonsoliKorkeus);
-            Console.Clear();
             Console.SetCursorPosition(0,0);
+            TyhjennäKonsoli();
+        }
+
+        static public void TyhjennäKonsoli()
+        {
+            Console.Clear();
         }
 
         static public void NollaaKursori()

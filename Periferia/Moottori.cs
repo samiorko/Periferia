@@ -9,6 +9,7 @@ namespace Periferia
     static class Moottori
     {
         static public List<Kartta> Kartat;
+        static public Kartta NykyinenKartta;
         static public Pelaaja Pelaaja = new Pelaaja()
         {
             Väri = ConsoleColor.Yellow,
@@ -17,7 +18,9 @@ namespace Periferia
             Nesteytys = 100,
             Nimi = "Pekka",
             Voima = 50,
-            Reppu = new List<Tavara>()
+            Reppu = new List<Tavara>(),
+            Sarake = 2,
+            Rivi = 2
         };
     }
 }
