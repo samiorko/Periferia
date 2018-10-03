@@ -74,6 +74,7 @@ namespace Periferia
                     break;
 
             }
+            Pelaaja.Nesteytys--;
         }
 
         static void vihollistenVuoro()
