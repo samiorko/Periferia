@@ -13,7 +13,29 @@ namespace Periferia
         public int Nopeus { get; set; }
         public int Onnekkuus { get; set; }
 
-        public int HP { get; set; }
+        private int hp;
+
+        public int HP
+        {
+            get { return hp; }
+            set {
+                if (value <= 0)
+                {
+                    hp = 0;
+                    kuole();
+                } else
+                {
+                    hp = value;
+                }
+            }
+        }
+
+        public virtual void kuole()
+        {
+            // Poistetaan karttaruudulla oleva hahmo
+            Moottori.NykyinenKartta.Ruudut[this.Sarake, this.Rivi].Entiteetti = null;
+        }
+
         public int Sarake { get; set; }
         public int Rivi { get; set; }
         public char Merkki { get; set; }
@@ -25,6 +47,98 @@ namespace Periferia
 
         public int ViimeSarake { get; set; }
         public int ViimeRivi { get; set; }
+
+        public void Hyökkää(Hahmo kohde)
+        {
+            // (1) Tarkistetaan, osuuko hyökkäys
+            if (osuukoHyökkäysNopeus(kohde) || osuukoHyökkäysOnni(kohde))
+            {
+                // (2) Kuinka paljon vahinkoa tehdään?
+                int vahinko = laskeVahinko();
+                // (3) Onko kriittinen vahinko?
+                if (onkoKriittinenOsuma(kohde))
+                {
+                    vahinko *= 2;
+                }
+                // Vähennetään kohteen hp vahingon mukaan
+                kohde.HP -= vahinko;
+            }
+
+
+        }
+
+        private bool onkoKriittinenOsuma(Hahmo kohde)
+        {
+            throw new NotImplementedException();
+        }
+
+        private int laskeVahinko()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool osuukoHyökkäysOnni(Hahmo kohde)
+        {
+            float suhdeLuku = ((float)this.Onnekkuus) / ((float)kohde.Onnekkuus);
+            // määritetään tod.näk. sille, että hyökkäys osuu
+            double tn = 0.0f;
+            if (suhdeLuku > 2.0f)
+            {
+                tn = 1.0f;
+            }
+            else if (suhdeLuku < 0.1f)
+            {
+                tn = 0.0f;
+            }
+            else
+            {
+                tn = -0.1140351f + (1.171053f * suhdeLuku) - (0.3070175f * Math.Pow(suhdeLuku, 2));
+            }
+            // varmistetaan, ettei tn pääse alle 0 tai yli 1
+            tn = Math.Min(tn, 1.0f);
+            tn = Math.Max(tn, 0.0f);
+            Random r = new Random();
+            int randomLuku = r.Next(1, 1000);
+            if (randomLuku > tn * 1000.0f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool osuukoHyökkäysNopeus(Hahmo kohde)
+        {
+            float suhdeLuku = ((float) this.Nopeus) / ((float) kohde.Nopeus);
+            // määritetään tod.näk. sille, että hyökkäys osuu
+            double tn = 0.0f;
+            if (suhdeLuku > 2.0f)
+            {
+                tn = 1.0f;
+            }
+            else if (suhdeLuku < 0.1f)
+            {
+                tn = 0.0f;
+            }
+            else
+            {
+                tn = -0.1140351f + (1.171053f * suhdeLuku) - (0.3070175f * Math.Pow(suhdeLuku, 2));
+            }
+            // varmistetaan, ettei tn pääse alle 0 tai yli 1
+            tn = Math.Min(tn, 1.0f);
+            tn = Math.Max(tn, 0.0f);
+            Random r = new Random();
+            int randomLuku = r.Next(1, 1000);
+            if (randomLuku > tn*1000.0f)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
 
         public bool LiikuOikealle()
         {
