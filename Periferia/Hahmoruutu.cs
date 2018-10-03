@@ -45,13 +45,11 @@ namespace Periferia
 
         public void VihollisenHPMuuttunut(object sender, EventArgs e)
         {
-            Console.WriteLine("MORRRRRRRRRROOOOOOOOOOOOOO");
-            PiirräEntiteettienTiedot(Konsoli.HahmoRuutuOffset_Vasen);
+            //PiirräEntiteettienTiedot(Konsoli.HahmoRuutuOffset_Vasen);
         }
 
         public void Piirrä(int kursoriVasen, int kursoriYlä)
         {
-
             Console.SetCursorPosition(kursoriVasen, kursoriYlä);                                        // Asetetaan kursorin aloituspaikka
             Konsoli.PiirräReunatStringWriter(kursoriVasen, kursoriYlä, hahmoruudunMaxKorkeus, hahmoruudunMaxLeveys);
 
