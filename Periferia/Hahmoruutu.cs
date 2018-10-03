@@ -13,7 +13,7 @@ namespace Periferia
             int hahmoruudunMaxLeveys = 25;
 
             Console.SetCursorPosition(kursoriVasen, kursoriYlä); // Asetetaan kursorin aloituspaikka
-            Konsoli.PiirräReunatStringWriter(kursoriVasen, kursoriYlä, 19, hahmoruudunMaxLeveys);
+            Konsoli.PiirräReunatConsole(kursoriVasen, kursoriYlä, 21, hahmoruudunMaxLeveys);
             Console.SetCursorPosition(kursoriVasen, kursoriYlä);
 
             Console.Write("Pelaaja " + Moottori.Pelaaja.Merkki + ": " + Moottori.Pelaaja.Nimi);
@@ -123,30 +123,24 @@ namespace Periferia
         public void NäytäSisältö(int kursoriVasen)
         {
             // Miten tulostus, jos repussa paljon tavaraa??
-            if (Moottori.Pelaaja.Reppu.Count > 0)
-            {
-                int i = 0;
-                while (i < 3)
-                {
-                    Konsoli.UusiRivi(kursoriVasen);
-                    if (i < Moottori.Pelaaja.Reppu.Count)
-                    {
-                        Console.Write("  [ " + Moottori.Pelaaja.Reppu[i].Nimi + " ]");
-                    }
-                    else
-                    {
-                        Console.Write("  [        ]");
-                    }
 
-                    i++;
-                }
-
-            }
-            else
+            int i = 0;
+            while (i < 3)
             {
                 Konsoli.UusiRivi(kursoriVasen);
-                Console.Write("  [        ]");
+                if (i < Moottori.Pelaaja.Reppu.Count)
+                {
+                    Console.Write("  [ " + Moottori.Pelaaja.Reppu[i].Nimi + " ]");
+                }
+                else
+                {
+                    Console.Write("  [        ]");
+                }
+
+                i++;
             }
+
+
         }
     }
 

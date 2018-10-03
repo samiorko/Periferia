@@ -33,7 +33,6 @@ namespace Periferia
             //Pelaaja.Reppu.Add(new Tavara("leka"));
 
 
-            k.PiirräHahmoRuutu();
             k.PiirräKartta(Moottori.NykyinenKartta);
 
             Konsoli.Viestiloki.Lisää("Peli alkaa!");
@@ -41,6 +40,7 @@ namespace Periferia
             bool pelijatkuu = true;
             while (pelijatkuu)
             {
+                k.PiirräHahmoRuutu();
                 //Konsoli.TyhjennäKonsoli();
                 k.PiirräLoki();
 
@@ -49,7 +49,7 @@ namespace Periferia
 
                 pelaajanVuoro();
                 Konsoli.Viestiloki.Lisää("Vihollisen vuoro, paina space");
-                
+
                 vihollistenVuoro();
 
             }
@@ -62,19 +62,22 @@ namespace Periferia
             {
                 case ConsoleKey.RightArrow:
                     Moottori.Pelaaja.LiikuOikealle();
+                    Pelaaja.Nesteytys--;
                     break;
                 case ConsoleKey.LeftArrow:
                     Moottori.Pelaaja.LiikuVasemmalle();
+                    Pelaaja.Nesteytys--;
                     break;
                 case ConsoleKey.UpArrow:
                     Moottori.Pelaaja.LiikuYlös();
+                    Pelaaja.Nesteytys--;
                     break;
                 case ConsoleKey.DownArrow:
                     Moottori.Pelaaja.LiikuAlas();
+                    Pelaaja.Nesteytys--;
                     break;
 
             }
-            Pelaaja.Nesteytys--;
         }
 
         static void vihollistenVuoro()

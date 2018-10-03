@@ -84,7 +84,7 @@ namespace Periferia
             }
             reunanpiirtäjä.Append("╗" + Environment.NewLine);
             LisääSisennys(vasenYläkulma_SarakeNro - 2);
-            for (int j = 0; j <= rivimäärä - 1; j++)
+            for (int j = 0; j < rivimäärä; j++)
             {
                 reunanpiirtäjä.Append("║");                         // vasen reuna
                 for (int k = 0; k < sarakemäärä; k++)
@@ -121,7 +121,7 @@ namespace Periferia
                 Console.Write("═");                         // yläreuna
             }
             Console.Write("╗");
-            for (int j = 0; j <= rivimäärä; j++)
+            for (int j = 0; j < rivimäärä; j++)
             {
                 Konsoli.UusiRivi(vasenYläkulma_SarakeNro - 2);
                 Console.Write("║");                         // vasen reuna
