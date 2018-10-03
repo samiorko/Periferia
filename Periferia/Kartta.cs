@@ -121,6 +121,7 @@ namespace Periferia
             {
                 VihollisMalli malli = Moottori.VihollisMallit[Vihollinen.Rnd.Next(0, Moottori.VihollisMallit.Count - 1)];
                 Vihollinen vihu = Vihollinen.Generoi(malli);
+                vihu.HpMuuttunut += Konsoli.Hahmoruutu.VihollisenHPMuuttunut;
                 Tuple<int, int> YX = RandomiVapaaRuutu(k);
                 vihu.Rivi = YX.Item1;
                 vihu.Sarake = YX.Item2;

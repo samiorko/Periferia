@@ -5,30 +5,30 @@ using System.Text;
 
 namespace Periferia
 {
-    public class Konsoli
+    public static class Konsoli
     {
-        public static int KarttaOffset_Vasen { get; } = 4;
-        public static int KarttaOffset_Ylä { get; } = 2;
+        public const int KarttaOffset_Vasen = 4;
+        public const int KarttaOffset_Ylä = 2;
 
-        public static int HahmoRuutuOffset_Vasen { get; } = KarttaOffset_Vasen + Kartta.KARTTALEVEYS + 5;
-        public static int HahmoRuutuOffset_Ylä { get; } = KarttaOffset_Ylä;
-
-        public static int ViestiLokiOffset_Vasen { get; } = 4;
-        public static int ViestiLokiOffset_Ylä { get; } = 18;
-
-        public static int KonsoliLeveys { get; } = 150;
-        public static int KonsoliKorkeus { get; } = 35;
-
+        public const int HahmoRuutuOffset_Vasen = 4 + Kartta.KARTTALEVEYS + 5;
+        public const int HahmoRuutuOffset_Ylä = 2;
+               
+        public const int ViestiLokiOffset_Vasen = 4;
+        public const int ViestiLokiOffset_Ylä  = 18;
+               
+        public const int KonsoliLeveys  = 150;
+        public const int KonsoliKorkeus = 35;
+               
         public static Viestiloki Viestiloki = new Viestiloki();
-        public Hahmoruutu Hahmoruutu = new Hahmoruutu();
+        public static Hahmoruutu Hahmoruutu = new Hahmoruutu();
 
-        public void PiirräKartta(Kartta k)
+        public static void PiirräKartta(Kartta k)
         {
             Console.ResetColor();
             k.Piirrä();
         }
 
-        public void PiirräLoki()
+        public static void PiirräLoki()
         {
             Console.ResetColor();
 
@@ -36,18 +36,18 @@ namespace Periferia
 
         }
 
-        public void PiirräHahmoRuutu()
+        public static void PiirräHahmoRuutu()
         {
             Console.ResetColor();
             Hahmoruutu.Piirrä(HahmoRuutuOffset_Vasen, HahmoRuutuOffset_Ylä);
         }
 
-        static public void UusiRivi(int offsetVasen)
+        public static void UusiRivi(int offsetVasen)
         {
             Console.SetCursorPosition(offsetVasen, Console.CursorTop + 1);
         }
 
-        static public void AlustaKonsoli()
+        public static void AlustaKonsoli()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.CursorVisible = false;
@@ -57,13 +57,16 @@ namespace Periferia
             TyhjennäKonsoli();
             Console.ResetColor();
         }
-
-        static public void TyhjennäKonsoli()
+        public static void Testi()
+        {
+            System.Diagnostics.Trace.WriteLine("test");
+        }
+        public static void TyhjennäKonsoli()
         {
             Console.Clear();
         }
 
-        static public void NollaaKursori()
+        public static void NollaaKursori()
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
@@ -71,7 +74,7 @@ namespace Periferia
             Console.SetCursorPosition(0, 0);
         }
 
-        static public void PiirräReunatStringWriter(int vasenYläkulma_SarakeNro, int vasenYläkulma_RiviNro, int rivimäärä, int sarakemäärä)
+        public static void PiirräReunatStringWriter(int vasenYläkulma_SarakeNro, int vasenYläkulma_RiviNro, int rivimäärä, int sarakemäärä)
         {  // Piirtää reunat objekteille StringWriterin avulla
 
             StringBuilder reunanpiirtäjä = new StringBuilder();
@@ -110,7 +113,7 @@ namespace Periferia
             }
         }
 
-        static public void PiirräReunatConsole(int vasenYläkulma_SarakeNro, int vasenYläkulma_RiviNro, int rivimäärä, int sarakemäärä)
+        public static void PiirräReunatConsole(int vasenYläkulma_SarakeNro, int vasenYläkulma_RiviNro, int rivimäärä, int sarakemäärä)
         {  // Piirtää reunat objekteille suoraan Consolella
 
             Console.SetCursorPosition(vasenYläkulma_SarakeNro - 2, vasenYläkulma_RiviNro - 1);

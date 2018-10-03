@@ -26,7 +26,8 @@ namespace Periferia
                 {
                     hp = 0;
                     Kuole();
-                } else
+                }
+                else
                 {
                     hp = value;
                 }
