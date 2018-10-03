@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,15 +11,18 @@ namespace Periferia
     {
         static public List<Kartta> Kartat;
         static public Kartta NykyinenKartta;
+        static public List<VihollisMalli> VihollisMallit = new List<VihollisMalli>();
         static public Pelaaja Pelaaja = new Pelaaja()
         {
-            Väri = ConsoleColor.Yellow,
+            Väri = ConsoleColor.Cyan,
             Merkki = '@',
-            HP = 49,
+            HP = 100,
             Nesteytys = 100,
             Nimi = "Pekka",
-            Voima = 50,
-            Reppu = new List<Tavara>(),
+            Voima = 5,
+            Nopeus = 2,
+            Onnekkuus = 3,
+            Reppu = new ObservableCollection<Tavara>(),
             Sarake = 2,
             Rivi = 2
         };
@@ -26,6 +30,12 @@ namespace Periferia
 
         static public void Peli()
         {
+            VihollisMallit.Add(new VihollisMalli("Karhu", 'K') {Voima=3, Nopeus=2, HP=60, Hyökkäys="raapaisee"});
+            VihollisMallit.Add(new VihollisMalli("Susi", 'S') {Voima=2, Nopeus=13, HP=30, Hyökkäys="puraisee"});
+            VihollisMallit.Add(new VihollisMalli("Goblin", 'G', ConsoleColor.DarkGreen) {Voima=1, Nopeus=1, HP=15, Hyökkäys="lyö"});
+            VihollisMallit.Add(new VihollisMalli("Arska", 'A', ConsoleColor.DarkYellow) {Voima=1, Nopeus=1, HP=15, Hyökkäys="lyö"});
+
+
             Konsoli k = new Konsoli();
             Konsoli.AlustaKonsoli();
             Moottori.NykyinenKartta = Kartta.LuoKartta();
@@ -48,7 +58,6 @@ namespace Periferia
 
 
                 pelaajanVuoro();
-                Konsoli.Viestiloki.Lisää("Vihollisen vuoro, paina space");
 
                 vihollistenVuoro();
 
@@ -84,8 +93,8 @@ namespace Periferia
         {
             foreach (Vihollinen v in NykyinenKartta.Entiteetit.Where(v => v is Vihollinen))
             {
-                if (!v.OnkoTekoäly)
-                    continue; // älytön tyyppi, mennään seuraavaan
+                if (!v.OnkoTekoäly || !v.Elossa)
+                    continue; // älytön tai kuollut tyyppi, mennään seuraavaan
 
                 v.Tekoäly();
             }
