@@ -14,10 +14,12 @@ namespace Periferia
         {
             Väri = ConsoleColor.Yellow,
             Merkki = '@',
-            HP = 49,
+            HP = 100,
             Nesteytys = 100,
             Nimi = "Pekka",
-            Voima = 50,
+            Voima = 5,
+            Nopeus = 2,
+            Onnekkuus = 3,
             Reppu = new List<Tavara>(),
             Sarake = 2,
             Rivi = 2
@@ -48,7 +50,6 @@ namespace Periferia
 
 
                 pelaajanVuoro();
-                Konsoli.Viestiloki.Lisää("Vihollisen vuoro, paina space");
 
                 vihollistenVuoro();
 
@@ -84,8 +85,8 @@ namespace Periferia
         {
             foreach (Vihollinen v in NykyinenKartta.Entiteetit.Where(v => v is Vihollinen))
             {
-                if (!v.OnkoTekoäly)
-                    continue; // älytön tyyppi, mennään seuraavaan
+                if (!v.OnkoTekoäly || !v.Elossa)
+                    continue; // älytön tai kuollut tyyppi, mennään seuraavaan
 
                 v.Tekoäly();
             }

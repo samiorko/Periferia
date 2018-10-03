@@ -34,8 +34,10 @@ namespace Periferia
         public virtual void kuole()
         {
             // Poistetaan karttaruudulla oleva hahmo
-            Moottori.NykyinenKartta.Ruudut[this.Sarake, this.Rivi].Entiteetti = null;
+            Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake].Entiteetti = null;
+            Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake].Päivitä();
         }
+        public bool Elossa { get => (HP > 0); }
         public int Sarake { get; set; }
         public int Rivi { get; set; }
         public char Merkki { get; set; }
@@ -59,9 +61,14 @@ namespace Periferia
                 if (onkoKriittinenOsuma(kohde))
                 {
                     vahinko *= 2;
+                    Konsoli.Viestiloki.Lisää("Kriittinen osuma!", ConsoleColor.DarkYellow);
                 }
                 // Vähennetään kohteen hp vahingon mukaan
                 kohde.HP -= vahinko;
+                Konsoli.Viestiloki.Lisää($"{this.Nimi} hyökkää kohti olentoa {kohde.Nimi}! {kohde.Nimi} HP -{vahinko} pistettä.");
+            } else
+            {
+                Konsoli.Viestiloki.Lisää($"{this.Nimi} olennon isku meni ohi {kohde.Nimi}-olennon!");
             }
 
 
@@ -69,12 +76,37 @@ namespace Periferia
 
         private bool onkoKriittinenOsuma(Hahmo kohde)
         {
-            throw new NotImplementedException();
+            float suhdeLuku = ((float)this.Onnekkuus) / ((float)kohde.Onnekkuus);
+            // määritetään tod.näk. sille, että hyökkäys osuu
+            double tn = 0.0f;
+            if (suhdeLuku < 2.0f)
+            {
+                tn = 0.0f;
+            }
+            else if (suhdeLuku > 4.0f)
+            {
+                tn = 0.2f;
+            }
+            else
+            {
+                tn = 0.1f * suhdeLuku - 0.2f;
+            }
+            Random r = new Random();
+            int randomLuku = r.Next(1, 1000);
+            if (randomLuku < tn * 1000.0f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private int laskeVahinko()
         {
-            throw new NotImplementedException();
+            int painokerroin = 8;
+            return this.Voima * painokerroin;
         }
 
         private bool osuukoHyökkäysOnni(Hahmo kohde)
@@ -82,24 +114,19 @@ namespace Periferia
             float suhdeLuku = ((float)this.Onnekkuus) / ((float)kohde.Onnekkuus);
             // määritetään tod.näk. sille, että hyökkäys osuu
             double tn = 0.0f;
-            if (suhdeLuku > 2.0f)
-            {
-                tn = 1.0f;
-            }
-            else if (suhdeLuku < 0.1f)
+            if (suhdeLuku < 1.5f)
             {
                 tn = 0.0f;
             }
             else
             {
-                tn = -0.1140351f + (1.171053f * suhdeLuku) - (0.3070175f * Math.Pow(suhdeLuku, 2));
+                tn = 0.2f * suhdeLuku - 0.3f;
             }
             // varmistetaan, ettei tn pääse alle 0 tai yli 1
             tn = Math.Min(tn, 1.0f);
-            tn = Math.Max(tn, 0.0f);
             Random r = new Random();
             int randomLuku = r.Next(1, 1000);
-            if (randomLuku > tn * 1000.0f)
+            if (randomLuku < tn * 1000.0f)
             {
                 return true;
             }
@@ -131,7 +158,7 @@ namespace Periferia
             tn = Math.Max(tn, 0.0f);
             Random r = new Random();
             int randomLuku = r.Next(1, 1000);
-            if (randomLuku > tn*1000.0f)
+            if (randomLuku < tn*1000.0f)
             {
                 return true;
             } else
@@ -200,9 +227,17 @@ namespace Periferia
 
         private bool liiku(Karttaruutu vr, Karttaruutu ur)
         {
-            
+
             if (!ur.Käveltävä)
+            {
+                // Pelaajan hyökkäys
+                if (ur.Entiteetti is Vihollinen && (this is Pelaaja))
+                {
+                    this.Hyökkää((Hahmo)ur.Entiteetti);
+                    return false;
+                }
                 return false;
+            }
             ur.Entiteetti = vr.Entiteetti;
             vr.Entiteetti = null;
 

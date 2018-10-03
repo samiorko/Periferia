@@ -67,8 +67,10 @@ namespace Periferia
             k.Entiteetit.Add(new Vihollinen()
             {
                 Nimi = "Karhu",
-                HP = 200,
-                Voima = 100,
+                HP = 40,
+                Voima = 3,
+                Nopeus = 1,
+                Onnekkuus = 1,
                 Merkki = 'K',
                 Väri = ConsoleColor.DarkRed,
                 Rivi = 1,
@@ -78,8 +80,10 @@ namespace Periferia
             k.Entiteetit.Add(new Vihollinen()
             {
                 Nimi = "Karhu",
-                HP = 2000,
-                Voima = 100,
+                HP = 40,
+                Voima = 3,
+                Nopeus = 1,
+                Onnekkuus = 1,
                 Merkki = 'K',
                 Väri = ConsoleColor.DarkRed,
                 Rivi = 10,
@@ -89,8 +93,10 @@ namespace Periferia
             k.Entiteetit.Add(new Vihollinen()
             {
                 Nimi = "Karhu",
-                HP = 2000,
-                Voima = 100,
+                HP = 40,
+                Voima = 3,
+                Nopeus = 1,
+                Onnekkuus = 1,
                 Merkki = 'K',
                 Väri = ConsoleColor.DarkRed,
                 Rivi = 10,

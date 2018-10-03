@@ -64,7 +64,7 @@ namespace Periferia
 
             if (Math.Abs(etäisyysX) + Math.Abs(etäisyysY) == 1)
             {
-                // Karhu on vieressä, HYÖKKÄÄ!
+                this.Hyökkää(Moottori.Pelaaja);
             }
             else
             {
