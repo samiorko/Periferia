@@ -9,6 +9,14 @@ namespace Periferia
     public class Vihollinen : Hahmo, IPiirrettävä
     {
 
+        public int KokemusPalkinto
+        {
+            get
+            {
+                return 2;
+            }
+        }
+
         public Vihollinen()
         {
             OnkoTekoäly = true;
