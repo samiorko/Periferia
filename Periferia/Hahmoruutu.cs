@@ -8,6 +8,21 @@ namespace Periferia
 {
     public class Hahmoruutu
     {
+        public Hahmoruutu()
+        {
+            Moottori.Pelaaja.HpMuuttunut += PelaajanHPMuuttunut;
+        }
+
+        public void PelaajanHPMuuttunut(object sender, EventArgs e)
+        {
+            // Tätä kutsutaan nyt kun pelaajan HP on muuttunut!
+        }
+
+        public void VihollisenHPMuuttunut(object sender, EventArgs e)
+        {
+            // Tätä kutsutaan kun vihollisen HP on muuttunut!
+        }
+
         public void Piirrä(int kursoriVasen, int kursoriYlä)
         {
             int hahmoruudunMaxLeveys = 25;

@@ -58,52 +58,23 @@ namespace Periferia
             Console.SetCursorPosition(Konsoli.KarttaOffset_Vasen + p.Sarake, Konsoli.KarttaOffset_Ylä + p.Rivi);
             p.Piirrä();
         }
+
+        static public Tuple<int, int> RandomiVapaaRuutu(Kartta k)
+        {
+            int x, y;
+            do
+            {
+                x = Vihollinen.Rnd.Next(0, KARTTALEVEYS - 1);
+                y = Vihollinen.Rnd.Next(0, KARTTAKORKEUS - 1);
+            } while (!k.Ruudut[y, x].Käveltävä);
+
+            return new Tuple<int, int>(y,x);
+        }
             
         static public Kartta LuoKartta()
         {
             Kartta k = new Kartta();
-            Random rnd = new Random();
-
-            k.Entiteetit.Add(new Vihollinen()
-            {
-                Nimi = "Karhu",
-                HP = 40,
-                Voima = 3,
-                Nopeus = 1,
-                Onnekkuus = 1,
-                Merkki = 'K',
-                Väri = ConsoleColor.DarkRed,
-                Rivi = 1,
-                Sarake = 1
-            });
-
-            k.Entiteetit.Add(new Vihollinen()
-            {
-                Nimi = "Karhu",
-                HP = 40,
-                Voima = 3,
-                Nopeus = 1,
-                Onnekkuus = 1,
-                Merkki = 'K',
-                Väri = ConsoleColor.DarkRed,
-                Rivi = 10,
-                Sarake = 10
-            });
-
-            k.Entiteetit.Add(new Vihollinen()
-            {
-                Nimi = "Karhu",
-                HP = 40,
-                Voima = 3,
-                Nopeus = 1,
-                Onnekkuus = 1,
-                Merkki = 'K',
-                Väri = ConsoleColor.DarkRed,
-                Rivi = 10,
-                Sarake = 20
-            });
-            
-
+            Random rnd = new Random();            
 
             for (int y = 0; y < KARTTAKORKEUS; y++)
             {
@@ -144,6 +115,16 @@ namespace Periferia
 
                 }
 
+            }
+
+            for (int i = 0; i < Vihollinen.Rnd.Next(1, 5); i++)
+            {
+                VihollisMalli malli = Moottori.VihollisMallit[Vihollinen.Rnd.Next(0, Moottori.VihollisMallit.Count - 1)];
+                Vihollinen vihu = Vihollinen.Generoi(malli);
+                Tuple<int, int> YX = RandomiVapaaRuutu(k);
+                vihu.Rivi = YX.Item1;
+                vihu.Sarake = YX.Item2;
+                k.Entiteetit.Add(vihu);
             }
 
             return k;
@@ -195,11 +176,6 @@ namespace Periferia
             //    }
 
             //}
-
-        }
-
-        static public void PiirräKartalle(Kartta k, IPiirrettävä p)
-        {
 
         }
 

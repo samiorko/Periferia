@@ -9,6 +9,10 @@ namespace Periferia
     public class Vihollinen : Hahmo, IPiirrettävä
     {
 
+        static public Random Rnd = new Random();
+
+        public string Hyökkäys { get; set; }
+
         public int KokemusPalkinto
         {
             get
@@ -25,7 +29,7 @@ namespace Periferia
 
         private bool liikeX(int etäisyys)
         {
-            if(etäisyys > 0)
+            if (etäisyys > 0)
             {
                 // Yritetään liikkua oikealle
                 Trace.WriteLine("AI Yritys: Oikealle");
@@ -59,7 +63,7 @@ namespace Periferia
         public void Tekoäly()
         {
             bool vuoroKäytetty = false;
-            int etäisyysX =  Moottori.Pelaaja.Sarake - this.Sarake;
+            int etäisyysX = Moottori.Pelaaja.Sarake - this.Sarake;
             int etäisyysY = Moottori.Pelaaja.Rivi - this.Rivi;
 
             if (Math.Abs(etäisyysX) + Math.Abs(etäisyysY) == 1)
@@ -75,14 +79,14 @@ namespace Periferia
                     if (!liikeX(etäisyysX))
                         liikeY(etäisyysY);
                 }
-                else if(Math.Abs(etäisyysX) > Math.Abs(etäisyysY) && etäisyysY != 0)
+                else if (Math.Abs(etäisyysX) > Math.Abs(etäisyysY) && etäisyysY != 0)
                 {
                     if (!liikeY(etäisyysY))
                         liikeX(etäisyysX);
                 }
-                else if(Math.Abs(etäisyysX) == Math.Abs(etäisyysY))
+                else if (Math.Abs(etäisyysX) == Math.Abs(etäisyysY))
                 {
-                    if(Moottori.Pelaaja.ViimeisinSuunta == Liikesuunnat.VASEN || Moottori.Pelaaja.ViimeisinSuunta == Liikesuunnat.OIKEA)
+                    if (Moottori.Pelaaja.ViimeisinSuunta == Liikesuunnat.VASEN || Moottori.Pelaaja.ViimeisinSuunta == Liikesuunnat.OIKEA)
                     {
                         liikeY(etäisyysY);
                     }
@@ -91,7 +95,7 @@ namespace Periferia
                         liikeX(etäisyysX);
                     }
                 }
-                else if(etäisyysX == 0)
+                else if (etäisyysX == 0)
                 {
                     liikeY(etäisyysY);
                 }
@@ -108,6 +112,66 @@ namespace Periferia
             Trace.WriteLine("ETäisyydet " + (Moottori.Pelaaja.Sarake - this.Sarake) + " / " + (Moottori.Pelaaja.Rivi - this.Rivi));
 
 
+        }
+
+        static public Vihollinen Generoi(VihollisMalli malli)
+        {
+            Vihollinen vihu = new Vihollinen();
+            int lvl = 1;
+            if(Moottori.Pelaaja.Taso > 1) {
+                // Pelaaja yli level 1, vihu voi olla sama tai yhden pienempi
+                lvl = Rnd.Next(Moottori.Pelaaja.Taso - 1, Moottori.Pelaaja.Taso);
+            }
+            vihu.Merkki = malli.Merkki;
+            vihu.Väri = malli.Väri;
+            vihu.OnkoTekoäly = true;
+            vihu.HP = malli.HP;
+            vihu.MaksimiHP = malli.HP;
+            vihu.Voima = malli.Voima;
+            vihu.Onnekkuus = malli.Onni;
+            vihu.Nopeus = malli.Nopeus;
+            vihu.Nimi = malli.Nimi;
+            vihu.Hyökkäys = malli.Hyökkäys;
+            vihu.Taso = lvl;
+
+            if(lvl > 1) {
+                // Vihun leveli yli 1, generoidaan randomilla statseja 1 / leveli
+                for (int i = 1; i < lvl; i++)
+                {
+                    switch (Rnd.Next(1, 3))
+                    {
+                        case 1:
+                            vihu.Voima++;
+                            break;
+                        case 2:
+                            vihu.Nopeus++;
+                            break;
+                        case 3:
+                            vihu.Onnekkuus++;
+                            break;
+                    }
+                }
+            }
+
+            return vihu;
+        }
+    }
+
+    public class VihollisMalli{
+        public int HP = 50;
+        public int Voima = 0;
+        public int Nopeus = 0;
+        public int Onni = 0;
+        public string Nimi;
+        public char Merkki;
+        public ConsoleColor Väri;
+        public string Hyökkäys = "vahingoittaa";
+
+        public VihollisMalli(string nimi, char merkki, ConsoleColor väri = ConsoleColor.DarkRed)
+        {
+            Nimi = nimi;
+            Merkki = merkki;
+            Väri = väri;
         }
     }
 }
