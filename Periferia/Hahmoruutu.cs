@@ -20,10 +20,40 @@ namespace Periferia
             Konsoli.UusiRivi(kursoriVasen);
             Console.Write("Voima: " + Moottori.Pelaaja.Voima);
             Konsoli.UusiRivi(kursoriVasen);
-            Console.Write("HP:        " + PiirräPalkki(Moottori.Pelaaja.HP));
+            Console.Write("HP:        \u2502");
+            // värin valinta
+            if (Moottori.Pelaaja.HP < 25)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Konsoli.Viestiloki.Lisää("HP vähissä.", ConsoleColor.DarkRed);
+            }
+            else if (Moottori.Pelaaja.HP == 0)
+            {
+                // GAME OVER
+            }
+            else
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write(PiirräPalkki(Moottori.Pelaaja.HP));
+            Console.ResetColor();
+            Console.Write("\u2502");
+            Console.ResetColor();
             Konsoli.UusiRivi(kursoriVasen);
-            Console.Write("Nesteytys: " + PiirräPalkki(Moottori.Pelaaja.Nesteytys));
-            //Console.ResetColor();
+            Console.Write("Nesteytys: \u2502");
+            // värin valinta
+            if (Moottori.Pelaaja.Nesteytys < 25)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Konsoli.Viestiloki.Lisää("Kuolet kohta janoon. Etsi vettä!", ConsoleColor.DarkBlue);
+            }
+            else if (Moottori.Pelaaja.Nesteytys == 0)
+            {
+                // GAME OVER
+            }
+            else
+                Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write(PiirräPalkki(Moottori.Pelaaja.Nesteytys));
+            Console.ResetColor();
+            Console.Write("\u2502");
             Konsoli.UusiRivi(kursoriVasen);
             Console.Write("Repun sisältö: ");
             NäytäSisältö(kursoriVasen);
@@ -38,9 +68,14 @@ namespace Periferia
 
                 if (entiteetti is Vihollinen)
                 {
-                    Console.Write("Voima: " + entiteetti.Voima);
+                    Console.ResetColor();
+                    Console.Write($"LVL:{entiteetti.Taso}  V:{entiteetti.Voima}  N:{entiteetti.Nopeus}  O:{entiteetti.Onnekkuus}");
                     Konsoli.UusiRivi(kursoriVasen);
-                    Console.Write("HP:        " + PiirräPalkki(entiteetti.HP));
+                    Console.Write($"HP: {entiteetti.HP}/  \u2502");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write(PiirräPalkki(entiteetti.HP));
+                    Console.ResetColor();
+                    Console.Write("\u2502");
                     Konsoli.UusiRivi(kursoriVasen);
                 }
             }
@@ -57,7 +92,7 @@ namespace Periferia
         public string PiirräPalkki(int PropertynKoko)
         {
             //Console.OutputEncoding = System.Text.Encoding.UTF8;
-            string palkki = "\u2502";
+            string palkki = "";
             //Console.ForegroundColor = ConsoleColor.Magenta;
 
             for (int i = 0; i < 10; i++)
@@ -66,19 +101,23 @@ namespace Periferia
                 {
                     palkki += '\u2588';
                     PropertynKoko -= 10;
-
                 }
-                else if (PropertynKoko < 10 && PropertynKoko > 0)
+                else if (PropertynKoko < 10 && PropertynKoko > 5)
                 {
                     palkki += '\u258C';
-                    PropertynKoko = 0;
+                    PropertynKoko -= PropertynKoko;
                 }
+                //else if (PropertynKoko < 10 && PropertynKoko > 5)
+                //{
+                //    palkki += " ";
+                //    PropertynKoko -= PropertynKoko;
+                //}
                 else
                     palkki += " ";
             }
             //Console.ResetColor();
 
-            return palkki += "\u2502";
+            return palkki;
         }
 
         public void NäytäSisältö(int kursoriVasen)
