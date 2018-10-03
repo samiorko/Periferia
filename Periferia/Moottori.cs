@@ -14,7 +14,7 @@ namespace Periferia
         {
             Väri = ConsoleColor.Yellow,
             Merkki = '@',
-            HP = 71,
+            HP = 49,
             Nesteytys = 100,
             Nimi = "Pekka",
             Voima = 50,
