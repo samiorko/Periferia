@@ -17,6 +17,7 @@ namespace Periferia
             Väri = ConsoleColor.Cyan,
             Merkki = '@',
             HP = 100,
+            MaksimiHP = 125,
             Nesteytys = 100,
             Nimi = "Pekka",
             Voima = 5,

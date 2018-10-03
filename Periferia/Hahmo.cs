@@ -20,16 +20,18 @@ namespace Periferia
         public int HP
         {
             get { return hp; }
-            set {
-                HpMuuttunut?.Invoke(this, EventArgs.Empty);
+            set
+            {
                 if (value <= 0)
                 {
                     hp = 0;
                     Kuole();
-                } else
+                }
+                else
                 {
                     hp = value;
                 }
+                HpMuuttunut?.Invoke(this, EventArgs.Empty);
             }
         }
         public int MaksimiHP { get; set; }
@@ -74,7 +76,8 @@ namespace Periferia
                     tekstinVari = ConsoleColor.Red;
                 }
                 Konsoli.Viestiloki.Lisää($"{this.Nimi} hyökkää kohti olentoa {kohde.Nimi}! {kohde.Nimi} HP -{vahinko} pistettä.", tekstinVari);
-            } else
+            }
+            else
             {
                 Konsoli.Viestiloki.Lisää($"{this.Nimi} olennon isku meni ohi {kohde.Nimi}-olennon!", ConsoleColor.DarkCyan);
             }
@@ -146,7 +149,7 @@ namespace Periferia
 
         private bool osuukoHyökkäysNopeus(Hahmo kohde)
         {
-            float suhdeLuku = ((float) this.Nopeus) / ((float) kohde.Nopeus);
+            float suhdeLuku = ((float)this.Nopeus) / ((float)kohde.Nopeus);
             // määritetään tod.näk. sille, että hyökkäys osuu
             double tn = 0.0f;
             if (suhdeLuku > 2.0f)
@@ -166,10 +169,11 @@ namespace Periferia
             tn = Math.Max(tn, 0.0f);
             Random r = new Random();
             int randomLuku = r.Next(1, 1000);
-            if (randomLuku < tn*1000.0f)
+            if (randomLuku < tn * 1000.0f)
             {
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
@@ -178,8 +182,8 @@ namespace Periferia
         public bool LiikuOikealle()
         {
             Karttaruutu vr = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake];
-            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake+1];
-            if (!liiku(vr,ur))
+            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake + 1];
+            if (!liiku(vr, ur))
                 return false;
             ViimeSarake = Sarake;
             Sarake++;
@@ -192,8 +196,8 @@ namespace Periferia
         public bool LiikuVasemmalle()
         {
             Karttaruutu vr = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake];
-            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake-1];
-            if (!liiku(vr,ur))
+            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake - 1];
+            if (!liiku(vr, ur))
                 return false;
             ViimeSarake = Sarake;
             Sarake--;
@@ -206,8 +210,8 @@ namespace Periferia
         public bool LiikuAlas()
         {
             Karttaruutu vr = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake];
-            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi+1, this.Sarake];
-            if (!liiku(vr,ur))
+            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi + 1, this.Sarake];
+            if (!liiku(vr, ur))
                 return false;
             ViimeRivi = Rivi;
             Rivi++;
@@ -220,8 +224,8 @@ namespace Periferia
         public bool LiikuYlös()
         {
             Karttaruutu vr = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake];
-            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi-1, this.Sarake];
-            if (!liiku(vr,ur))
+            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi - 1, this.Sarake];
+            if (!liiku(vr, ur))
                 return false;
             ViimeRivi = Rivi;
             Rivi--;
