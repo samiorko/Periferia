@@ -14,6 +14,7 @@ namespace Periferia
         public int Onnekkuus { get; set; }
 
         public int HP { get; set; }
+        public int MaksimiHP { get; set; }
         public int Sarake { get; set; }
         public int Rivi { get; set; }
         public char Merkki { get; set; }
@@ -28,58 +29,70 @@ namespace Periferia
 
         public bool LiikuOikealle()
         {
+            Karttaruutu vr = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake];
             Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake+1];
-            if (!liiku(ur))
+            if (!liiku(vr,ur))
                 return false;
             ViimeSarake = Sarake;
             Sarake++;
             ViimeisinSuunta = Liikesuunnat.OIKEA;
-
+            vr.Päivitä();
+            ur.Päivitä();
             return true;
         }
 
         public bool LiikuVasemmalle()
         {
-            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake - 1];
-            if (!liiku(ur))
+            Karttaruutu vr = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake];
+            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake-1];
+            if (!liiku(vr,ur))
                 return false;
             ViimeSarake = Sarake;
             Sarake--;
             ViimeisinSuunta = Liikesuunnat.VASEN;
+            vr.Päivitä();
+            ur.Päivitä();
             return true;
         }
 
         public bool LiikuAlas()
         {
+            Karttaruutu vr = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake];
             Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi+1, this.Sarake];
-            if (!liiku(ur))
+            if (!liiku(vr,ur))
                 return false;
             ViimeRivi = Rivi;
             Rivi++;
             ViimeisinSuunta = Liikesuunnat.ALAS;
+            vr.Päivitä();
+            ur.Päivitä();
             return true;
         }
 
         public bool LiikuYlös()
         {
-            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi - 1, this.Sarake];
-            if (!liiku(ur))
+            Karttaruutu vr = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake];
+            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi-1, this.Sarake];
+            if (!liiku(vr,ur))
                 return false;
             ViimeRivi = Rivi;
             Rivi--;
             ViimeisinSuunta = Liikesuunnat.YLÖS;
+            vr.Päivitä();
+            ur.Päivitä();
             return true;
         }
 
 
 
-        private bool liiku(Karttaruutu ur)
+        private bool liiku(Karttaruutu vr, Karttaruutu ur)
         {
-            Karttaruutu vr = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake];
+            
             if (!ur.Käveltävä)
                 return false;
             ur.Entiteetti = vr.Entiteetti;
             vr.Entiteetti = null;
+
 
             return true;
         }

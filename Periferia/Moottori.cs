@@ -33,17 +33,19 @@ namespace Periferia
             //Pelaaja.Reppu.Add(new Tavara("leka"));
 
 
+            k.PiirräHahmoRuutu();
+            k.PiirräKartta(Moottori.NykyinenKartta);
+
+            Konsoli.Viestiloki.Lisää("Peli alkaa!");
+
             bool pelijatkuu = true;
             while (pelijatkuu)
             {
-                Konsoli.TyhjennäKonsoli();
-                
-                k.PiirräHahmoRuutu();
+                //Konsoli.TyhjennäKonsoli();
                 k.PiirräLoki();
-                k.PiirräKartta(Moottori.NykyinenKartta);
+
                 //Konsoli.PiirräReunat();
 
-                Konsoli.NollaaKursori();
 
                 pelaajanVuoro();
                 Konsoli.Viestiloki.Lisää("Vihollisen vuoro, paina space");

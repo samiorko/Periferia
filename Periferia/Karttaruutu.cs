@@ -33,6 +33,22 @@ namespace Periferia
             Console.Write(Merkki);
         }
 
+        public void Päivitä()
+        {
+            int KursoriYlä = Rivi + Konsoli.KarttaOffset_Ylä;
+            int KursoriVasen = Sarake + Konsoli.KarttaOffset_Vasen;
+            Console.SetCursorPosition(KursoriVasen, KursoriYlä);
+            
+            if(Entiteetti != null)
+            {
+                Entiteetti.Piirrä();
+            }
+            else
+            {
+                Piirrä();
+            }
+        }
+
         public enum Ruututyypit
         {
             SISÄÄN,
