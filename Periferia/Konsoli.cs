@@ -7,14 +7,14 @@ namespace Periferia
 {
     public class Konsoli
     {
-        public static int KarttaOffset_Vasen { get; } = 40;
+        public static int KarttaOffset_Vasen { get; } = 4;
         public static int KarttaOffset_Ylä { get; } = 2;
 
         public static int HahmoRuutuOffset_Vasen { get; } = KarttaOffset_Vasen + Kartta.KARTTALEVEYS + 5;
         public static int HahmoRuutuOffset_Ylä { get; } = KarttaOffset_Ylä;
 
-        public static int ViestiLokiOffset_Vasen { get; } = 2;
-        public static int ViestiLokiOffset_Ylä { get; } = 16;
+        public static int ViestiLokiOffset_Vasen { get; } = 4;
+        public static int ViestiLokiOffset_Ylä { get; } = 18;
 
         public static int KonsoliLeveys { get; } = 150;
         public static int KonsoliKorkeus { get; } = 35;
@@ -31,9 +31,6 @@ namespace Periferia
         public void PiirräLoki()
         {
             Console.ResetColor();
-            // alustetaan kursorin sijainti
-            int KursoriVasen = 2;
-            int KursoriYlä = 0;
 
             Viestiloki.Piirrä();
 
@@ -87,7 +84,7 @@ namespace Periferia
             }
             reunanpiirtäjä.Append("╗" + Environment.NewLine);
             LisääSisennys(vasenYläkulma_SarakeNro - 2);
-            for (int j = 0; j <= rivimäärä - 1; j++)
+            for (int j = 0; j < rivimäärä; j++)
             {
                 reunanpiirtäjä.Append("║");                         // vasen reuna
                 for (int k = 0; k < sarakemäärä; k++)
@@ -124,7 +121,7 @@ namespace Periferia
                 Console.Write("═");                         // yläreuna
             }
             Console.Write("╗");
-            for (int j = 0; j <= rivimäärä; j++)
+            for (int j = 0; j < rivimäärä; j++)
             {
                 Konsoli.UusiRivi(vasenYläkulma_SarakeNro - 2);
                 Console.Write("║");                         // vasen reuna

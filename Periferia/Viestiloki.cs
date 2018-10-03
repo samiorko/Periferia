@@ -21,14 +21,13 @@ namespace Periferia
 
         public void Piirrä()
         {
+            //Essin
+            Konsoli.PiirräReunatStringWriter(Konsoli.ViestiLokiOffset_Vasen, Konsoli.ViestiLokiOffset_Ylä, 5, MaksimiLeveys);
+            //
             Console.SetCursorPosition(Konsoli.ViestiLokiOffset_Vasen, Konsoli.ViestiLokiOffset_Ylä);
             foreach(Tuple<string, ConsoleColor> v in Viestit)
             {
-                //Essin
-                Konsoli.PiirräReunatStringWriter(Konsoli.ViestiLokiOffset_Vasen, Konsoli.ViestiLokiOffset_Ylä, 5, MaksimiLeveys);
-                //
 
-                Console.SetCursorPosition(Konsoli.ViestiLokiOffset_Vasen, Konsoli.ViestiLokiOffset_Ylä);
                 Console.ForegroundColor = v.Item2;
                 Console.Write(v.Item1);
                 Konsoli.UusiRivi(Konsoli.ViestiLokiOffset_Vasen);
