@@ -26,12 +26,12 @@ namespace Periferia
             Sarake = 2,
             Rivi = 2
         };
-
-
+        static public bool Pelijatkuu { get; set; } = true;
+        
         static public void Peli()
         {
-            VihollisMallit.Add(new VihollisMalli("Karhu", 'K') {Voima=3, Nopeus=2, HP=60, Hyökkäys="raapaisee"});
-            VihollisMallit.Add(new VihollisMalli("Susi", 'S') {Voima=2, Nopeus=13, HP=30, Hyökkäys="puraisee"});
+            VihollisMallit.Add(new VihollisMalli("Karhu", 'K') {Voima=3, Nopeus=1, Onnekkuus=1, HP=40, Hyökkäys="raapaisee"});
+            VihollisMallit.Add(new VihollisMalli("Susi", 'S') {Voima=2, Nopeus=2, Onnekkuus=1, HP=30, Hyökkäys="puraisee"});
             VihollisMallit.Add(new VihollisMalli("Goblin", 'G', ConsoleColor.DarkGreen) {Voima=1, Nopeus=1, HP=15, Hyökkäys="lyö"});
             VihollisMallit.Add(new VihollisMalli("Arska", 'A', ConsoleColor.DarkYellow) {Voima=1, Nopeus=1, HP=15, Hyökkäys="lyö"});
 
@@ -48,8 +48,7 @@ namespace Periferia
 
             Konsoli.Viestiloki.Lisää("Peli alkaa!");
 
-            bool pelijatkuu = true;
-            while (pelijatkuu)
+            while (Pelijatkuu)
             {
                 //Konsoli.TyhjennäKonsoli();
                 k.PiirräLoki();

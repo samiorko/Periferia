@@ -50,7 +50,7 @@ namespace Periferia
         {
 
             Console.SetCursorPosition(kursoriVasen, kursoriYlä);                                        // Asetetaan kursorin aloituspaikka
-            Konsoli.PiirräReunatStringWriter(kursoriVasen, kursoriYlä, hahmoruudunMaxKorkeus, hahmoruudunMaxLeveys);
+            Konsoli.PiirräReunatStringBuilder(kursoriVasen, kursoriYlä, hahmoruudunMaxKorkeus, hahmoruudunMaxLeveys);
 
             PiirräPelaajanTiedot(kursoriVasen, kursoriYlä);                                             // Piirretään pelaajan tiedot
 

@@ -11,8 +11,6 @@ namespace Periferia
 
         static public Random Rnd = new Random();
 
-        public string Hyökkäys { get; set; }
-
         public int KokemusPalkinto
         {
             get
@@ -110,8 +108,7 @@ namespace Periferia
             Trace.WriteLine("Pelaaja:   " + Moottori.Pelaaja.Sarake + " / " + Moottori.Pelaaja.Rivi);
             Trace.WriteLine("Vihu:      " + this.Sarake + " / " + this.Rivi);
             Trace.WriteLine("ETäisyydet " + (Moottori.Pelaaja.Sarake - this.Sarake) + " / " + (Moottori.Pelaaja.Rivi - this.Rivi));
-
-
+            
         }
 
         static public Vihollinen Generoi(VihollisMalli malli)
@@ -128,7 +125,7 @@ namespace Periferia
             vihu.HP = malli.HP;
             vihu.MaksimiHP = malli.HP;
             vihu.Voima = malli.Voima;
-            vihu.Onnekkuus = malli.Onni;
+            vihu.Onnekkuus = malli.Onnekkuus;
             vihu.Nopeus = malli.Nopeus;
             vihu.Nimi = malli.Nimi;
             vihu.Hyökkäys = malli.Hyökkäys;
@@ -159,9 +156,9 @@ namespace Periferia
 
     public class VihollisMalli{
         public int HP = 50;
-        public int Voima = 0;
-        public int Nopeus = 0;
-        public int Onni = 0;
+        public int Voima = 1;
+        public int Nopeus = 1;
+        public int Onnekkuus = 1;
         public string Nimi;
         public char Merkki;
         public ConsoleColor Väri;

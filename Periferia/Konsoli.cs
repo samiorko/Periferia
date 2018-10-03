@@ -16,7 +16,7 @@ namespace Periferia
         public static int ViestiLokiOffset_Vasen { get; } = 4;
         public static int ViestiLokiOffset_Ylä { get; } = 18;
 
-        public static int KonsoliLeveys { get; } = 150;
+        public static int KonsoliLeveys { get; } = 95;
         public static int KonsoliKorkeus { get; } = 35;
 
         public static Viestiloki Viestiloki = new Viestiloki();
@@ -58,6 +58,35 @@ namespace Periferia
             Console.ResetColor();
         }
 
+        public static void PiirräGameOver()
+        {
+            TyhjennäKonsoli();
+            string teksti = @"
+    ___                              ___         ___       ___  
+   (   )                            (   )  .-.  (   )     (   ) 
+    | |   ___    ___  ___    .--.    | |  ( __)  | |_      | |  
+    | |  (   )  (   )(   )  /    \   | |  (   ) (   __)    | |
+    | |  ' /     | |  | |  |  .-. ;  | |   | |   | |       | |  
+    | |,' /      | |  | |  | |  | |  | |   | |   | | ___   | |  
+    | .  '.      | |  | |  | |  | |  | |   | |   | |(   )  | |  
+    | | `. \     | |  | |  | |  | |  | |   | |   | | | |   | |
+    | |   \ \    | |  ; '  | '  | |  | |   | |   | ' | |   |_|  
+    | |    \ .   ' `-' / '    `-' /  | |   | |   ' `-';    .-.
+   (___)  (___)   '.__.'    `.__.'  (___) (___)   `.__.   (   ) 
+                                                           '-'
+            ";
+            PiirräReunatStringBuilder(4, 2, KonsoliKorkeus-3, KonsoliLeveys-5);
+            Console.SetCursorPosition(10, 5);
+            string[] rivit = teksti.Split('\n');
+            foreach (var rivi in rivit)
+            {
+                Console.Write(rivi);
+                Konsoli.UusiRivi(10);
+            }
+            Konsoli.UusiRivi(15);
+            Console.Write($"Tapetut:\t{Moottori.Pelaaja.MontakoTapettu}");
+        }
+
         static public void TyhjennäKonsoli()
         {
             Console.Clear();
@@ -71,7 +100,7 @@ namespace Periferia
             Console.SetCursorPosition(0, 0);
         }
 
-        static public void PiirräReunatStringWriter(int vasenYläkulma_SarakeNro, int vasenYläkulma_RiviNro, int rivimäärä, int sarakemäärä)
+        static public void PiirräReunatStringBuilder(int vasenYläkulma_SarakeNro, int vasenYläkulma_RiviNro, int rivimäärä, int sarakemäärä)
         {  // Piirtää reunat objekteille StringWriterin avulla
 
             StringBuilder reunanpiirtäjä = new StringBuilder();

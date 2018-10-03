@@ -23,7 +23,7 @@ namespace Periferia
         public void Piirrä()
         {
             //Essin
-            Konsoli.PiirräReunatStringWriter(Konsoli.ViestiLokiOffset_Vasen, Konsoli.ViestiLokiOffset_Ylä, MaksimiRivit, MaksimiLeveys);
+            Konsoli.PiirräReunatStringBuilder(Konsoli.ViestiLokiOffset_Vasen, Konsoli.ViestiLokiOffset_Ylä, MaksimiRivit, MaksimiLeveys);
             //
             Console.SetCursorPosition(Konsoli.ViestiLokiOffset_Vasen, Konsoli.ViestiLokiOffset_Ylä);
             foreach(Tuple<string, ConsoleColor> v in Viestit)

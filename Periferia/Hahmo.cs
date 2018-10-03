@@ -39,6 +39,10 @@ namespace Periferia
             // Poistetaan karttaruudulla oleva hahmo
             Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake].Entiteetti = null;
             Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake].Päivitä();
+            if (this is Vihollinen)
+            {
+                Moottori.Pelaaja.MontakoTapettu++;
+            }
         }
         public bool Elossa { get => (HP > 0); }
         public int Sarake { get; set; }
@@ -52,6 +56,7 @@ namespace Periferia
 
         public int ViimeSarake { get; set; }
         public int ViimeRivi { get; set; }
+        public string Hyökkäys { get; set; } = "vahingoittaa";
 
         public void Hyökkää(Hahmo kohde)
         {
@@ -73,7 +78,7 @@ namespace Periferia
                 {
                     tekstinVari = ConsoleColor.Red;
                 }
-                Konsoli.Viestiloki.Lisää($"{this.Nimi} hyökkää kohti olentoa {kohde.Nimi}! {kohde.Nimi} HP -{vahinko} pistettä.", tekstinVari);
+                Konsoli.Viestiloki.Lisää($"{this.Nimi} {this.Hyökkäys} olentoa {kohde.Nimi}! {kohde.Nimi} HP -{vahinko} pistettä.", tekstinVari);
             } else
             {
                 Konsoli.Viestiloki.Lisää($"{this.Nimi} olennon isku meni ohi {kohde.Nimi}-olennon!", ConsoleColor.DarkCyan);
@@ -134,7 +139,7 @@ namespace Periferia
             tn = Math.Min(tn, 1.0f);
             Random r = new Random();
             int randomLuku = r.Next(1, 1000);
-            if (randomLuku < tn * 1000.0f)
+            if (randomLuku > tn * 1000.0f)
             {
                 return true;
             }
@@ -166,7 +171,7 @@ namespace Periferia
             tn = Math.Max(tn, 0.0f);
             Random r = new Random();
             int randomLuku = r.Next(1, 1000);
-            if (randomLuku < tn*1000.0f)
+            if (randomLuku > tn*1000.0f)
             {
                 return true;
             } else
