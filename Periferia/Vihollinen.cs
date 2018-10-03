@@ -60,7 +60,6 @@ namespace Periferia
 
         public void Tekoäly()
         {
-            bool vuoroKäytetty = false;
             int etäisyysX = Moottori.Pelaaja.Sarake - this.Sarake;
             int etäisyysY = Moottori.Pelaaja.Rivi - this.Rivi;
 
@@ -135,7 +134,8 @@ namespace Periferia
                 // Vihun leveli yli 1, generoidaan randomilla statseja 1 / leveli
                 for (int i = 1; i < lvl; i++)
                 {
-                    switch (Rnd.Next(1, 3))
+                    int randomi = Rnd.Next(1, 3);
+                    switch (randomi)
                     {
                         case 1:
                             vihu.Voima++;

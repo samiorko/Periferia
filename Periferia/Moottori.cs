@@ -17,6 +17,7 @@ namespace Periferia
             Väri = ConsoleColor.Cyan,
             Merkki = '@',
             HP = 100,
+            MaksimiHP = 125,
             Nesteytys = 100,
             Nimi = "Pekka",
             Voima = 5,
@@ -35,23 +36,26 @@ namespace Periferia
             VihollisMallit.Add(new VihollisMalli("Goblin", 'G', ConsoleColor.DarkGreen) {Voima=1, Nopeus=1, HP=15, Hyökkäys="lyö"});
             VihollisMallit.Add(new VihollisMalli("Arska", 'A', ConsoleColor.DarkYellow) {Voima=1, Nopeus=1, HP=15, Hyökkäys="lyö"});
 
+            
+           Konsoli.AlustaKonsoli();
 
-            Konsoli k = new Konsoli();
-            Konsoli.AlustaKonsoli();
+            Moottori.Pelaaja.HpMuuttunut += Konsoli.Hahmoruutu.PelaajanHPMuuttunut;
+            Moottori.Pelaaja.NesteMuuttunut += Konsoli.Hahmoruutu.PelaajanNesteytysMuuttunut;
+
             Moottori.NykyinenKartta = Kartta.LuoKartta();
             //Pelaaja.Reppu.Add(new Tavara("kirves"));
             //Pelaaja.Reppu.Add(new Tavara("leka"));
 
 
-            k.PiirräHahmoRuutu();
-            k.PiirräKartta(Moottori.NykyinenKartta);
+            Konsoli.PiirräHahmoRuutu();
+            Konsoli.PiirräKartta(Moottori.NykyinenKartta);
 
             Konsoli.Viestiloki.Lisää("Peli alkaa!");
 
             while (Pelijatkuu)
             {
                 //Konsoli.TyhjennäKonsoli();
-                k.PiirräLoki();
+                Konsoli.PiirräLoki();
 
                 //Konsoli.PiirräReunat();
 

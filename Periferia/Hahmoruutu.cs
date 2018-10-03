@@ -13,15 +13,15 @@ namespace Periferia
 
         public Hahmoruutu()
         {
-            Moottori.Pelaaja.HpMuuttunut += PelaajanHPMuuttunut;
-            Moottori.Pelaaja.NesteMuuttunut += PelaajanNesteytysMuuttunut;
+           // Moottori.Pelaaja.HpMuuttunut += PelaajanHPMuuttunut;
+            //Moottori.Pelaaja.NesteMuuttunut += PelaajanNesteytysMuuttunut;
         }
 
         public void PelaajanNesteytysMuuttunut(object sender, EventArgs e)
         {
             Console.SetCursorPosition(Konsoli.HahmoRuutuOffset_Vasen + 12, Konsoli.HahmoRuutuOffset_Ylä + 6);
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write(PiirräPalkki(Moottori.Pelaaja.Nesteytys));
+            Console.Write($"{PiirräPalkki(Moottori.Pelaaja.Nesteytys),10}");
             Console.ResetColor();
 
             if (Moottori.Pelaaja.Nesteytys < 25 && Moottori.Pelaaja.Nesteytys > 0)
@@ -30,25 +30,26 @@ namespace Periferia
 
         public void PelaajanHPMuuttunut(object sender, EventArgs e)
         {
-            Console.SetCursorPosition(Konsoli.HahmoRuutuOffset_Vasen + 12, Konsoli.HahmoRuutuOffset_Ylä + 5);               // ESSI TSEKKAA KUN HP TOIMII
+            float hpProsentti = (float)Moottori.Pelaaja.HP / (float)Moottori.Pelaaja.MaksimiHP * 100.0f;
+
+            Console.SetCursorPosition(Konsoli.HahmoRuutuOffset_Vasen, Konsoli.HahmoRuutuOffset_Ylä + 5);
+            Console.ResetColor();
+            Console.Write($"HP:{Moottori.Pelaaja.HP, 3}/{Moottori.Pelaaja.MaksimiHP,3} \u2502");
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine(PiirräPalkki(Moottori.Pelaaja.HP));
+            Console.Write($"{PiirräPalkki((int)hpProsentti),10}");
             Console.ResetColor();
 
-            if (Moottori.Pelaaja.HP < 25 && Moottori.Pelaaja.HP > 0)            
+            if (hpProsentti < 25.0f && Moottori.Pelaaja.HP > 0f)
                 Konsoli.Viestiloki.Lisää("HP vähissä.", ConsoleColor.DarkRed);
         }
 
         public void VihollisenHPMuuttunut(object sender, EventArgs e)
         {
-            // Tätä kutsutaan kun vihollisen HP on muuttunut!
-            // PiirräEntiteettienTiedot();
-                                                                                                                            // ESSI TSEKKAA KUN HP TOIMII
+            //PiirräEntiteettienTiedot(Konsoli.HahmoRuutuOffset_Vasen);
         }
 
         public void Piirrä(int kursoriVasen, int kursoriYlä)
         {
-
             Console.SetCursorPosition(kursoriVasen, kursoriYlä);                                        // Asetetaan kursorin aloituspaikka
             Konsoli.PiirräReunatStringBuilder(kursoriVasen, kursoriYlä, hahmoruudunMaxKorkeus, hahmoruudunMaxLeveys);
 
@@ -69,7 +70,7 @@ namespace Periferia
         {
             Console.SetCursorPosition(kursoriVasen, kursoriYlä);
 
-            Console.Write("Pelaaja " + Moottori.Pelaaja.Merkki + ": " + Moottori.Pelaaja.Nimi);
+            Console.Write($"Pelaaja {Moottori.Pelaaja.Merkki,1}: {Moottori.Pelaaja.Nimi,10}");
             Konsoli.UusiRivi(kursoriVasen);
             Console.Write("LVL: " + Moottori.Pelaaja.Taso);
             Konsoli.UusiRivi(kursoriVasen);
@@ -79,16 +80,16 @@ namespace Periferia
             Konsoli.UusiRivi(kursoriVasen);
             Console.Write("Onnekkuus: " + Moottori.Pelaaja.Onnekkuus);
             Konsoli.UusiRivi(kursoriVasen);
-            Console.Write("HP:        \u2502");
+            Console.Write($"HP:{Moottori.Pelaaja.HP,3}/{Moottori.Pelaaja.MaksimiHP,3} \u2502");
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.Write(PiirräPalkki(Moottori.Pelaaja.HP));
+            Console.Write($"{PiirräPalkki(Moottori.Pelaaja.HP),10}");
             Console.ResetColor();
             Console.Write("\u2502");
             Console.ResetColor();
             Konsoli.UusiRivi(kursoriVasen);
             Console.Write("Nesteytys: \u2502");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write(PiirräPalkki(Moottori.Pelaaja.Nesteytys));
+            Console.Write($"{PiirräPalkki(Moottori.Pelaaja.Nesteytys),10}");
             Console.ResetColor();
             Console.Write("\u2502");
             Konsoli.UusiRivi(kursoriVasen);
@@ -111,9 +112,9 @@ namespace Periferia
                     Console.ResetColor();
                     Console.Write($"LVL:{entiteetti.Taso}  V:{entiteetti.Voima}  N:{entiteetti.Nopeus}  O:{entiteetti.Onnekkuus}");
                     Konsoli.UusiRivi(kursoriVasen);
-                    Console.Write($"HP: {entiteetti.HP}/  \u2502");
+                    Console.Write($"HP: {entiteetti.HP}/{entiteetti.MaksimiHP}  \u2502");
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write(PiirräPalkki(entiteetti.HP));
+                    Console.Write($"{PiirräPalkki(entiteetti.HP),12}");
                     Console.ResetColor();
                     Console.Write("\u2502");
                     Konsoli.UusiRivi(kursoriVasen);
