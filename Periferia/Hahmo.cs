@@ -8,6 +8,8 @@ namespace Periferia
 {
     abstract public class Hahmo
     {
+        public event EventHandler HpMuuttunut;
+
         public int Taso { get; set; }
         public int Voima { get; set; }
         public int Nopeus { get; set; }
@@ -19,10 +21,11 @@ namespace Periferia
         {
             get { return hp; }
             set {
+                HpMuuttunut?.Invoke(this, EventArgs.Empty);
                 if (value <= 0)
                 {
                     hp = 0;
-                    kuole();
+                    Kuole();
                 } else
                 {
                     hp = value;
@@ -31,7 +34,7 @@ namespace Periferia
         }
         public int MaksimiHP { get; set; }
 
-        public virtual void kuole()
+        public virtual void Kuole()
         {
             // Poistetaan karttaruudulla oleva hahmo
             Moottori.NykyinenKartta.Ruudut[this.Sarake, this.Rivi].Entiteetti = null;

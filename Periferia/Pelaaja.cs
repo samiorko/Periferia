@@ -7,8 +7,25 @@ namespace Periferia
 {
     public class Pelaaja : Hahmo, IPiirrettävä
     {
-       
-        public int Nesteytys { get; set; }
+        public event EventHandler NesteMuuttunut;
+
+        private int _nesteytys;
+
+        public int Nesteytys {
+            get {
+                return _nesteytys;
+            }
+            set
+            {
+                NesteMuuttunut?.Invoke(this, EventArgs.Empty);
+                this._nesteytys = value;
+                if(Nesteytys < 0)
+                {
+                    //Kuole();
+                    Konsoli.Viestiloki.Lisää("NEste loppui, KUOLIT!", ConsoleColor.Red);
+                }
+            }
+        }
 
         private int _kokemus;
 
