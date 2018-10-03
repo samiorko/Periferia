@@ -128,7 +128,7 @@ namespace Periferia
             vihu.HP = malli.HP;
             vihu.MaksimiHP = malli.HP;
             vihu.Voima = malli.Voima;
-            vihu.Onnekkuus = malli.Onni;
+            vihu.Onnekkuus = malli.Onnekkuus;
             vihu.Nopeus = malli.Nopeus;
             vihu.Nimi = malli.Nimi;
             vihu.Hyökkäys = malli.Hyökkäys;
@@ -138,7 +138,8 @@ namespace Periferia
                 // Vihun leveli yli 1, generoidaan randomilla statseja 1 / leveli
                 for (int i = 1; i < lvl; i++)
                 {
-                    switch (Rnd.Next(1, 3))
+                    int randomi = Rnd.Next(1, 3);
+                    switch (randomi)
                     {
                         case 1:
                             vihu.Voima++;
@@ -159,9 +160,9 @@ namespace Periferia
 
     public class VihollisMalli{
         public int HP = 50;
-        public int Voima = 0;
-        public int Nopeus = 0;
-        public int Onni = 0;
+        public int Voima = 1;
+        public int Nopeus = 1;
+        public int Onnekkuus = 1;
         public string Nimi;
         public char Merkki;
         public ConsoleColor Väri;
