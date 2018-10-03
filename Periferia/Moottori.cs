@@ -65,6 +65,7 @@ namespace Periferia
                 vihollistenVuoro();
 
             }
+            Konsoli.PiirräGameOver();
         }
 
         static void pelaajanVuoro()

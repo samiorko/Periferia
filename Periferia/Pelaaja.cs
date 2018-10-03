@@ -59,7 +59,7 @@ namespace Periferia
             Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake].Päivitä();
             // Game over-ruutuun
             Moottori.Pelijatkuu = false;
-            Konsoli.PiirräGameOver();
+            
         }
     }
 }
