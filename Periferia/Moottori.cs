@@ -33,6 +33,7 @@ namespace Periferia
             //Pelaaja.Reppu.Add(new Tavara("leka"));
 
 
+            k.PiirräHahmoRuutu();
             k.PiirräKartta(Moottori.NykyinenKartta);
 
             Konsoli.Viestiloki.Lisää("Peli alkaa!");
@@ -40,7 +41,6 @@ namespace Periferia
             bool pelijatkuu = true;
             while (pelijatkuu)
             {
-                k.PiirräHahmoRuutu();
                 //Konsoli.TyhjennäKonsoli();
                 k.PiirräLoki();
 
