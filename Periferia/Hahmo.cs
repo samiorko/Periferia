@@ -8,7 +8,11 @@ namespace Periferia
 {
     abstract public class Hahmo
     {
+        public int Taso { get; set; }
         public int Voima { get; set; }
+        public int Nopeus { get; set; }
+        public int Onnekkuus { get; set; }
+
         public int HP { get; set; }
         public int Sarake { get; set; }
         public int Rivi { get; set; }

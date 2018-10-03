@@ -40,7 +40,7 @@
   <Class Name="Periferia.Vihollinen">
     <Position X="6.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAIAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Vihollinen.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -56,7 +56,7 @@
   <Class Name="Periferia.Konsoli">
     <Position X="0.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAGAAAAAAABAAiEACABAACAEIIAAAAIAIIAAAAAACAA=</HashCode>
+      <HashCode>AAGAAAAAAABAAiEACABAACAEIIAAAAIAIIAAAAgACAA=</HashCode>
       <FileName>Konsoli.cs</FileName>
     </TypeIdentifier>
   </Class>
