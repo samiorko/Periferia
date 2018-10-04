@@ -323,10 +323,10 @@ namespace Periferia
 
             } // liikkumattomuus päättyy
             // Jos liikkuminen onnistuu, suoritetaan alla olevat rivit
-            if (ur.Entiteetti is Tavara)
+            if (ur.Entiteetti is Tavara && this is Pelaaja)
             {
                 Moottori.Pelaaja.Nesteytys += Moottori.VedenPisteet;
-                Konsoli.Viestiloki.Lisää("Löysit vettä! +"+ Moottori.VedenPisteet, ConsoleColor.Blue);
+                Konsoli.Viestiloki.Lisää($"Löysit vettä! +{Moottori.VedenPisteet}!", ConsoleColor.Blue);
                 
             }
             ur.Entiteetti = vr.Entiteetti;

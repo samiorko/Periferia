@@ -19,6 +19,18 @@ namespace Periferia
             }
         }
 
+        public bool TekoälyKäveltävä
+        {
+            get
+            {
+                if (Entiteetti is Tavara)
+                {
+                    return false;
+                }
+                return Käveltävä;
+            }
+        }
+
         public Ruututyypit Tyyppi { get; set; }
         public IPiirrettävä Entiteetti { get; set; }
         public int Sarake { get; set; }
@@ -29,7 +41,7 @@ namespace Periferia
 
         public void Piirrä()
         {
-            if(this.Entiteetti != null)
+            if (this.Entiteetti != null)
             {
                 this.Entiteetti.Piirrä();
             }
@@ -38,7 +50,7 @@ namespace Periferia
                 Console.ForegroundColor = Väri;
                 Console.Write(Merkki);
             }
-            
+
         }
 
         public void Päivitä()
@@ -46,8 +58,8 @@ namespace Periferia
             int KursoriYlä = Rivi + Konsoli.KarttaOffset_Ylä;
             int KursoriVasen = Sarake + Konsoli.KarttaOffset_Vasen;
             Console.SetCursorPosition(KursoriVasen, KursoriYlä);
-            
-            if(Entiteetti != null)
+
+            if (Entiteetti != null)
             {
                 Entiteetti.Piirrä();
             }

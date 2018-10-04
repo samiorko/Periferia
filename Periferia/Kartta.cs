@@ -187,9 +187,15 @@ namespace Periferia
             }
 
             k.Ulosmenosuunta = ulos;
-            Tavara vesi = new Tavara("vesi") { Merkki = 'V', Väri = ConsoleColor.Blue, Rivi = 1, Sarake = 1 };
-            k.Entiteetit.Add(vesi);
-            k.Ruudut[1, 1].Entiteetti=vesi;
+
+            for(int i=0; i< karttageneraattori_vesilähteet; i++)
+            {
+                Tuple<int, int> YX = RandomiVapaaRuutu(k);
+                Tavara vesi = new Tavara("vesi") { Merkki = 'V', Väri = ConsoleColor.Blue, Rivi = YX.Item1, Sarake = YX.Item2 };
+                k.Entiteetit.Add(vesi);
+                k.Ruudut[YX.Item1, YX.Item2].Entiteetti = vesi;
+            }
+            
             return k;
             
         }
