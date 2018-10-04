@@ -148,7 +148,7 @@ namespace Periferia
                     if (entiteetti.HP == 0)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGray;
-                        Console.Write(entiteetti.Merkki + " = " + entiteetti.Nimi);
+                        Console.Write(entiteetti.Merkki + " = " + entiteetti.Nimi + "      ");
                         Konsoli.UusiRivi(kursoriVasen);
                         Console.Write($"LVL:{entiteetti.Taso}  V:{entiteetti.Voima}  N:{entiteetti.Nopeus}  O:{entiteetti.Onnekkuus}");
                         Konsoli.UusiRivi(kursoriVasen);
