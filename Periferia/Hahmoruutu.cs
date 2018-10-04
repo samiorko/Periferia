@@ -164,6 +164,7 @@ namespace Periferia
                         Console.Write($"HP:{entiteetti.HP,4}/{entiteetti.MaksimiHP,-4}\u2502");
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.Write($"{PiirräPalkki((int)hpProsentti),-10}");
+                        Console.ResetColor();
                         Console.Write("\u2502");
                         Konsoli.UusiRivi(kursoriVasen);
                     }
