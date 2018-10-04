@@ -10,22 +10,33 @@ namespace Periferia
     {
         const int hahmoruudunMaxLeveys = 25;
         const int hahmoruudunMaxKorkeus = 31;
+        const int repunSlottienMäärä = 3;
+        const int ReppupalkinLeveys = 10;
+
 
         public Hahmoruutu()
         {
-            //Moottori.Pelaaja.HpMuuttunut += PelaajanHPMuuttunut;
+            // Moottori.Pelaaja.HpMuuttunut += PelaajanHPMuuttunut;
             //Moottori.Pelaaja.NesteMuuttunut += PelaajanNesteytysMuuttunut;
         }
 
+
+        // EVENTIT
+
         public void PelaajanNesteytysMuuttunut(object sender, EventArgs e)
         {
-            Console.SetCursorPosition(Konsoli.HahmoRuutuOffset_Vasen + 12, Konsoli.HahmoRuutuOffset_Ylä + 6);
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write($"{PiirräPalkki(Moottori.Pelaaja.Nesteytys),10}");
+            Console.SetCursorPosition(Konsoli.HahmoRuutuOffset_Vasen, Konsoli.HahmoRuutuOffset_Ylä + 6);
             Console.ResetColor();
+            Console.Write("Nesteytys:  \u2502");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write($"{PiirräPalkki(Moottori.Pelaaja.Nesteytys),-10}");
+            Console.ResetColor();
+            Console.Write("\u2502");
 
-            if (Moottori.Pelaaja.Nesteytys < 25 && Moottori.Pelaaja.Nesteytys > 0)
+            if (Moottori.Pelaaja.Nesteytys < 25 && Moottori.Pelaaja.Nesteytys > 0 && (Moottori.Pelaaja.Nesteytys % 2 != 0))
+            {
                 Konsoli.Viestiloki.Lisää("Kuolet kohta janoon. Etsi vettä!", ConsoleColor.DarkBlue);
+            }
         }
 
         public void PelaajanHPMuuttunut(object sender, EventArgs e)
@@ -34,7 +45,7 @@ namespace Periferia
 
             Console.SetCursorPosition(Konsoli.HahmoRuutuOffset_Vasen, Konsoli.HahmoRuutuOffset_Ylä + 5);
             Console.ResetColor();
-            Console.Write($"HP:{Moottori.Pelaaja.HP, 3}/{Moottori.Pelaaja.MaksimiHP,3} \u2502");
+            Console.Write($"HP:{Moottori.Pelaaja.HP,4}/{Moottori.Pelaaja.MaksimiHP,-4}\u2502");
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.Write($"{PiirräPalkki((int)hpProsentti),10}");
             Console.ResetColor();
@@ -45,33 +56,38 @@ namespace Periferia
 
         public void VihollisenHPMuuttunut(object sender, EventArgs e)
         {
-            //PiirräEntiteettienTiedot(Konsoli.HahmoRuutuOffset_Vasen);
+            PiirräEntiteettienTiedot(Konsoli.HahmoRuutuOffset_Vasen, Konsoli.HahmoRuutuOffset_Ylä);
         }
+
+
+        // HAHMORUUDUN PIIRROT
 
         public void Piirrä(int kursoriVasen, int kursoriYlä)
         {
-            Console.SetCursorPosition(kursoriVasen, kursoriYlä);                                        // Asetetaan kursorin aloituspaikka
+            // Asetetaan kursorin aloituspaikka
+            Console.SetCursorPosition(kursoriVasen, kursoriYlä);
             Konsoli.PiirräReunatStringBuilder(kursoriVasen, kursoriYlä, hahmoruudunMaxKorkeus, hahmoruudunMaxLeveys);
 
-            PiirräPelaajanTiedot(kursoriVasen, kursoriYlä);                                             // Piirretään pelaajan tiedot
+            // Piirretään pelaajan tiedot
+            PiirräPelaajanTiedot(kursoriVasen, kursoriYlä);
 
-            PiirräEntiteettienTiedot(kursoriVasen);
-
-            foreach (Tavara entiteetti in Moottori.NykyinenKartta.Entiteetit.Where(e => e is Tavara))
-            {
-                entiteetti.Piirrä();
-                Console.Write(" = " + entiteetti.Nimi);
-                Konsoli.UusiRivi(kursoriVasen);
-            }
-
+            // Piirretään muiden pelihahmojen tiedot
+            PiirräEntiteettienTiedot(kursoriVasen, kursoriYlä);
         }
 
         public void PiirräPelaajanTiedot(int kursoriVasen, int kursoriYlä)
         {
             Console.SetCursorPosition(kursoriVasen, kursoriYlä);
+            Console.ResetColor();
 
-            Console.Write($"Pelaaja {Moottori.Pelaaja.Merkki,1}: {Moottori.Pelaaja.Nimi,10}");
+            // Pelaajan tiedot
+            Console.Write("Pelaaja ");
+            Moottori.Pelaaja.Piirrä();
+            Console.ResetColor();
+            Console.Write($": {Moottori.Pelaaja.Nimi,-10}");
             Konsoli.UusiRivi(kursoriVasen);
+
+            // Pelaajan numerostatsit
             Console.Write("LVL: " + Moottori.Pelaaja.Taso);
             Konsoli.UusiRivi(kursoriVasen);
             Console.Write("Voima: " + Moottori.Pelaaja.Voima);
@@ -80,53 +96,91 @@ namespace Periferia
             Konsoli.UusiRivi(kursoriVasen);
             Console.Write("Onnekkuus: " + Moottori.Pelaaja.Onnekkuus);
             Konsoli.UusiRivi(kursoriVasen);
-            Console.Write($"HP:{Moottori.Pelaaja.HP,3}/{Moottori.Pelaaja.MaksimiHP,3} \u2502");
+
+            // Pelaajan HP-palkki
+
+            Console.SetCursorPosition(kursoriVasen, kursoriYlä + 5);
+            Console.Write($"HP:{Moottori.Pelaaja.HP,4}/{Moottori.Pelaaja.MaksimiHP,-4}\u2502");
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.Write($"{PiirräPalkki(Moottori.Pelaaja.HP),10}");
+            Console.Write($"{PiirräPalkki(Moottori.Pelaaja.HP),-10}");
             Console.ResetColor();
             Console.Write("\u2502");
             Console.ResetColor();
             Konsoli.UusiRivi(kursoriVasen);
-            Console.Write("Nesteytys: \u2502");
+
+            // Pelaajan Nesteytys-palkki
+            Console.SetCursorPosition(kursoriVasen, kursoriYlä + 6);
+            Console.Write("Nesteytys:  \u2502");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write($"{PiirräPalkki(Moottori.Pelaaja.Nesteytys),10}");
+            Console.Write($"{PiirräPalkki(Moottori.Pelaaja.Nesteytys),-10}");
             Console.ResetColor();
             Console.Write("\u2502");
             Konsoli.UusiRivi(kursoriVasen);
+
+            // Pelaajan repun sisältö
             Console.Write("Repun sisältö: ");
-            NäytäRepunSisältö(kursoriVasen);
+            NäytäRepunSisältö(kursoriVasen, kursoriYlä);
             Konsoli.UusiRivi(kursoriVasen);
             Konsoli.UusiRivi(kursoriVasen);
         }
 
-        public void PiirräEntiteettienTiedot(int kursoriVasen)
+        public void PiirräEntiteettienTiedot(int kursoriVasen, int kursoriYlä)
         {
+            Console.SetCursorPosition(kursoriVasen, kursoriYlä + 13);
+            Console.ResetColor();
+
+            // Pelin hahmot (muut kuin pelaaja) listattuna
+
             foreach (Hahmo entiteetti in Moottori.NykyinenKartta.Entiteetit.Where(e => e is Hahmo))
             {
-                entiteetti.Piirrä();
-                Console.Write(" = " + entiteetti.Nimi);
-                Konsoli.UusiRivi(kursoriVasen);
+                Console.ResetColor();
+
+                // Tiedot jos hahmo vihollinen
 
                 if (entiteetti is Vihollinen)
                 {
+                    float hpProsentti = (float)entiteetti.HP / (float)entiteetti.MaksimiHP * 100.0f;
+
+                    if (entiteetti.HP == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.Write(entiteetti.Merkki + " = " + entiteetti.Nimi);
+                        Konsoli.UusiRivi(kursoriVasen);
+                        Console.Write($"LVL:{entiteetti.Taso}  V:{entiteetti.Voima}  N:{entiteetti.Nopeus}  O:{entiteetti.Onnekkuus}");
+                        Konsoli.UusiRivi(kursoriVasen);
+                        Console.Write($"HP:{entiteetti.HP,4}/{entiteetti.MaksimiHP,-4}\u2502");
+                        Console.Write($"{PiirräPalkki((int)hpProsentti),-10}");
+                        Console.Write("\u2502");
+                        Konsoli.UusiRivi(kursoriVasen);
+                    }
+                    else
+                    {
+                        entiteetti.Piirrä();
+                        Console.Write(" = " + entiteetti.Nimi);
+                        Console.ResetColor();
+                        Konsoli.UusiRivi(kursoriVasen);
+                        Console.Write($"LVL:{entiteetti.Taso}  V:{entiteetti.Voima}  N:{entiteetti.Nopeus}  O:{entiteetti.Onnekkuus}");
+                        Konsoli.UusiRivi(kursoriVasen);
+                        Console.Write($"HP:{entiteetti.HP,4}/{entiteetti.MaksimiHP,-4}\u2502");
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write($"{PiirräPalkki((int)hpProsentti),-10}");
+                        Console.ResetColor();
+                        Console.Write("\u2502");
+                        Konsoli.UusiRivi(kursoriVasen);
+                    }
+
                     Console.ResetColor();
-                    Console.Write($"LVL:{entiteetti.Taso}  V:{entiteetti.Voima}  N:{entiteetti.Nopeus}  O:{entiteetti.Onnekkuus}");
-                    Konsoli.UusiRivi(kursoriVasen);
-                    Console.Write($"HP: {entiteetti.HP}/{entiteetti.MaksimiHP}  \u2502");
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write($"{PiirräPalkki(entiteetti.HP),12}");
-                    Console.ResetColor();
-                    Console.Write("\u2502");
-                    Konsoli.UusiRivi(kursoriVasen);
                 }
+
+                // Tiedot jos hahmo ystävä tai tavara
             }
         }
 
         public string PiirräPalkki(int PropertynKoko)
         {
-            //Console.OutputEncoding = System.Text.Encoding.UTF8;
+            // HP- tai Nesteytyspalkki (10 ruutua, puolikas tai kokonainen palkki)
+
             string palkki = "";
-            //Console.ForegroundColor = ConsoleColor.Magenta;
 
             for (int i = 0; i < 10; i++)
             {
@@ -135,7 +189,12 @@ namespace Periferia
                     palkki += '\u2588';
                     PropertynKoko -= 10;
                 }
-                else if (PropertynKoko < 10 && PropertynKoko > 0)
+                else if (PropertynKoko < 10 && PropertynKoko >= 5)
+                {
+                    palkki += '\u258C';
+                    PropertynKoko -= PropertynKoko;
+                }
+                else if (PropertynKoko < 10 && PropertynKoko < 5 && PropertynKoko > 0)
                 {
                     palkki += '\u258C';
                     PropertynKoko -= PropertynKoko;
@@ -143,32 +202,39 @@ namespace Periferia
                 else
                     palkki += " ";
             }
-            //Console.ResetColor();
 
             return palkki;
         }
 
-        public void NäytäRepunSisältö(int kursoriVasen)
+        public void NäytäRepunSisältö(int kursoriVasen, int kursoriYlä)
         {
-            // Miten tulostus, jos repussa paljon tavaraa??
+            // Kolmipaikkainen reppu
+
+            Console.SetCursorPosition(kursoriVasen, kursoriYlä + 7);
 
             int i = 0;
-            while (i < 3)
+            while (i < repunSlottienMäärä)
             {
                 Konsoli.UusiRivi(kursoriVasen);
                 if (i < Moottori.Pelaaja.Reppu.Count)
                 {
-                    Console.Write("  [ " + Moottori.Pelaaja.Reppu[i].Nimi + " ]");
+                    var palkinleveys = ReppupalkinLeveys;
+                    var teksti = Moottori.Pelaaja.Reppu[i].Nimi;
+                    var keskitettyTeksti = teksti.PadLeft(((palkinleveys - teksti.Length) / 2) + teksti.Length).PadRight(palkinleveys);
+
+                    Console.Write("  [");
+                    Console.Write(keskitettyTeksti);
+                    Console.Write("]");
                 }
                 else
                 {
-                    Console.Write("  [        ]");
+                    Console.Write("  [");
+                    Console.Write(new string(' ', ReppupalkinLeveys));
+                    Console.Write("]");
                 }
 
                 i++;
             }
-
-
         }
     }
 
