@@ -10,7 +10,7 @@ namespace Periferia
     {
         public const int KARTTALEVEYS = 60;
         public const int KARTTAKORKEUS = 14;
-
+        public static int karttageneraattori_vesilähteet = 2;
         private const int KARTTAGENERAATTORI_PUUTIHEYS = 1;
 
         static int seuraavaVapaaId = 0;
@@ -47,7 +47,7 @@ namespace Periferia
             Ruudut[Moottori.Pelaaja.Rivi, Moottori.Pelaaja.Sarake].Entiteetti = Moottori.Pelaaja;
 
             if (Entiteetit != null)
-                foreach(IPiirrettävä p in Entiteetit.Where(e => e is Vihollinen && (e as Vihollinen).Elossa))
+                foreach(IPiirrettävä p in Entiteetit.Where(e => (e is Vihollinen && (e as Vihollinen).Elossa) || e is Tavara))
                 {
                     Ruudut[p.Rivi, p.Sarake].Entiteetti = p;
                     PiirräEntiteetti(p);
@@ -78,6 +78,7 @@ namespace Periferia
         {
             Kartta k = new Kartta();
             Random rnd = new Random();
+            
 
             SUUNTA? sisään = null, ulos = null;
             List<SUUNTA> sallitutUlosmenot = new List<SUUNTA>() { SUUNTA.YLÄ, SUUNTA.ALA, SUUNTA.VASEN, SUUNTA.OIKEA };
@@ -186,7 +187,9 @@ namespace Periferia
             }
 
             k.Ulosmenosuunta = ulos;
-
+            Tavara vesi = new Tavara("vesi") { Merkki = 'V', Väri = ConsoleColor.Blue, Rivi = 1, Sarake = 1 };
+            k.Entiteetit.Add(vesi);
+            k.Ruudut[1, 1].Entiteetti=vesi;
             return k;
             
         }

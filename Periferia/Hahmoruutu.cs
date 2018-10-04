@@ -184,7 +184,7 @@ namespace Periferia
 
             for (int i = 0; i < 10; i++)
             {
-                if (PropertynKoko >= 10)
+                if (PropertynKoko >= 9)
                 {
                     palkki += '\u2588';
                     PropertynKoko -= 10;

@@ -29,8 +29,16 @@ namespace Periferia
 
         public void Piirrä()
         {
-            Console.ForegroundColor = Väri;
-            Console.Write(Merkki);
+            if(this.Entiteetti != null)
+            {
+                this.Entiteetti.Piirrä();
+            }
+            else
+            {
+                Console.ForegroundColor = Väri;
+                Console.Write(Merkki);
+            }
+            
         }
 
         public void Päivitä()

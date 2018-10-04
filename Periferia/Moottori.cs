@@ -9,6 +9,7 @@ namespace Periferia
 {
     static class Moottori
     {
+        static public int VedenPisteet = 50;
         static public List<Kartta> Kartat = new List<Kartta>();
         static public Kartta NykyinenKartta;
         static public List<VihollisMalli> VihollisMallit = new List<VihollisMalli>();
