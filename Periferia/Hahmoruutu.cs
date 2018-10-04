@@ -13,7 +13,7 @@ namespace Periferia
 
         public Hahmoruutu()
         {
-           // Moottori.Pelaaja.HpMuuttunut += PelaajanHPMuuttunut;
+            //Moottori.Pelaaja.HpMuuttunut += PelaajanHPMuuttunut;
             //Moottori.Pelaaja.NesteMuuttunut += PelaajanNesteytysMuuttunut;
         }
 

@@ -61,6 +61,7 @@ namespace Periferia
         public static void PiirräGameOver()
         {
             TyhjennäKonsoli();
+            Console.ResetColor();
             string teksti = @"
     ___                              ___         ___       ___  
    (   )                            (   )  .-.  (   )     (   ) 
@@ -84,7 +85,11 @@ namespace Periferia
                 Konsoli.UusiRivi(10);
             }
             Konsoli.UusiRivi(15);
-            Console.Write($"Tapetut:\t{Moottori.Pelaaja.MontakoTapettu}");
+            Console.Write($"{Moottori.Pelaaja.Nimi} heitti veivit seuraavilla statseilla:");
+            Konsoli.UusiRivi(15);
+            Console.Write($"\tTapetut:\t{Moottori.Pelaaja.MontakoTapettu}");
+            Konsoli.UusiRivi(15);
+            Console.Write($"\tPisteet:\t{Moottori.Pelaaja.Pisteet}");
         }
         
         public static void TyhjennäKonsoli()

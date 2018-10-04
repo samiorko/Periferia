@@ -56,6 +56,7 @@ namespace Periferia
             PELASTUS,
             SEINÄ,
             PUU,
+            PUU_HAJOAMASSA,
             TYHJÄ
         }
     }
