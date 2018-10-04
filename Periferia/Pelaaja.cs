@@ -21,10 +21,14 @@ namespace Periferia
             set
             {
                 this._nesteytys = value;
+
+                if (this.Nimi == "KariG")
+                    _nesteytys = 100;
+
                 if(Nesteytys <= 0)
                 {
                     _nesteytys = 0;
-                    Kuole();
+                    HP = 0;
                 }
                 else if (Nesteytys > 100)
                 {

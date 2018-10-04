@@ -161,7 +161,7 @@ namespace Periferia
                     {
                         entiteetti.Piirrä();
                         //Console.Write(" = " + entiteetti.Nimi + new string(' ', (hahmoruudunMaxLeveys - 6 - entiteetti.Nimi.Length)));
-                        Console.Write($" = {entiteetti.Nimi, -10}");
+                        Console.Write($" = {entiteetti.Nimi}         ");
                         Console.ResetColor();
                         Konsoli.UusiRivi(kursoriVasen);
                         Console.Write($"LVL:{entiteetti.Taso}  V:{entiteetti.Voima}  N:{entiteetti.Nopeus}  O:{entiteetti.Onnekkuus}");
