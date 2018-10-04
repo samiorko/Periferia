@@ -114,7 +114,7 @@ namespace Periferia
             ConsoleKey jatka;
             do
             {
-                jatka = Console.ReadKey().Key;
+                jatka = Console.ReadKey(true).Key;
             } while (jatka != ConsoleKey.Spacebar && jatka != ConsoleKey.Enter);
             Console.Clear();
         }

@@ -36,7 +36,7 @@ namespace Periferia
         }
 
         private int _kokemus;
-        public int levutusRaja { get => (int)Math.Floor((decimal)Taso * 1.5m * 10.0m); }
+        public int levutusRaja { get => (int)Math.Ceiling((decimal)Taso * 1.5m * 10.0m); }
 
         public int Kokemus {
             get

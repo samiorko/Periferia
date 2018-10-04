@@ -11,6 +11,16 @@ namespace Periferia
 
         static public Random Rnd = new Random();
 
+        public int Näkökenttä { get; set; }
+
+        public int EtäisyysPelaajasta { get
+            {
+                if (!this.Elossa)
+                    return 9001;
+                return (Math.Abs(Moottori.Pelaaja.Rivi - this.Rivi) + Math.Abs(Moottori.Pelaaja.Sarake - this.Sarake));
+            }
+        }
+
         public int KokemusPalkinto
         {
             get
@@ -116,25 +126,26 @@ namespace Periferia
             int lvl = 1;
             if(Moottori.Pelaaja.Taso > 1) {
                 // Pelaaja yli level 1, vihu voi olla sama tai yhden pienempi
-                lvl = (int) Math.Floor((decimal) Moottori.VaikeusKerroin * Rnd.Next(Moottori.Pelaaja.Taso - 1, Moottori.Pelaaja.Taso));
+                lvl = (int) Math.Ceiling((decimal) Moottori.VaikeusKerroin * Rnd.Next(Moottori.Pelaaja.Taso - 1, Moottori.Pelaaja.Taso));
             }
             vihu.Merkki = malli.Merkki;
             vihu.Väri = malli.Väri;
             vihu.OnkoTekoäly = true;
             vihu.HP = malli.HP;
-            vihu.MaksimiHP = malli.HP;
+            
             vihu.Voima = malli.Voima;
             vihu.Onnekkuus = malli.Onnekkuus;
             vihu.Nopeus = malli.Nopeus;
             vihu.Nimi = malli.Nimi;
             vihu.Hyökkäys = malli.Hyökkäys;
             vihu.Taso = lvl;
+            vihu.Näkökenttä = malli.Näkökenttä;
 
             if(lvl > 1) {
                 // Vihun leveli yli 1, generoidaan randomilla statseja 1 / leveli
                 for (int i = 1; i < lvl; i++)
                 {
-                    int randomi = Rnd.Next(1, 3);
+                    int randomi = Rnd.Next(1, 5);
                     switch (randomi)
                     {
                         case 1:
@@ -146,9 +157,16 @@ namespace Periferia
                         case 3:
                             vihu.Onnekkuus++;
                             break;
+                        case 4:
+                            vihu.HP += 10;
+                            break;
+                        default:
+                            vihu.HP += 10;
+                            break;
                     }
                 }
             }
+            vihu.MaksimiHP = vihu.HP;
 
             return vihu;
         }
@@ -159,6 +177,7 @@ namespace Periferia
         public int Voima = 1;
         public int Nopeus = 1;
         public int Onnekkuus = 1;
+        public int Näkökenttä = 5;
         public string Nimi;
         public char Merkki;
         public ConsoleColor Väri;
