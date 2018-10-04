@@ -193,12 +193,12 @@ namespace Periferia
                     palkki += '\u2588';
                     PropertynKoko -= 10;
                 }
-                else if (PropertynKoko < 10 && PropertynKoko >= 5)
+                else if (PropertynKoko < 9 && PropertynKoko > 5)
                 {
-                    palkki += '\u258C';
+                    palkki += '\u2588';
                     PropertynKoko -= PropertynKoko;
                 }
-                else if (PropertynKoko < 10 && PropertynKoko < 5 && PropertynKoko > 0)
+                else if (PropertynKoko < 9 && PropertynKoko <= 5 && PropertynKoko > 0)
                 {
                     palkki += '\u258C';
                     PropertynKoko -= PropertynKoko;
