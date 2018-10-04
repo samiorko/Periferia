@@ -216,7 +216,9 @@ namespace Periferia
             int voima = 1;
             int nopeus = 1;
             int onnekkus = 1;
-            string nimi = "Pekka";
+            int maksimiStatsit = 10;
+            int hp = 100;
+            string nimi = "";
             Moottori.Vaikeustasot vaikeustaso = Moottori.Vaikeustasot.HELPPO;
             Console.Clear();
 
@@ -247,24 +249,43 @@ namespace Periferia
             {
                 piirräNimiKenttä(nimi, 4, 20, valinta == 0);
                 piirräVaikeustaso(vaikeustaso, 6, 20, valinta == 1);
-                PiirräStatsPalkit(voima, nopeus, onnekkus, 8, 20, valinta);
-                PiirräJatkaNappi(voima, nopeus, onnekkus, 15, 5, valinta == 5);
+                PiirräStatsPalkit(voima, nopeus, onnekkus, 8, 20, valinta, maksimiStatsit);
+                PiirräJatkaNappi(voima, nopeus, onnekkus, 15, 5, valinta == 5, maksimiStatsit);
 
                 ConsoleKeyInfo näppäin = Console.ReadKey(true);
                 switch (näppäin.Key)
                 {
                     case ConsoleKey.DownArrow:
-                        if(valinta < maxValinta && !(valinta == maxValinta - 1 && voima + nopeus + onnekkus != 10))
-                            
+                        if(valinta == 0 && nimi.Length < 1)
+                        {
+                            nimi = "Pekka";
+                        }
+                        if(valinta == 0 && nimi.ToLower() == "maija")
+                        {
+                            maksimiStatsit = 15;
+                            hp = 1000;
+                            voima = 5;
+                            nopeus = 5;
+                            onnekkus = 5;
+                        }
+                        if (valinta == 0 && nimi.ToLower() == "hannu")
+                        {
+                            maksimiStatsit = 22;
+                            voima = 1;
+                            nopeus = 1;
+                            onnekkus = 20;
+                        }
+
+                        if (valinta < maxValinta && !(valinta == maxValinta - 1 && voima + nopeus + onnekkus != maksimiStatsit))
                                 valinta++;
-                        else
-                            Console.Beep();
+                        
                         break;
                     case ConsoleKey.UpArrow:
                         if (valinta > 0)
                             valinta--;
-                        else
-                            Console.Beep();
+                        if (valinta == 0 && nimi == "Pekka")
+                            nimi = "";
+                        
                         break;
                     case ConsoleKey.LeftArrow:
                         if(valinta == 1)
@@ -272,7 +293,6 @@ namespace Periferia
                             switch (vaikeustaso)
                             {
                                 case Moottori.Vaikeustasot.HELPPO:
-                                    Console.Beep();
                                     break;
                                 case Moottori.Vaikeustasot.VAIKEA:
                                     vaikeustaso = Moottori.Vaikeustasot.HELPPO;
@@ -290,7 +310,6 @@ namespace Periferia
                                 case 2: // voima
                                     if (voima == 1)
                                     {
-                                        Console.Beep();
                                         break;
                                     }
                                     voima--;
@@ -298,7 +317,6 @@ namespace Periferia
                                 case 3: // nopeus
                                     if (nopeus == 1)
                                     {
-                                        Console.Beep();
                                         break;
                                     }
                                     nopeus--;
@@ -306,17 +324,13 @@ namespace Periferia
                                 case 4: // onnekkuus
                                     if (onnekkus == 1)
                                     {
-                                        Console.Beep();
                                         break;
                                     }
                                     onnekkus--;
                                     break;
                             }
                         }
-                        else
-                        {
-                            Console.Beep();
-                        }
+                
                         break;
                     case ConsoleKey.RightArrow:
                         if (valinta == 1)
@@ -330,15 +344,13 @@ namespace Periferia
                                     vaikeustaso = Moottori.Vaikeustasot.VAIKEIN;
                                     break;
                                 case Moottori.Vaikeustasot.VAIKEIN:
-                                    Console.Beep();
                                     break;
                             }
                         }
                         else if (valinta == 2 || valinta == 3 || valinta == 4)
                         {
-                            if(voima+nopeus+onnekkus == 10)
+                            if(voima+nopeus+onnekkus == maksimiStatsit)
                             {
-                                Console.Beep();
                                 break;
                             }
                             switch (valinta)
@@ -346,7 +358,6 @@ namespace Periferia
                                 case 2: // voima
                                     if (voima >= 5)
                                     {
-                                        Console.Beep();
                                         break;
                                     }
                                     voima++;
@@ -354,7 +365,6 @@ namespace Periferia
                                 case 3: // nopeus
                                     if (nopeus >= 5)
                                     {
-                                        Console.Beep();
                                         break;
                                     }
                                     nopeus++;
@@ -362,17 +372,13 @@ namespace Periferia
                                 case 4: // onnekkuus
                                     if (onnekkus >= 5)
                                     {
-                                        Console.Beep();
                                         break;
                                     }
                                     onnekkus++;
                                     break;
                             }
                         }
-                        else
-                        {
-                            Console.Beep();
-                        }
+                     
                         break;
                     case ConsoleKey.Enter:
                         if (valinta == maxValinta)
@@ -381,16 +387,27 @@ namespace Periferia
                             Moottori.Pelaaja.Nopeus = nopeus;
                             Moottori.Pelaaja.Onnekkuus = onnekkus;
                             Moottori.Pelaaja.Nimi = nimi;
+                            Moottori.Pelaaja.HP = hp;
+                            Moottori.Pelaaja.MaksimiHP = hp;
                             Moottori.Vaikeustaso = vaikeustaso;
+
                             
                             flag = false;
                         }
-                        else
+                    
+                        break;
+                    case ConsoleKey.Backspace:
+                        if (valinta == 0 && nimi.Length > 0)
                         {
-                            Console.Beep();
+                            nimi = nimi.Substring(0, nimi.Length - 1);
                         }
                         break;
-
+                    default:
+                        if (char.IsLetter(näppäin.KeyChar) && nimi.Length < 10)
+                        {
+                            nimi += näppäin.KeyChar;
+                        }
+                        break;
                 }
 
                 
@@ -401,10 +418,10 @@ namespace Periferia
 
         }
 
-        private static void PiirräJatkaNappi(int voima, int nopeus, int onnekkus, int y, int x, bool valinta)
+        private static void PiirräJatkaNappi(int voima, int nopeus, int onnekkus, int y, int x, bool valinta, int maksimiStatsit)
         {
             Console.SetCursorPosition(x, y);
-            if (voima + nopeus + onnekkus != 10)
+            if (voima + nopeus + onnekkus != maksimiStatsit)
             {
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.Write("[ Valitse kaikki statsit jatkaaksesi! ]");
@@ -420,7 +437,7 @@ namespace Periferia
             
         }
 
-        private static void PiirräStatsPalkit(int voima, int nopeus, int onnekkuus, int y, int x, int valinta)
+        private static void PiirräStatsPalkit(int voima, int nopeus, int onnekkuus, int y, int x, int valinta, int maksimiStatsit)
         {
             Console.SetCursorPosition(x, y);
             piirräYksiPalkki(voima, valinta==2);
@@ -430,7 +447,7 @@ namespace Periferia
             piirräYksiPalkki(onnekkuus, valinta == 4);
 
             Console.SetCursorPosition(x + 1, y + 3);
-            Console.Write(10 - (voima+nopeus+onnekkuus));
+            Console.Write(maksimiStatsit - (voima+nopeus+onnekkuus));
             Console.ResetColor();
         }
 

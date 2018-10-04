@@ -135,7 +135,7 @@ namespace Periferia
 
             // Pelin hahmot (muut kuin pelaaja) listattuna
 
-            foreach (Hahmo entiteetti in Moottori.NykyinenKartta.Entiteetit.Where(e => e is Hahmo))
+            foreach (Hahmo entiteetti in Moottori.NykyinenKartta.Entiteetit.Where(e => e is Hahmo).OrderBy(e => (e as Hahmo).EtäisyysPelaajasta))
             {
                 Console.ResetColor();
 
@@ -160,7 +160,8 @@ namespace Periferia
                     else
                     {
                         entiteetti.Piirrä();
-                        Console.Write(" = " + entiteetti.Nimi + new string(' ', (hahmoruudunMaxLeveys - 6 - entiteetti.Nimi.Length)));
+                        //Console.Write(" = " + entiteetti.Nimi + new string(' ', (hahmoruudunMaxLeveys - 6 - entiteetti.Nimi.Length)));
+                        Console.Write($" = {entiteetti.Nimi, -10}");
                         Console.ResetColor();
                         Konsoli.UusiRivi(kursoriVasen);
                         Console.Write($"LVL:{entiteetti.Taso}  V:{entiteetti.Voima}  N:{entiteetti.Nopeus}  O:{entiteetti.Onnekkuus}");

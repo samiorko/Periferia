@@ -15,21 +15,31 @@ namespace Periferia
         public virtual int Nopeus { get; set; }
         public virtual int Onnekkuus { get; set; }
 
-        private int hp;
+        public int EtäisyysPelaajasta
+        {
+            get
+            {
+                if (!this.Elossa)
+                    return 9001;
+                return (Math.Abs(Moottori.Pelaaja.Rivi - this.Rivi) + Math.Abs(Moottori.Pelaaja.Sarake - this.Sarake));
+            }
+        }
+
+        private int _hp;
 
         public int HP
         {
-            get { return hp; }
+            get { return _hp; }
             set
             {
                 if (value <= 0)
                 {
-                    hp = 0;
+                    _hp = 0;
                     Kuole();
                 }
                 else
                 {
-                    hp = value;
+                    _hp = value;
                 }
                 HpMuuttunut?.Invoke(this, EventArgs.Empty);
             }

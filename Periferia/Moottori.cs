@@ -36,13 +36,11 @@ namespace Periferia
         
         static public void Peli()
         {
-            VihollisMallit.Add(new VihollisMalli("Karhu", 'K') {Voima=4, Nopeus=1, Onnekkuus=1, Näkökenttä = 5, HP=40, Hyökkäys="raapaisee"});
-            VihollisMallit.Add(new VihollisMalli("Susi", 'S') {Voima=2, Nopeus=2, Onnekkuus=1, Näkökenttä = 10, HP = 30, Hyökkäys="puraisee"});
+            VihollisMallit.Add(new VihollisMalli("Karhu", 'K') {Voima=4, Nopeus=1, Onnekkuus=1, Näkökenttä = 10, HP=40, Hyökkäys="raapaisee"});
+            VihollisMallit.Add(new VihollisMalli("Susi", 'S') {Voima=2, Nopeus=2, Onnekkuus=1, Näkökenttä = 25, HP = 30, Hyökkäys="puraisee"});
             VihollisMallit.Add(new VihollisMalli("Goblin", 'G', ConsoleColor.DarkGreen) {Voima=1, Nopeus=1, Näkökenttä = 50, HP = 15, Hyökkäys="lyö"});
             Konsoli.AlustaKonsoli();
-
             
-            Konsoli.AlustaKonsoli();
             Konsoli.piirräAloitusnäyttö();
             Konsoli.HahmonLuonti();
 
@@ -80,7 +78,7 @@ namespace Periferia
 
         static void pelaajanVuoro()
         {
-            ConsoleKeyInfo näppäin = Console.ReadKey();
+            ConsoleKeyInfo näppäin = Console.ReadKey(true);
             switch (näppäin.Key)
             {
                 case ConsoleKey.RightArrow:
