@@ -11,7 +11,8 @@ namespace Periferia
     {
         static public int VedenPisteet = 50;
         static public List<Kartta> Kartat = new List<Kartta>();
-        
+        static public int VaikeusKerroin { get; set; }
+
         static public Kartta NykyinenKartta;
         static public List<VihollisMalli> VihollisMallit = new List<VihollisMalli>();
         static public Pelaaja Pelaaja = new Pelaaja()

@@ -11,7 +11,7 @@ namespace Periferia
         public const int KARTTALEVEYS = 60;
         public const int KARTTAKORKEUS = 14;
         public static int karttageneraattori_vesilähteet = 2;
-        private const int KARTTAGENERAATTORI_PUUTIHEYS = 1;
+        private const int KARTTAGENERAATTORI_PUUTIHEYS = 6;
 
         static int seuraavaVapaaId = 0;
         
@@ -175,8 +175,8 @@ namespace Periferia
                 k.Ruudut[Y, X] = sisäänmenoruutu;
                 k.Sisääntuloruutu = sisäänmenoruutu;
             }
-
-            for (int i = 0; i < Vihollinen.Rnd.Next(2, 5); i++)
+            int vihujenMaara = (int)Math.Floor((decimal)Moottori.VaikeusKerroin * Vihollinen.Rnd.Next(2, 5));
+            for (int i = 0; i < vihujenMaara; i++)
             {
                 VihollisMalli malli = Moottori.VihollisMallit[Vihollinen.Rnd.Next(0, Moottori.VihollisMallit.Count - 1)];
                 Vihollinen vihu = Vihollinen.Generoi(malli);
