@@ -60,8 +60,11 @@ namespace Periferia
             this.Rivi = 0;
             if (this is Vihollinen)
             {
+                int saatuKokemus = (this as Vihollinen).KokemusPalkinto;
+                Konsoli.Viestiloki.Lisää($"{Moottori.Pelaaja.Nimi} sai {saatuKokemus} XP. \t ( Seuraava LVL {Moottori.Pelaaja.Kokemus} / {Moottori.Pelaaja.levutusRaja} )");
+                Moottori.Pelaaja.Kokemus += saatuKokemus;
                 Moottori.Pelaaja.MontakoTapettu++;
-                Moottori.Pelaaja.TappoPisteet += (this as Vihollinen).KokemusPalkinto * this.Taso;
+                Moottori.Pelaaja.TappoPisteet += saatuKokemus * this.Taso;
             }
         }
 

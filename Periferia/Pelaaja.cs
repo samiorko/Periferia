@@ -35,6 +35,7 @@ namespace Periferia
         }
 
         private int _kokemus;
+        public int levutusRaja { get => (int)Math.Floor((decimal)Taso * 1.5m * 10.0m); }
 
         public int Kokemus {
             get
@@ -43,10 +44,11 @@ namespace Periferia
             }
             set {
                 _kokemus = _kokemus + value;
-                if(_kokemus > 10)
+                if(_kokemus > levutusRaja)
                 {
                     Taso++;
-                    _kokemus = _kokemus - 10;
+                    Konsoli.Viestiloki.Lisää($"{this.Nimi} sai LVL:n!", ConsoleColor.DarkYellow);
+                    _kokemus = _kokemus - levutusRaja;
                     Voima++;
                     Nopeus++;
                     Onnekkuus++;

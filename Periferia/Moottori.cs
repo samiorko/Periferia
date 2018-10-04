@@ -10,6 +10,7 @@ namespace Periferia
     static class Moottori
     {
         static public List<Kartta> Kartat = new List<Kartta>();
+        
         static public Kartta NykyinenKartta;
         static public List<VihollisMalli> VihollisMallit = new List<VihollisMalli>();
         static public Pelaaja Pelaaja = new Pelaaja()
@@ -20,6 +21,7 @@ namespace Periferia
             MaksimiHP = 125,
             Nesteytys = 100,
             Nimi = "Pekka",
+            Taso = 1,
             Voima = 5,
             Nopeus = 2,
             Onnekkuus = 3,
@@ -36,8 +38,8 @@ namespace Periferia
             VihollisMallit.Add(new VihollisMalli("Goblin", 'G', ConsoleColor.DarkGreen) {Voima=1, Nopeus=1, HP=15, Hyökkäys="lyö"});
             VihollisMallit.Add(new VihollisMalli("Arska", 'A', ConsoleColor.DarkYellow) {Voima=1, Nopeus=1, HP=15, Hyökkäys="lyö"});
 
-            
             Konsoli.AlustaKonsoli();
+            Konsoli.piirräAloitusnäyttö();
 
             Moottori.Pelaaja.HpMuuttunut += Konsoli.Hahmoruutu.PelaajanHPMuuttunut;
             Moottori.Pelaaja.NesteMuuttunut += Konsoli.Hahmoruutu.PelaajanNesteytysMuuttunut;

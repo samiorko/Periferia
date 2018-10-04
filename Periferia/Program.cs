@@ -10,11 +10,7 @@ namespace Periferia
     {
         static void Main(string[] args)
         {
-
             Moottori.Peli();
-
-
-            
             Console.ReadKey();
         }
     }

@@ -61,40 +61,102 @@ namespace Periferia
             Console.ResetColor();
         }
 
+        public static void piirräAloitusnäyttö()
+        {
+            TyhjennäKonsoli();
+            Console.ResetColor();
+            string kuva = @"
+               ,@@@@@@@,
+       ,,,.   ,@@@@@@/@@,  .oo8888o.
+    ,&%%&%&&%,@@@@@/@@@@@@,8888\88/8o
+   ,%&\%&&%&&%,@@@\@@@/@@@88\88888/88'
+   %&&%&%&/%&&%@@\@@/ /@@@88888\88888'
+   %&&%/ %&%%&&@@\ V /@@' `88\8 `/88'
+   `&%\ ` /%&'    |.|        \ '|8'
+       |o|        | |         | |
+       |.|        | |         | |
+    \\/ ._\//_/__/  ,\_//__\\/.  \_//__/_";
+            string pelinNimi = @"
+ __, __, __, _ __, __, __, _  _,
+ |_) |_  |_) | |_  |_  |_) | /_\
+ |   |   | \ | |   |   | \ | | |
+ ^   ^^^ ^ ^ ^ ^   ^^^ ^ ^ ^ ^ ^";
+            PiirräReunatStringBuilder(4, 2, KonsoliKorkeus - 3, KonsoliLeveys - 5);
+            Console.SetCursorPosition(30, 5);
+            string[] rivit = pelinNimi.Split('\n');
+            foreach (var rivi in rivit)
+            {
+                Console.Write(rivi);
+                Konsoli.UusiRivi(30);
+            }
+            Konsoli.UusiRivi(25);
+            string[] kuvaRivit = kuva.Split('\n');
+            foreach (var rivi in kuvaRivit)
+            {
+                Console.Write(rivi);
+                Konsoli.UusiRivi(25);
+            }
+
+            Konsoli.UusiRivi(20);
+            Konsoli.UusiRivi(20);
+            Console.Write("Huomaat eksyneesi tiheäkasvuiseen metsään. Asutuksesta");
+            Konsoli.UusiRivi(20);
+            Console.Write("ei ole havaittavissa minkäänlaisia merkkejä. Huomaat, ");
+            Konsoli.UusiRivi(20);
+            Console.Write("ettei sinulla ole mukanasi vesileiliä, ja repustasi");
+            Konsoli.UusiRivi(20);
+            Console.Write("löytyy vain retkisaha. Löydätköhän koskaan pois?");
+
+            Konsoli.UusiRivi(33);
+            Konsoli.UusiRivi(33);
+            Console.Write("Paina välilyönti tai ENTER");
+            Konsoli.UusiRivi(25);
+            ConsoleKey jatka;
+            do
+            {
+                jatka = Console.ReadKey().Key;
+            } while (jatka != ConsoleKey.Spacebar && jatka != ConsoleKey.Enter);
+            Console.Clear();
+        }
+
         public static void PiirräGameOver()
         {
             TyhjennäKonsoli();
             Console.ResetColor();
             string teksti = @"
-    ___                              ___         ___       ___  
-   (   )                            (   )  .-.  (   )     (   ) 
-    | |   ___    ___  ___    .--.    | |  ( __)  | |_      | |  
-    | |  (   )  (   )(   )  /    \   | |  (   ) (   __)    | |
-    | |  ' /     | |  | |  |  .-. ;  | |   | |   | |       | |  
-    | |,' /      | |  | |  | |  | |  | |   | |   | | ___   | |  
-    | .  '.      | |  | |  | |  | |  | |   | |   | |(   )  | |  
-    | | `. \     | |  | |  | |  | |  | |   | |   | | | |   | |
-    | |   \ \    | |  ; '  | '  | |  | |   | |   | ' | |   |_|  
-    | |    \ .   ' `-' / '    `-' /  | |   | |   ' `-';    .-.
-   (___)  (___)   '.__.'    `.__.'  (___) (___)   `.__.   (   ) 
-                                                           '-'
+[##   [##    [##     [##      [####       [##       [##  [###[######
+[##  [##     [##     [##    [##    [##    [##       [##      [##    
+[## [##      [##     [##  [##        [##  [##       [##      [##    
+[# [#        [##     [##  [##        [##  [##       [##      [##    
+[##  [##     [##     [##  [##        [##  [##       [##      [##    
+[##   [##    [##     [##    [##     [##   [##       [##      [##    
+[##     [##    [#####         [####       [######## [##      [##
             ";
             PiirräReunatStringBuilder(4, 2, KonsoliKorkeus-3, KonsoliLeveys-5);
-            Console.SetCursorPosition(10, 5);
+            Console.SetCursorPosition(14, 8);
             string[] rivit = teksti.Split('\n');
             foreach (var rivi in rivit)
             {
                 Console.Write(rivi);
-                Konsoli.UusiRivi(10);
+                Konsoli.UusiRivi(14);
             }
-            Konsoli.UusiRivi(15);
+            Konsoli.UusiRivi(20);
             Console.Write($"{Moottori.Pelaaja.Nimi} heitti veivit seuraavilla statseilla:");
-            Konsoli.UusiRivi(15);
-            Console.Write($"\tTapetut:\t{Moottori.Pelaaja.MontakoTapettu}");
-            Konsoli.UusiRivi(15);
-            Console.Write($"\tPisteet:\t{Moottori.Pelaaja.Pisteet}");
+            Konsoli.UusiRivi(20);
+            Konsoli.UusiRivi(20);
+            Console.Write($"\tLVL:\t\t\t{Moottori.Pelaaja.Taso}");
+            Konsoli.UusiRivi(20);
+            Console.Write($"\tVaelletut kartat:\t{Moottori.Kartat.Count}");
+            Konsoli.UusiRivi(20);
+            Console.Write($"\tTapetut:\t\t{Moottori.Pelaaja.MontakoTapettu}");
+            Konsoli.UusiRivi(20);
+            Console.Write($"\tPisteet:\t\t{Moottori.Pelaaja.Pisteet}");
+            for (int i = 0; i < 5; i++)
+            {
+                Konsoli.UusiRivi(20);
+            }
         }
-        
+
         public static void TyhjennäKonsoli()
         {
             Console.Clear();
