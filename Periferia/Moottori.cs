@@ -39,9 +39,12 @@ namespace Periferia
             VihollisMallit.Add(new VihollisMalli("Susi", 'S') {Voima=2, Nopeus=2, Onnekkuus=1, HP=30, Hyökkäys="puraisee"});
             VihollisMallit.Add(new VihollisMalli("Goblin", 'G', ConsoleColor.DarkGreen) {Voima=1, Nopeus=1, HP=15, Hyökkäys="lyö"});
             VihollisMallit.Add(new VihollisMalli("Arska", 'A', ConsoleColor.DarkYellow) {Voima=1, Nopeus=1, HP=15, Hyökkäys="lyö"});
+            Konsoli.AlustaKonsoli();
 
+            
             Konsoli.AlustaKonsoli();
             Konsoli.piirräAloitusnäyttö();
+            Konsoli.HahmonLuonti();
 
             Moottori.Pelaaja.HpMuuttunut += Konsoli.Hahmoruutu.PelaajanHPMuuttunut;
             Moottori.Pelaaja.NesteMuuttunut += Konsoli.Hahmoruutu.PelaajanNesteytysMuuttunut;
@@ -130,6 +133,13 @@ namespace Periferia
             Konsoli.PiirräKartta(sk);
             if (!Kartat.Contains(sk))
                 Kartat.Add(sk);
+        }
+
+        public enum Vaikeustaso
+        {
+            HELPPO,
+            VAIKEA,
+            VAIKEIN
         }
     }
 }
