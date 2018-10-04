@@ -258,7 +258,28 @@ namespace Periferia
                     this.Hyökkää((Hahmo)ur.Entiteetti);
                     return false;
                 }
+                // Puun kaato
+                if (this is Pelaaja && ur.Tyyppi is Karttaruutu.Ruututyypit.PUU)
+                {
+                    ur.Väri =ConsoleColor.DarkYellow;
+                    ur.Tyyppi = Karttaruutu.Ruututyypit.PUU_HAJOAMASSA;
+                    Konsoli.Viestiloki.Lisää("Kaadat puuta, sahaa vielä hetki");
+                    Moottori.NykyinenKartta.Ruudut[ur.Rivi, ur.Sarake].Päivitä();
+                    return false;
+                }
+                // Puu hajoamassa
+                if(this is Pelaaja && ur.Tyyppi is Karttaruutu.Ruututyypit.PUU_HAJOAMASSA)
+                {
+                    ur.Tyyppi= Karttaruutu.Ruututyypit.TYHJÄ;
+                    ur.Merkki = '░';
+                    ur.Väri = ConsoleColor.DarkGray;
+                    Moottori.NykyinenKartta.Ruudut[ur.Rivi, ur.Sarake].Päivitä();
+                    
+                    return false;
+                }
                 return false;
+
+
             }
             ur.Entiteetti = vr.Entiteetti;
             vr.Entiteetti = null;
