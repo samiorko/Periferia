@@ -217,7 +217,7 @@ namespace Periferia
             int nopeus = 1;
             int onnekkus = 1;
             string nimi = "Pekka";
-            Moottori.Vaikeustaso vaikeustaso = Moottori.Vaikeustaso.HELPPO;
+            Moottori.Vaikeustasot vaikeustaso = Moottori.Vaikeustasot.HELPPO;
             Console.Clear();
 
             Console.SetCursorPosition(5, 2);
@@ -271,14 +271,14 @@ namespace Periferia
                         {
                             switch (vaikeustaso)
                             {
-                                case Moottori.Vaikeustaso.HELPPO:
+                                case Moottori.Vaikeustasot.HELPPO:
                                     Console.Beep();
                                     break;
-                                case Moottori.Vaikeustaso.VAIKEA:
-                                    vaikeustaso = Moottori.Vaikeustaso.HELPPO;
+                                case Moottori.Vaikeustasot.VAIKEA:
+                                    vaikeustaso = Moottori.Vaikeustasot.HELPPO;
                                     break;
-                                case Moottori.Vaikeustaso.VAIKEIN:
-                                    vaikeustaso = Moottori.Vaikeustaso.VAIKEA;
+                                case Moottori.Vaikeustasot.VAIKEIN:
+                                    vaikeustaso = Moottori.Vaikeustasot.VAIKEA;
                                     break;
                             }
                         }
@@ -323,13 +323,13 @@ namespace Periferia
                         {
                             switch (vaikeustaso)
                             {
-                                case Moottori.Vaikeustaso.HELPPO:
-                                    vaikeustaso = Moottori.Vaikeustaso.VAIKEA;
+                                case Moottori.Vaikeustasot.HELPPO:
+                                    vaikeustaso = Moottori.Vaikeustasot.VAIKEA;
                                     break;
-                                case Moottori.Vaikeustaso.VAIKEA:
-                                    vaikeustaso = Moottori.Vaikeustaso.VAIKEIN;
+                                case Moottori.Vaikeustasot.VAIKEA:
+                                    vaikeustaso = Moottori.Vaikeustasot.VAIKEIN;
                                     break;
-                                case Moottori.Vaikeustaso.VAIKEIN:
+                                case Moottori.Vaikeustasot.VAIKEIN:
                                     Console.Beep();
                                     break;
                             }
@@ -381,6 +381,7 @@ namespace Periferia
                             Moottori.Pelaaja.Nopeus = nopeus;
                             Moottori.Pelaaja.Onnekkuus = onnekkus;
                             Moottori.Pelaaja.Nimi = nimi;
+                            Moottori.Vaikeustaso = vaikeustaso;
                             
                             flag = false;
                         }
@@ -454,12 +455,12 @@ namespace Periferia
             Console.Write(maara);
         }
 
-        private static void piirräVaikeustaso(Moottori.Vaikeustaso vaikeustaso, int y, int x, bool valittu)
+        private static void piirräVaikeustaso(Moottori.Vaikeustasot vaikeustaso, int y, int x, bool valittu)
         {
             Console.SetCursorPosition(x, y);
-            piirräVaikustasoPalkki("Helppo", vaikeustaso == Moottori.Vaikeustaso.HELPPO, valittu);
-            piirräVaikustasoPalkki("Vaikea", vaikeustaso == Moottori.Vaikeustaso.VAIKEA, valittu);
-            piirräVaikustasoPalkki("Ei kannata", vaikeustaso == Moottori.Vaikeustaso.VAIKEIN, valittu);
+            piirräVaikustasoPalkki("Helppo", vaikeustaso == Moottori.Vaikeustasot.HELPPO, valittu);
+            piirräVaikustasoPalkki("Vaikea", vaikeustaso == Moottori.Vaikeustasot.VAIKEA, valittu);
+            piirräVaikustasoPalkki("Ei kannata", vaikeustaso == Moottori.Vaikeustasot.VAIKEIN, valittu);
         }
 
         private static void piirräVaikustasoPalkki(string str, bool nykyinen, bool valinta)

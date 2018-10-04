@@ -11,7 +11,8 @@ namespace Periferia
     {
         static public int VedenPisteet = 50;
         static public List<Kartta> Kartat = new List<Kartta>();
-        static public int VaikeusKerroin { get; set; }
+        static public float VaikeusKerroin { get => ((float)Vaikeustaso)/10.0f; }
+        static public Vaikeustasot Vaikeustaso { get; set; }
 
         static public Kartta NykyinenKartta;
         static public List<VihollisMalli> VihollisMallit = new List<VihollisMalli>();
@@ -135,11 +136,11 @@ namespace Periferia
                 Kartat.Add(sk);
         }
 
-        public enum Vaikeustaso
+        public enum Vaikeustasot
         {
-            HELPPO,
-            VAIKEA,
-            VAIKEIN
+            HELPPO = 10,
+            VAIKEA = 15,
+            VAIKEIN = 20
         }
     }
 }
