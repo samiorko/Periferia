@@ -29,8 +29,12 @@ namespace Periferia
         }
 
 
-        private bool liikeX(int etäisyys)
+        private bool liikeX(int etäisyys, bool koitaKiertää = false)
         {
+            if(etäisyys == 0 && koitaKiertää)
+            {
+                etäisyys = Rnd.Next(-10, 11);
+            }
             if (etäisyys > 0)
             {
                 // Yritetään liikkua oikealle
@@ -45,8 +49,13 @@ namespace Periferia
                 return this.LiikuVasemmalle();
             }
         }
-        private bool liikeY(int etäisyys)
+        private bool liikeY(int etäisyys, bool koitaKiertää = false)
         {
+            if (etäisyys == 0 && koitaKiertää)
+            {
+                etäisyys = Rnd.Next(-10, 11);
+            }
+
             if (etäisyys > 0)
             {
                 // Yritetään liikkua alas
@@ -73,17 +82,17 @@ namespace Periferia
             }
             else
             {
-                // Karhu ei ole vieressä, pyritään lähemmäs7
+                //  ei ole vieressä, pyritään lähemmäs7
 
-                if (Math.Abs(etäisyysX) < Math.Abs(etäisyysY) && etäisyysX != 0) // Pyritään vähentämään X
+                if (Math.Abs(etäisyysX) > Math.Abs(etäisyysY) && etäisyysX != 0) // Pyritään vähentämään X
                 {
                     if (!liikeX(etäisyysX))
-                        liikeY(etäisyysY);
+                        liikeY(etäisyysY, true);
                 }
-                else if (Math.Abs(etäisyysX) > Math.Abs(etäisyysY) && etäisyysY != 0)
+                else if (Math.Abs(etäisyysX) < Math.Abs(etäisyysY) && etäisyysY != 0)
                 {
                     if (!liikeY(etäisyysY))
-                        liikeX(etäisyysX);
+                        liikeX(etäisyysX, true);
                 }
                 else if (Math.Abs(etäisyysX) == Math.Abs(etäisyysY))
                 {
@@ -98,11 +107,13 @@ namespace Periferia
                 }
                 else if (etäisyysX == 0)
                 {
-                    liikeY(etäisyysY);
+                    if (!liikeY(etäisyysY))
+                        liikeX(etäisyysX, true);
                 }
                 else if (etäisyysY == 0)
                 {
-                    liikeX(etäisyysX);
+                    if (!liikeX(etäisyysX))
+                        liikeY(etäisyysY, true);
                 }
 
             }

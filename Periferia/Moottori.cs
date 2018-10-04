@@ -81,7 +81,13 @@ namespace Periferia
             {
                 Konsoli.PiirräGameOver();
             }
-            
+
+            ConsoleKey jatka;
+            do
+            {
+                jatka = Console.ReadKey(true).Key;
+            } while (jatka != ConsoleKey.Escape);
+
         }
 
         static void pelaajanVuoro()
@@ -117,6 +123,8 @@ namespace Periferia
                     continue; // älytön tai kuollut tyyppi, mennään seuraavaan
                 if (v.EtäisyysPelaajasta > Math.Ceiling(v.Näkökenttä * Moottori.VaikeusKerroin))
                     continue; // Liian kaukana, ei nähdä pelaajaa
+                if (v.EtäisyysPelaajasta != 1 && Vihollinen.Rnd.Next(0, 100) <= (25 - 10 * Moottori.VaikeusKerroin)) 
+                    continue; // Skipataan joka n:s vuoro
 
                 v.Tekoäly();
             }

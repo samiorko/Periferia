@@ -141,8 +141,14 @@ namespace Periferia
                 Konsoli.UusiRivi(14);
             }
             Konsoli.UusiRivi(20);
-            Console.Write($"{Moottori.Pelaaja.Nimi} heitti veivit seuraavilla statseilla:");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write(Moottori.Pelaaja.Nimi);
+            Console.ResetColor();
+            Console.Write($" heitti veivit seuraavilla statseilla:");
             TulostaLopetusStatsit();
+            Konsoli.UusiRivi(20);
+            Konsoli.UusiRivi(20);
+            Console.Write("Paina ESC lopettaaksesi");
         }
         
         public static void PiirräPelastus()
@@ -175,7 +181,7 @@ namespace Periferia
         {
             Konsoli.UusiRivi(20);
             Konsoli.UusiRivi(20);
-            Console.Write($"\tLVL:\t\t\t{Moottori.Pelaaja.Taso}");
+            Console.Write($"\tTaso:\t\t\t{Moottori.Pelaaja.Taso}");
             Konsoli.UusiRivi(20);
             Console.Write($"\tVaelletut kartat:\t{Moottori.Kartat.Count}");
             Konsoli.UusiRivi(20);
