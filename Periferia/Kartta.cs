@@ -11,12 +11,13 @@ namespace Periferia
         public const int KARTTALEVEYS = 60;
         public const int KARTTAKORKEUS = 14;
         public static int karttageneraattori_vesilähteet = 2;
-        public static int minPelastusKartanNumero = 0;
-        public static float pelastusTodennäköisyysProsentti = 100f; 
+        public static int karttageneraattori_taikajuomat = 1;
+        public static int minPelastusKartanNumero = 5;
+        public static float pelastusTodennäköisyysProsentti = 10f;
         private const int KARTTAGENERAATTORI_PUUTIHEYS = 6;
 
         static int seuraavaVapaaId = 0;
-        
+
         public int Id { get; set; }
         public List<IPiirrettävä> Entiteetit = new List<IPiirrettävä>(); // Kartalle piirrettävät objektit (tavarat, olennot ym.)
         public Karttaruutu[,] Ruudut = new Karttaruutu[KARTTAKORKEUS, KARTTALEVEYS];
@@ -32,7 +33,7 @@ namespace Periferia
 
         public void Piirrä()
         {
-            foreach(Karttaruutu r in Ruudut)
+            foreach (Karttaruutu r in Ruudut)
             {
                 int KursoriYlä = r.Rivi + Konsoli.KarttaOffset_Ylä;
                 int KursoriVasen = r.Sarake + Konsoli.KarttaOffset_Vasen;
@@ -50,14 +51,14 @@ namespace Periferia
             Ruudut[Moottori.Pelaaja.Rivi, Moottori.Pelaaja.Sarake].Entiteetti = Moottori.Pelaaja;
 
             if (Entiteetit != null)
-                foreach(IPiirrettävä p in Entiteetit.Where(e => (e is Vihollinen && (e as Vihollinen).Elossa) || e is Tavara))
+                foreach (IPiirrettävä p in Entiteetit.Where(e => (e is Vihollinen && (e as Vihollinen).Elossa) || e is Tavara))
                 {
                     Ruudut[p.Rivi, p.Sarake].Entiteetti = p;
                     PiirräEntiteetti(p);
                 }
         }
 
- 
+
 
         private void PiirräEntiteetti(IPiirrettävä p)
         {
@@ -74,21 +75,21 @@ namespace Periferia
                 y = Vihollinen.Rnd.Next(0, KARTTAKORKEUS - 1);
             } while (!k.Ruudut[y, x].TekoälyKäveltävä);
 
-            return new Tuple<int, int>(y,x);
+            return new Tuple<int, int>(y, x);
         }
-            
+
         static public Kartta LuoKartta()
         {
             Kartta k = new Kartta();
             Random rnd = new Random();
-            
+
 
             SUUNTA? sisään = null, ulos = null;
             List<SUUNTA> sallitutUlosmenot = new List<SUUNTA>() { SUUNTA.YLÄ, SUUNTA.ALA, SUUNTA.VASEN, SUUNTA.OIKEA };
             if (k.Id != 0)
             {
 
-                switch (Moottori.Kartat[k.Id-1].Ulosmenosuunta)
+                switch (Moottori.Kartat[k.Id - 1].Ulosmenosuunta)
                 {
                     case SUUNTA.YLÄ:
                         sisään = SUUNTA.ALA;
@@ -108,7 +109,7 @@ namespace Periferia
                         break;
                 }
             }
-            int ulosInt = rnd.Next(0, sallitutUlosmenot.Count-1);
+            int ulosInt = rnd.Next(0, sallitutUlosmenot.Count - 1);
             ulos = sallitutUlosmenot[ulosInt];
 
             for (int y = 0; y < KARTTAKORKEUS; y++)
@@ -122,9 +123,9 @@ namespace Periferia
 
                     r.Rivi = y;
                     r.Sarake = x;
-                    
-                    
-                    if( (y == 0 || y == KARTTAKORKEUS-1) || (x == 0 || x == KARTTALEVEYS - 1))
+
+
+                    if ((y == 0 || y == KARTTAKORKEUS - 1) || (x == 0 || x == KARTTALEVEYS - 1))
                     {
                         r.Tyyppi = Karttaruutu.Ruututyypit.SEINÄ;
                         r.Väri = ConsoleColor.DarkGray;
@@ -132,7 +133,7 @@ namespace Periferia
                     }
                     else
                     {
-                        if(rnd.Next(0,100) <= KARTTAGENERAATTORI_PUUTIHEYS)
+                        if (rnd.Next(0, 100) <= KARTTAGENERAATTORI_PUUTIHEYS)
                         {
                             r.Tyyppi = Karttaruutu.Ruututyypit.PUU;
                             r.Merkki = '&';
@@ -192,7 +193,7 @@ namespace Periferia
             k.Ulosmenosuunta = ulos;
 
             //Varataan karttaruudut vesilähteille
-            for(int i=0; i< karttageneraattori_vesilähteet; i++)
+            for (int i = 0; i < karttageneraattori_vesilähteet; i++)
             {
                 Tuple<int, int> YX = RandomiVapaaRuutu(k);
                 Tavara vesi = new Tavara("vesi") { Merkki = 'V', Väri = ConsoleColor.Blue, Rivi = YX.Item1, Sarake = YX.Item2 };
@@ -200,8 +201,21 @@ namespace Periferia
                 k.Ruudut[YX.Item1, YX.Item2].Entiteetti = vesi;
             }
 
+            //Varataan karttaruudut taikajuomalle
+            if (k.Id % 5 == 0 && k.Id != 0)
+            {
+                for (int i = 0; i < karttageneraattori_taikajuomat; i++)
+                {
+                    Tuple<int, int> YX = RandomiVapaaRuutu(k);
+                    Tavara taikajuoma = new Tavara("taikajuoma") { Merkki = '\u2665', Väri = ConsoleColor.DarkRed, Rivi = YX.Item1, Sarake = YX.Item2 };
+                    k.Entiteetit.Add(taikajuoma);
+                    k.Ruudut[YX.Item1, YX.Item2].Entiteetti = taikajuoma;
+                    Konsoli.Viestiloki.Lisää("\u2665 \u2665 \u2665 HP-boosti näköpiirissä! \u2665 \u2665 \u2665", ConsoleColor.DarkRed);
+                }
+            }
+
             // Määritetään pelastuksen sijainti
-            if(k.Id > minPelastusKartanNumero)
+            if (k.Id > minPelastusKartanNumero)
             {
                 Random r = new Random();
                 int randomLuku = r.Next(1, 100);
@@ -217,7 +231,7 @@ namespace Periferia
             }
 
             return k;
-            
+
         }
         public enum SUUNTA
         {

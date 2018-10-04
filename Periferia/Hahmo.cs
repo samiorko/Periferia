@@ -340,7 +340,11 @@ namespace Periferia
                 {
                     case ("vesi"):
                         Moottori.Pelaaja.Nesteytys += Moottori.VedenPisteet;
-                        Konsoli.Viestiloki.Lisää($"Löysit vettä! +{Moottori.VedenPisteet}!", ConsoleColor.Blue);
+                        Konsoli.Viestiloki.Lisää($"Löysit vettä +{Moottori.VedenPisteet}!", ConsoleColor.Blue);
+                        break;
+                    case ("taikajuoma"):
+                        Moottori.Pelaaja.HP += Moottori.TaikajuomanPisteet;
+                        Konsoli.Viestiloki.Lisää($"Löysit taikajuomaa +{Moottori.TaikajuomanPisteet}!", ConsoleColor.DarkRed);
                         break;
                 }
                 
