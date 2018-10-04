@@ -186,7 +186,8 @@ namespace Periferia
             }
 
             k.Ulosmenosuunta = ulos;
-
+            
+            Moottori.Pelaaja.Taso++;
             return k;
             
         }

@@ -11,7 +11,7 @@ namespace Periferia
         const int hahmoruudunMaxLeveys = 25;
         const int hahmoruudunMaxKorkeus = 31;
         const int repunSlottienMäärä = 3;
-        const int ReppupalkinLeveys = 10;
+        const int ReppupalkinLeveys = 21;
 
 
         public Hahmoruutu()
@@ -59,6 +59,11 @@ namespace Periferia
             PiirräEntiteettienTiedot(Konsoli.HahmoRuutuOffset_Vasen, Konsoli.HahmoRuutuOffset_Ylä);
         }
 
+        internal void PelaajanStatsitMuuttuneet(object sender, EventArgs e)
+        {
+            PiirräPelaajanTiedot(Konsoli.HahmoRuutuOffset_Vasen, Konsoli.HahmoRuutuOffset_Ylä);
+        }
+
 
         // HAHMORUUDUN PIIRROT
 
@@ -88,13 +93,13 @@ namespace Periferia
             Konsoli.UusiRivi(kursoriVasen);
 
             // Pelaajan numerostatsit
-            Console.Write("LVL: " + Moottori.Pelaaja.Taso);
+            Console.Write("LVL: " + Moottori.Pelaaja.Taso + "   ");
             Konsoli.UusiRivi(kursoriVasen);
-            Console.Write("Voima: " + Moottori.Pelaaja.Voima);
+            Console.Write("Voima: " + Moottori.Pelaaja.Voima + "   ");
             Konsoli.UusiRivi(kursoriVasen);
-            Console.Write("Nopeus: " + Moottori.Pelaaja.Nopeus);
+            Console.Write("Nopeus: " + Moottori.Pelaaja.Nopeus + "   ");
             Konsoli.UusiRivi(kursoriVasen);
-            Console.Write("Onnekkuus: " + Moottori.Pelaaja.Onnekkuus);
+            Console.Write("Onnekkuus: " + Moottori.Pelaaja.Onnekkuus + "   ");
             Konsoli.UusiRivi(kursoriVasen);
 
             // Pelaajan HP-palkki
@@ -156,7 +161,7 @@ namespace Periferia
                     else
                     {
                         entiteetti.Piirrä();
-                        Console.Write(" = " + entiteetti.Nimi);
+                        Console.Write(" = " + entiteetti.Nimi + new string(' ',(hahmoruudunMaxLeveys - 6 - entiteetti.Nimi.Length)));
                         Console.ResetColor();
                         Konsoli.UusiRivi(kursoriVasen);
                         Console.Write($"LVL:{entiteetti.Taso}  V:{entiteetti.Voima}  N:{entiteetti.Nopeus}  O:{entiteetti.Onnekkuus}");
@@ -222,13 +227,13 @@ namespace Periferia
                     var teksti = Moottori.Pelaaja.Reppu[i].Nimi;
                     var keskitettyTeksti = teksti.PadLeft(((palkinleveys - teksti.Length) / 2) + teksti.Length).PadRight(palkinleveys);
 
-                    Console.Write("  [");
+                    Console.Write("[");
                     Console.Write(keskitettyTeksti);
                     Console.Write("]");
                 }
                 else
                 {
-                    Console.Write("  [");
+                    Console.Write("[");
                     Console.Write(new string(' ', ReppupalkinLeveys));
                     Console.Write("]");
                 }
