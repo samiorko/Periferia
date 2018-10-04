@@ -13,7 +13,7 @@ namespace Periferia
         public static int karttageneraattori_vesilähteet = 2;
         public static int minPelastusKartanNumero = 0;
         public static float pelastusTodennäköisyysProsentti = 100f; 
-        private const int KARTTAGENERAATTORI_PUUTIHEYS = 1;
+        private const int KARTTAGENERAATTORI_PUUTIHEYS = 6;
 
         static int seuraavaVapaaId = 0;
         
@@ -177,10 +177,10 @@ namespace Periferia
                 k.Ruudut[Y, X] = sisäänmenoruutu;
                 k.Sisääntuloruutu = sisäänmenoruutu;
             }
-
-            for (int i = 0; i < Vihollinen.Rnd.Next(2, 5); i++)
+            int vihujenMaara = (int)Math.Ceiling((decimal)Moottori.VaikeusKerroin * Vihollinen.Rnd.Next(2, 5));
+            for (int i = 0; i < vihujenMaara; i++)
             {
-                VihollisMalli malli = Moottori.VihollisMallit[Vihollinen.Rnd.Next(0, Moottori.VihollisMallit.Count - 1)];
+                VihollisMalli malli = Moottori.VihollisMallit[Vihollinen.Rnd.Next(0, Moottori.VihollisMallit.Count)];
                 Vihollinen vihu = Vihollinen.Generoi(malli);
                 vihu.HpMuuttunut += Konsoli.Hahmoruutu.VihollisenHPMuuttunut;
                 Tuple<int, int> YX = RandomiVapaaRuutu(k);

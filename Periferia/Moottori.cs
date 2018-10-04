@@ -11,7 +11,9 @@ namespace Periferia
     {
         static public int VedenPisteet = 50;
         static public List<Kartta> Kartat = new List<Kartta>();
-        
+        static public float VaikeusKerroin { get => ((float)Vaikeustaso)/10.0f; }
+        static public Vaikeustasot Vaikeustaso { get; set; } = Vaikeustasot.HELPPO;
+
         static public Kartta NykyinenKartta;
         static public List<VihollisMalli> VihollisMallit = new List<VihollisMalli>();
         static public Pelaaja Pelaaja = new Pelaaja()
@@ -19,7 +21,7 @@ namespace Periferia
             Väri = ConsoleColor.Cyan,
             Merkki = '@',
             HP = 100,
-            MaksimiHP = 125,
+            MaksimiHP = 100,
             Nesteytys = 100,
             Nimi = "Pekka",
             Taso = 1,
@@ -34,13 +36,15 @@ namespace Periferia
         
         static public void Peli()
         {
-            VihollisMallit.Add(new VihollisMalli("Karhu", 'K') {Voima=3, Nopeus=1, Onnekkuus=1, HP=40, Hyökkäys="raapaisee"});
-            VihollisMallit.Add(new VihollisMalli("Susi", 'S') {Voima=2, Nopeus=2, Onnekkuus=1, HP=30, Hyökkäys="puraisee"});
-            VihollisMallit.Add(new VihollisMalli("Goblin", 'G', ConsoleColor.DarkGreen) {Voima=1, Nopeus=1, HP=15, Hyökkäys="lyö"});
-            VihollisMallit.Add(new VihollisMalli("Arska", 'A', ConsoleColor.DarkYellow) {Voima=1, Nopeus=1, HP=15, Hyökkäys="lyö"});
+            VihollisMallit.Add(new VihollisMalli("Karhu", 'K') {Voima=4, Nopeus=1, Onnekkuus=1, Näkökenttä = 5, HP=40, Hyökkäys="raapaisee"});
+            VihollisMallit.Add(new VihollisMalli("Susi", 'S') {Voima=2, Nopeus=2, Onnekkuus=1, Näkökenttä = 10, HP = 30, Hyökkäys="puraisee"});
+            VihollisMallit.Add(new VihollisMalli("Goblin", 'G', ConsoleColor.DarkGreen) {Voima=1, Nopeus=1, Näkökenttä = 50, HP = 15, Hyökkäys="lyö"});
+            Konsoli.AlustaKonsoli();
 
+            
             Konsoli.AlustaKonsoli();
             Konsoli.piirräAloitusnäyttö();
+            Konsoli.HahmonLuonti();
 
             Moottori.Pelaaja.HpMuuttunut += Konsoli.Hahmoruutu.PelaajanHPMuuttunut;
             Moottori.Pelaaja.NesteMuuttunut += Konsoli.Hahmoruutu.PelaajanNesteytysMuuttunut;
@@ -112,6 +116,8 @@ namespace Periferia
             {
                 if (!v.OnkoTekoäly || !v.Elossa)
                     continue; // älytön tai kuollut tyyppi, mennään seuraavaan
+                if (v.EtäisyysPelaajasta > Math.Ceiling(v.Näkökenttä * Moottori.VaikeusKerroin))
+                    continue; // Liian kaukana, ei nähdä pelaajaa
 
                 v.Tekoäly();
             }
@@ -136,6 +142,13 @@ namespace Periferia
             Konsoli.PiirräKartta(sk);
             if (!Kartat.Contains(sk))
                 Kartat.Add(sk);
+        }
+
+        public enum Vaikeustasot
+        {
+            HELPPO = 10,
+            VAIKEA = 15,
+            VAIKEIN = 20
         }
     }
 }
