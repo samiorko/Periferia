@@ -175,7 +175,7 @@ namespace Periferia
                 k.Ruudut[Y, X] = sisäänmenoruutu;
                 k.Sisääntuloruutu = sisäänmenoruutu;
             }
-            int vihujenMaara = (int)Math.Ceiling((decimal)Moottori.VaikeusKerroin * Vihollinen.Rnd.Next(2, 5));
+            int vihujenMaara = Math.Min(6, (int)Math.Ceiling((decimal)Moottori.VaikeusKerroin * Vihollinen.Rnd.Next(2, 5)));
             for (int i = 0; i < vihujenMaara; i++)
             {
                 VihollisMalli malli = Moottori.VihollisMallit[Vihollinen.Rnd.Next(0, Moottori.VihollisMallit.Count)];
