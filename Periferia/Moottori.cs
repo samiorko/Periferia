@@ -43,10 +43,11 @@ namespace Periferia
             Moottori.Pelaaja.NesteMuuttunut += Konsoli.Hahmoruutu.PelaajanNesteytysMuuttunut;
 
             Moottori.NykyinenKartta = Kartta.LuoKartta();
-            Moottori.Kartat.Add(Moottori.NykyinenKartta);
-            //Pelaaja.Reppu.Add(new Tavara("kirves"));
-            //Pelaaja.Reppu.Add(new Tavara("leka"));
 
+            Pelaaja.Reppu.Add(new Tavara("kirves"));
+            Pelaaja.Reppu.Add(new Tavara("leka"));
+
+            Moottori.Kartat.Add(Moottori.NykyinenKartta);
 
             Konsoli.PiirräHahmoRuutu();
             Konsoli.PiirräKartta(Moottori.NykyinenKartta);

@@ -44,7 +44,10 @@ namespace Periferia
 
         public static void UusiRivi(int offsetVasen)
         {
-            Console.SetCursorPosition(offsetVasen, Console.CursorTop + 1);
+            try
+            {
+                Console.SetCursorPosition(offsetVasen, Console.CursorTop + 1);
+            } catch(Exception ex) { } // HV virheelle
         }
 
         public static void AlustaKonsoli()
