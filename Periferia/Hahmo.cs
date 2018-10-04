@@ -192,7 +192,15 @@ namespace Periferia
         public bool LiikuOikealle()
         {
             Karttaruutu vr = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake];
-            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake + 1];
+            Karttaruutu ur;
+            try
+            {
+                ur = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake + 1];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return false;
+            }
             if (!liiku(vr, ur))
                 return false;
             ViimeSarake = Sarake;
@@ -206,7 +214,15 @@ namespace Periferia
         public bool LiikuVasemmalle()
         {
             Karttaruutu vr = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake];
-            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake - 1];
+            Karttaruutu ur;
+            try
+            {
+                ur = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake -1];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return false;
+            }
             if (!liiku(vr, ur))
                 return false;
             ViimeSarake = Sarake;
@@ -220,7 +236,15 @@ namespace Periferia
         public bool LiikuAlas()
         {
             Karttaruutu vr = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake];
-            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi + 1, this.Sarake];
+            Karttaruutu ur;
+            try
+            {
+                ur = Moottori.NykyinenKartta.Ruudut[this.Rivi + 1, this.Sarake];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return false;
+            }
             if (!liiku(vr, ur))
                 return false;
             ViimeRivi = Rivi;
@@ -234,7 +258,15 @@ namespace Periferia
         public bool LiikuYlös()
         {
             Karttaruutu vr = Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake];
-            Karttaruutu ur = Moottori.NykyinenKartta.Ruudut[this.Rivi - 1, this.Sarake];
+            Karttaruutu ur;
+            try
+            {
+                ur = Moottori.NykyinenKartta.Ruudut[this.Rivi - 1, this.Sarake];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return false;
+            }
             if (!liiku(vr, ur))
                 return false;
             ViimeRivi = Rivi;
@@ -257,6 +289,17 @@ namespace Periferia
                 {
                     this.Hyökkää((Hahmo)ur.Entiteetti);
                     return false;
+                }
+                // Pelaaja vaihtaa karttaa
+                else if (ur.Tyyppi == Karttaruutu.Ruututyypit.ULOS && (this is Pelaaja))
+                {
+                    vr.Entiteetti = null;
+                    Moottori.SeuraavaKartta();
+                }
+                else if (ur.Tyyppi == Karttaruutu.Ruututyypit.SISÄÄN && (this is Pelaaja))
+                {
+                    vr.Entiteetti = null;
+                    Moottori.EdellinenKartta();
                 }
                 return false;
             }

@@ -105,5 +105,25 @@ namespace Periferia
             }
 
         }
+
+        internal static void EdellinenKartta()
+        {
+            Kartta sk = Kartat[NykyinenKartta.Id-1];
+            NykyinenKartta = sk;
+            Pelaaja.Rivi = sk.Ulosmenoruutu.Rivi;
+            Pelaaja.Sarake = sk.Ulosmenoruutu.Sarake;
+            Konsoli.PiirräKartta(sk);
+        }
+
+        internal static void SeuraavaKartta()
+        {
+            Kartta sk = (NykyinenKartta.Id+1 == Kartat.Count) ? Kartta.LuoKartta() : Kartat[NykyinenKartta.Id+1] ;
+            NykyinenKartta = sk;
+            Pelaaja.Rivi = sk.Sisääntuloruutu.Rivi;
+            Pelaaja.Sarake = sk.Sisääntuloruutu.Sarake;
+            Konsoli.PiirräKartta(sk);
+            if (!Kartat.Contains(sk))
+                Kartat.Add(sk);
+        }
     }
 }

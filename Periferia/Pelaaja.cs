@@ -23,7 +23,7 @@ namespace Periferia
                 if(Nesteytys <= 0)
                 {
                     _nesteytys = 0;
-                    Kuole();
+                    //Kuole();
                 }
                 else if (Nesteytys > 100)
                 {
