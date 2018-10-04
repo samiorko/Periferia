@@ -39,6 +39,7 @@ namespace Periferia
             }
 
             PiirräEntiteetit();
+            Konsoli.Hahmoruutu.PiirräEntiteettienTiedot(Konsoli.HahmoRuutuOffset_Vasen, Konsoli.HahmoRuutuOffset_Ylä);
         }
 
         public void PiirräEntiteetit()
