@@ -52,6 +52,7 @@ namespace Periferia
                 if(_kokemus > levutusRaja)
                 {
                     Taso++;
+                    MaksimiHP += 10;
                     HP = MaksimiHP;
                     Konsoli.Viestiloki.Lisää($"{this.Nimi} sai LVL:n!", ConsoleColor.DarkYellow);
                     _kokemus = _kokemus - levutusRaja;

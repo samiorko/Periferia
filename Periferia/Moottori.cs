@@ -42,8 +42,8 @@ namespace Periferia
             VihollisMallit.Add(new VihollisMalli("Goblin", 'G', ConsoleColor.DarkGreen) {Voima=1, Nopeus=1, Näkökenttä = 50, HP = 15, Hyökkäys="lyö"});
             Konsoli.AlustaKonsoli();
             
-            Konsoli.piirräAloitusnäyttö();
-            Konsoli.HahmonLuonti();
+            //Konsoli.piirräAloitusnäyttö();
+            //Konsoli.HahmonLuonti();
 
             Moottori.Pelaaja.HpMuuttunut += Konsoli.Hahmoruutu.PelaajanHPMuuttunut;
             Moottori.Pelaaja.NesteMuuttunut += Konsoli.Hahmoruutu.PelaajanNesteytysMuuttunut;
