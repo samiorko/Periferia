@@ -13,13 +13,7 @@ namespace Periferia
 
         public int Näkökenttä { get; set; }
 
-        public int EtäisyysPelaajasta { get
-            {
-                if (!this.Elossa)
-                    return 9001;
-                return (Math.Abs(Moottori.Pelaaja.Rivi - this.Rivi) + Math.Abs(Moottori.Pelaaja.Sarake - this.Sarake));
-            }
-        }
+
 
         public int KokemusPalkinto
         {
