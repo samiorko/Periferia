@@ -36,16 +36,7 @@ namespace Periferia
         }
         public int MaksimiHP { get; set; }
 
-        public virtual void Kuole()
-        {
-            // Poistetaan karttaruudulla oleva hahmo
-            Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake].Entiteetti = null;
-            Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake].Päivitä();
-            if (this is Vihollinen)
-            {
-                Moottori.Pelaaja.MontakoTapettu++;
-            }
-        }
+
         public bool Elossa { get => (HP > 0); }
         public int Sarake { get; set; }
         public int Rivi { get; set; }
@@ -59,6 +50,20 @@ namespace Periferia
         public int ViimeSarake { get; set; }
         public int ViimeRivi { get; set; }
         public string Hyökkäys { get; set; } = "vahingoittaa";
+
+        public virtual void Kuole()
+        {
+            // Poistetaan karttaruudulla oleva hahmo
+            Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake].Entiteetti = null;
+            Moottori.NykyinenKartta.Ruudut[this.Rivi, this.Sarake].Päivitä();
+            this.Sarake = 0;
+            this.Rivi = 0;
+            if (this is Vihollinen)
+            {
+                Moottori.Pelaaja.MontakoTapettu++;
+                Moottori.Pelaaja.TappoPisteet += (this as Vihollinen).KokemusPalkinto * this.Taso;
+            }
+        }
 
         public void Hyökkää(Hahmo kohde)
         {

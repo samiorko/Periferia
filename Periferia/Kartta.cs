@@ -117,7 +117,7 @@ namespace Periferia
 
             }
 
-            for (int i = 0; i < Vihollinen.Rnd.Next(1, 5); i++)
+            for (int i = 0; i < Vihollinen.Rnd.Next(2, 5); i++)
             {
                 VihollisMalli malli = Moottori.VihollisMallit[Vihollinen.Rnd.Next(0, Moottori.VihollisMallit.Count - 1)];
                 Vihollinen vihu = Vihollinen.Generoi(malli);

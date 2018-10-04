@@ -11,20 +11,26 @@ namespace Periferia
         public event EventHandler NesteMuuttunut;
 
         private int _nesteytys;
-
+        public int TappoPisteet { get; set; }
+        public int Pisteet { get => (TappoPisteet + Moottori.Kartat.Count * 100 + Taso * 100 + HP * 10); }
         public int Nesteytys {
             get {
                 return _nesteytys;
             }
             set
             {
-                NesteMuuttunut?.Invoke(this, EventArgs.Empty);
                 this._nesteytys = value;
-                if(Nesteytys < 0)
+                if(Nesteytys <= 0)
                 {
-                    //Kuole();
-                    Konsoli.Viestiloki.Lisää("NEste loppui, KUOLIT!", ConsoleColor.Red);
+                    _nesteytys = 0;
+                    Kuole();
                 }
+                else if (Nesteytys > 100)
+                {
+                    _nesteytys = 100;
+                }
+                
+                NesteMuuttunut?.Invoke(this, EventArgs.Empty);
             }
         }
 
