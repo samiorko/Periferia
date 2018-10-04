@@ -10,6 +10,7 @@ namespace Periferia
     static class Moottori
     {
         static public int VedenPisteet = 50;
+        static public int TaikajuomanPisteet = 50;
         static public List<Kartta> Kartat = new List<Kartta>();
         static public float VaikeusKerroin { get => ((float)Vaikeustaso)/10.0f; }
         static public Vaikeustasot Vaikeustaso { get; set; } = Vaikeustasot.HELPPO;
@@ -75,7 +76,14 @@ namespace Periferia
                 if(Moottori.Pelaaja.Elossa) vihollistenVuoro();
 
             }
-            Konsoli.PiirräGameOver();
+            if (Moottori.Pelaaja.Elossa)
+            {
+                Konsoli.PiirräPelastus();
+            } else
+            {
+                Konsoli.PiirräGameOver();
+            }
+            
         }
 
         static void pelaajanVuoro()

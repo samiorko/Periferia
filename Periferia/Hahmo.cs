@@ -320,6 +320,15 @@ namespace Periferia
                     
                     return false;
                 }
+
+                if (this is Pelaaja && ur.Tyyppi is Karttaruutu.Ruututyypit.PELASTUS)
+                {
+                    Konsoli.Viestiloki.Lisää("Voiti");
+                    Moottori.Pelijatkuu = false;
+
+                    return false;
+                }
+
                 return false;
 
 
@@ -331,7 +340,11 @@ namespace Periferia
                 {
                     case ("vesi"):
                         Moottori.Pelaaja.Nesteytys += Moottori.VedenPisteet;
-                        Konsoli.Viestiloki.Lisää($"Löysit vettä! +{Moottori.VedenPisteet}!", ConsoleColor.Blue);
+                        Konsoli.Viestiloki.Lisää($"Löysit vettä +{Moottori.VedenPisteet}!", ConsoleColor.Blue);
+                        break;
+                    case ("taikajuoma"):
+                        Moottori.Pelaaja.HP += Moottori.TaikajuomanPisteet;
+                        Konsoli.Viestiloki.Lisää($"Löysit taikajuomaa +{Moottori.TaikajuomanPisteet}!", ConsoleColor.DarkRed);
                         break;
                 }
                 
