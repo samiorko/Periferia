@@ -37,17 +37,20 @@ namespace Periferia
         
         static public void Peli()
         {
-            VihollisMallit.Add(new VihollisMalli("Karhu", 'K') {Voima=4, Nopeus=1, Onnekkuus=1, Näkökenttä = 10, HP=40, Hyökkäys="raapaisee"});
+            VihollisMallit.Add(new VihollisMalli("Karhu", 'K') {Voima=4, Nopeus=1, Onnekkuus=1, Näkökenttä = 15, HP=40, Hyökkäys="raapaisee"});
             VihollisMallit.Add(new VihollisMalli("Susi", 'S') {Voima=2, Nopeus=2, Onnekkuus=1, Näkökenttä = 25, HP = 30, Hyökkäys="puraisee"});
             VihollisMallit.Add(new VihollisMalli("Goblin", 'G', ConsoleColor.DarkGreen) {Voima=1, Nopeus=1, Näkökenttä = 50, HP = 15, Hyökkäys="lyö"});
             Konsoli.AlustaKonsoli();
-            
-            //Konsoli.piirräAloitusnäyttö();
-            //Konsoli.HahmonLuonti();
 
+            Konsoli.piirräAloitusnäyttö();
+            Konsoli.HahmonLuonti();
+            Console.Clear();
+
+            // Sidotaan event handlerit:
             Moottori.Pelaaja.HpMuuttunut += Konsoli.Hahmoruutu.PelaajanHPMuuttunut;
             Moottori.Pelaaja.NesteMuuttunut += Konsoli.Hahmoruutu.PelaajanNesteytysMuuttunut;
             Moottori.Pelaaja.StatsitMuuttunut += Konsoli.Hahmoruutu.PelaajanStatsitMuuttuneet;
+            Moottori.Pelaaja.Reppu.CollectionChanged += Konsoli.Hahmoruutu.PelaajanReppuMuuttunut;
 
             Moottori.NykyinenKartta = Kartta.LuoKartta();
 

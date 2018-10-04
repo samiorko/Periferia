@@ -54,7 +54,7 @@ namespace Periferia
                     Taso++;
                     MaksimiHP += 10;
                     HP = MaksimiHP;
-                    Konsoli.Viestiloki.Lisää($"{this.Nimi} sai LVL:n!", ConsoleColor.DarkYellow);
+                    Konsoli.Viestiloki.Lisää($"{this.Nimi} saavutti tason {this.Taso}!", ConsoleColor.DarkYellow);
                     _kokemus = _kokemus - levutusRaja;
                     Voima++;
                     Nopeus++;
@@ -62,6 +62,33 @@ namespace Periferia
                 }
             }
         }
+
+        public string TulostaVoima {
+            get
+            {
+                int plusVoima = Reppu.Where(t => t.PlusVoima > 0).Sum(t => t.PlusVoima);
+                return Voima + ((plusVoima > 0) ? $" (+{plusVoima})" : "");
+            }
+        }
+
+        public string TulostaNopeus
+        {
+            get
+            {
+                int plusNopeus = Reppu.Where(t => t.PlusNopeus > 0).Sum(t => t.PlusNopeus);
+                return Nopeus + ((plusNopeus > 0) ? $" (+{plusNopeus})" : "");
+            }
+        }
+
+        public string TulostaOnnekkuus
+        {
+            get
+            {
+                int plusOnnekkuus = Reppu.Where(t => t.PlusOnnekkuus > 0).Sum(t => t.PlusOnnekkuus);
+                return Nopeus + ((plusOnnekkuus > 0) ? $" (+{plusOnnekkuus})" : "");
+            }
+        }
+
 
         private int _taso;
         public override int Taso
@@ -76,7 +103,9 @@ namespace Periferia
         private int _voima;
         public override int Voima
         {
-            get { return _voima; }
+            get {
+                return _voima + Reppu.Where(t => t.PlusVoima > 0).Sum(t => t.PlusVoima);
+            }
             set
             {
                 _voima = value;
@@ -86,7 +115,9 @@ namespace Periferia
         private int _nopeus;
         public override int Nopeus
         {
-            get { return _nopeus; }
+            get {
+                return _nopeus + Reppu.Where(t => t.PlusNopeus > 0).Sum(t => t.PlusNopeus);
+            }
             set
             {
                 _nopeus = value;
@@ -96,7 +127,9 @@ namespace Periferia
         private int _onnekkuus;
         public override int Onnekkuus
         {
-            get { return _onnekkuus; }
+            get {
+                return _onnekkuus + Reppu.Where(t => t.PlusOnnekkuus > 0).Sum(t => t.PlusOnnekkuus);
+            }
             set
             {
                 _onnekkuus = value;

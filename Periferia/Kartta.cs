@@ -168,8 +168,8 @@ namespace Periferia
             if (sisään != null)
             {
                 X = (sisään == SUUNTA.VASEN || sisään == SUUNTA.OIKEA)
-                            ? (sisään == SUUNTA.VASEN) ? 0 : Kartta.KARTTALEVEYS - 1
-                            : rnd.Next(1, KARTTALEVEYS - 1);
+                        ? (sisään == SUUNTA.VASEN) ? 0 : Kartta.KARTTALEVEYS - 1
+                        : rnd.Next(1, KARTTALEVEYS - 1);
                 Y = (sisään == SUUNTA.YLÄ || sisään == SUUNTA.ALA)
                         ? (sisään == SUUNTA.YLÄ) ? 0 : Kartta.KARTTAKORKEUS - 1
                         : rnd.Next(1, KARTTAKORKEUS - 1);
@@ -191,6 +191,16 @@ namespace Periferia
             }
 
             k.Ulosmenosuunta = ulos;
+
+            // Spawnataan mahtikirves
+            if (k.Id == 0)
+            {
+                Tuple<int, int> YX = RandomiVapaaRuutu(k);
+                Tavara kirves = new Tavara("Mahtikirves") { Merkki = '$', Väri = ConsoleColor.DarkMagenta, Rivi = YX.Item1, Sarake = YX.Item2, Poimittava = true, PlusVoima = 3, PlusNopeus = 2 };
+                k.Entiteetit.Add(kirves);
+                k.Ruudut[YX.Item1, YX.Item2].Entiteetti = kirves;
+            }
+            
 
             //Varataan karttaruudut vesilähteille
             for (int i = 0; i < karttageneraattori_vesilähteet; i++)

@@ -257,10 +257,10 @@ namespace Periferia
             string nimi = "";
             Moottori.Vaikeustasot vaikeustaso = Moottori.Vaikeustasot.HELPPO;
             Console.Clear();
-
+            PiirräReunatStringBuilder(4, 2, KonsoliKorkeus - 3, KonsoliLeveys - 5);
             Console.SetCursorPosition(5, 2);
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.Write("Luo hahmo");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.Write("Pelihahmon luonti");
             Konsoli.UusiRivi(5);
             Konsoli.UusiRivi(5);
             Console.ResetColor();

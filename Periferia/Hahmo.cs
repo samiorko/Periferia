@@ -71,10 +71,13 @@ namespace Periferia
             if (this is Vihollinen)
             {
                 int saatuKokemus = (this as Vihollinen).KokemusPalkinto;
-                Konsoli.Viestiloki.Lisää($"{Moottori.Pelaaja.Nimi} sai {saatuKokemus} XP. \t ( Seuraava LVL {Moottori.Pelaaja.Kokemus} / {Moottori.Pelaaja.levutusRaja} )");
+                int leveli = Moottori.Pelaaja.Taso;
                 Moottori.Pelaaja.Kokemus += saatuKokemus;
                 Moottori.Pelaaja.MontakoTapettu++;
                 Moottori.Pelaaja.TappoPisteet += saatuKokemus * this.Taso;
+                if(Moottori.Pelaaja.Taso == leveli)
+                    Konsoli.Viestiloki.Lisää($"{Moottori.Pelaaja.Nimi} tappoi olennon {this.Nimi} ja sai {saatuKokemus} XP. ({Moottori.Pelaaja.Kokemus} / {Moottori.Pelaaja.levutusRaja} )");
+                
             }
         }
 
@@ -90,14 +93,17 @@ namespace Periferia
                     vahinko *= 2;
                     Konsoli.Viestiloki.Lisää("Kriittinen osuma!", ConsoleColor.DarkYellow);
                 }
-                // Vähennetään kohteen hp vahingon mukaan
-                kohde.HP -= vahinko;
+
                 ConsoleColor tekstinVari = ConsoleColor.Gray;
                 if (this is Vihollinen)
                 {
                     tekstinVari = ConsoleColor.Red;
                 }
                 Konsoli.Viestiloki.Lisää($"{this.Nimi} {this.Hyökkäys} olentoa {kohde.Nimi}! {kohde.Nimi} HP -{vahinko} pistettä.", tekstinVari);
+                Console.ResetColor();
+
+                // Vähennetään kohteen hp vahingon mukaan
+                kohde.HP -= vahinko;
             }
             else
             {
@@ -330,7 +336,7 @@ namespace Periferia
                     
                     return false;
                 }
-
+                // Voitto
                 if (this is Pelaaja && ur.Tyyppi is Karttaruutu.Ruututyypit.PELASTUS)
                 {
                     Konsoli.Viestiloki.Lisää("Voiti");
@@ -346,7 +352,7 @@ namespace Periferia
             // Jos liikkuminen onnistuu, suoritetaan alla olevat rivit
             if (ur.Entiteetti is Tavara && this is Pelaaja)
             {
-                switch (ur.Entiteetti.Nimi)
+                switch (ur.Entiteetti.Nimi) // Kovakoodatut nimet
                 {
                     case ("vesi"):
                         Moottori.Pelaaja.Nesteytys += Moottori.VedenPisteet;
@@ -356,6 +362,31 @@ namespace Periferia
                         Moottori.Pelaaja.HP += Moottori.TaikajuomanPisteet;
                         Konsoli.Viestiloki.Lisää($"Löysit taikajuomaa +{Moottori.TaikajuomanPisteet}!", ConsoleColor.DarkRed);
                         break;
+                }
+
+                if((ur.Entiteetti as Tavara).Poimittava) // Jos poimittava tavara
+                {
+                    Tavara t = (Tavara)ur.Entiteetti;
+                    Moottori.Pelaaja.Reppu.Add(t); // Lisätään reppuun
+                    string lisätiedot = "";
+                    if (t.BoostaaStatseja)
+                    {
+                        lisätiedot = "(";
+                        if (t.PlusVoima > 0)
+                        {
+                            lisätiedot += $" +{t.PlusVoima} voima";
+                        }
+                        if (t.PlusNopeus > 0)
+                        {
+                            lisätiedot += $" +{t.PlusNopeus} nopeus";
+                        }
+                        if (t.PlusOnnekkuus > 0)
+                        {
+                            lisätiedot += $" +{t.PlusOnnekkuus} voima";
+                        }
+                        lisätiedot += ")";
+                    }
+                    Konsoli.Viestiloki.Lisää($"Löysit tavaran {t.Nimi}{lisätiedot}!", t.Väri);
                 }
                 
                 

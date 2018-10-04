@@ -27,6 +27,11 @@ namespace Periferia
             PiirräPelaajanTiedot(Konsoli.HahmoRuutuOffset_Vasen, Konsoli.HahmoRuutuOffset_Ylä);
         }
 
+        public void PelaajanReppuMuuttunut(object sender, EventArgs e)
+        {
+            PiirräPelaajanTiedot(Konsoli.HahmoRuutuOffset_Vasen, Konsoli.HahmoRuutuOffset_Ylä);
+        }
+
         public void PelaajanNesteytysMuuttunut(object sender, EventArgs e)
         {
             Console.SetCursorPosition(Konsoli.HahmoRuutuOffset_Vasen, Konsoli.HahmoRuutuOffset_Ylä + 6);
@@ -94,11 +99,20 @@ namespace Periferia
             // Pelaajan numerostatsit
             Console.Write("LVL: " + Moottori.Pelaaja.Taso + "   ");
             Konsoli.UusiRivi(kursoriVasen);
-            Console.Write("Voima: " + Moottori.Pelaaja.Voima + "   ");
+            if (Moottori.Pelaaja.Reppu.Where(t => t.PlusVoima > 0).Sum(t => t.PlusVoima) > 0)
+                Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("Voima: " + Moottori.Pelaaja.TulostaVoima + "   ");
+            Console.ResetColor();
             Konsoli.UusiRivi(kursoriVasen);
-            Console.Write("Nopeus: " + Moottori.Pelaaja.Nopeus + "   ");
+            if (Moottori.Pelaaja.Reppu.Where(t => t.PlusNopeus > 0).Sum(t => t.PlusNopeus) > 0)
+                Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("Nopeus: " + Moottori.Pelaaja.TulostaNopeus + "   ");
+            Console.ResetColor();
             Konsoli.UusiRivi(kursoriVasen);
-            Console.Write("Onnekkuus: " + Moottori.Pelaaja.Onnekkuus + "   ");
+            if (Moottori.Pelaaja.Reppu.Where(t => t.PlusOnnekkuus > 0).Sum(t => t.PlusOnnekkuus) > 0)
+                Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("Onnekkuus: " + Moottori.Pelaaja.TulostaOnnekkuus + "   ");
+            Console.ResetColor();
             Konsoli.UusiRivi(kursoriVasen);
 
             // Pelaajan HP-palkki
@@ -228,7 +242,9 @@ namespace Periferia
                     var keskitettyTeksti = teksti.PadLeft(((palkinleveys - teksti.Length) / 2) + teksti.Length).PadRight(palkinleveys);
 
                     Console.Write("[");
+                    Console.ForegroundColor = Moottori.Pelaaja.Reppu[i].Väri;
                     Console.Write(keskitettyTeksti);
+                    Console.ResetColor();
                     Console.Write("]");
                 }
                 else

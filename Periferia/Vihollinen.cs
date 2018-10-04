@@ -131,7 +131,7 @@ namespace Periferia
             int lvl = 1;
             if(Moottori.Pelaaja.Taso > 1) {
                 // Pelaaja yli level 1, vihu voi olla sama tai yhden pienempi
-                lvl = (int) Math.Ceiling((decimal) Moottori.VaikeusKerroin * Rnd.Next(Moottori.Pelaaja.Taso - 1, Moottori.Pelaaja.Taso));
+                lvl = (int) Math.Ceiling((decimal) Moottori.VaikeusKerroin * Rnd.Next(Moottori.Pelaaja.Taso - 1, Moottori.Pelaaja.Taso + 1));
             }
             vihu.Merkki = malli.Merkki;
             vihu.Väri = malli.Väri;
