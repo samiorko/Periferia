@@ -9,6 +9,7 @@ namespace Periferia
 {
     static class Moottori
     {
+        static public int VedenPisteet = 50;
         static public List<Kartta> Kartat = new List<Kartta>();
         
         static public Kartta NykyinenKartta;
@@ -43,6 +44,7 @@ namespace Periferia
 
             Moottori.Pelaaja.HpMuuttunut += Konsoli.Hahmoruutu.PelaajanHPMuuttunut;
             Moottori.Pelaaja.NesteMuuttunut += Konsoli.Hahmoruutu.PelaajanNesteytysMuuttunut;
+            Moottori.Pelaaja.StatsitMuuttunut += Konsoli.Hahmoruutu.PelaajanStatsitMuuttuneet;
 
             Moottori.NykyinenKartta = Kartta.LuoKartta();
 

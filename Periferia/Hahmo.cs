@@ -10,10 +10,10 @@ namespace Periferia
     {
         public event EventHandler HpMuuttunut;
 
-        public int Taso { get; set; }
-        public int Voima { get; set; }
-        public int Nopeus { get; set; }
-        public int Onnekkuus { get; set; }
+        public virtual int Taso { get; set; }
+        public virtual int Voima { get; set; }
+        public virtual int Nopeus { get; set; }
+        public virtual int Onnekkuus { get; set; }
 
         private int hp;
 
@@ -72,8 +72,7 @@ namespace Periferia
         {
             // (1) Tarkistetaan, osuuko hyökkäys
             if (osuukoHyökkäysNopeus(kohde) || osuukoHyökkäysOnni(kohde))
-            {
-                // (2) Kuinka paljon vahinkoa tehdään?
+            {                // (2) Kuinka paljon vahinkoa tehdään?
                 int vahinko = laskeVahinko();
                 // (3) Onko kriittinen vahinko?
                 if (onkoKriittinenOsuma(kohde))
@@ -283,7 +282,7 @@ namespace Periferia
         private bool liiku(Karttaruutu vr, Karttaruutu ur)
         {
 
-            if (!ur.Käveltävä)
+            if (this is Vihollinen ? !ur.TekoälyKäveltävä : !ur.Käveltävä)
             {
                 // Pelaajan hyökkäys
                 if (ur.Entiteetti is Vihollinen && (this is Pelaaja))
@@ -324,6 +323,19 @@ namespace Periferia
                 return false;
 
 
+            } // liikkumattomuus päättyy
+            // Jos liikkuminen onnistuu, suoritetaan alla olevat rivit
+            if (ur.Entiteetti is Tavara && this is Pelaaja)
+            {
+                switch (ur.Entiteetti.Nimi)
+                {
+                    case ("vesi"):
+                        Moottori.Pelaaja.Nesteytys += Moottori.VedenPisteet;
+                        Konsoli.Viestiloki.Lisää($"Löysit vettä! +{Moottori.VedenPisteet}!", ConsoleColor.Blue);
+                        break;
+                }
+                
+                
             }
             ur.Entiteetti = vr.Entiteetti;
             vr.Entiteetti = null;

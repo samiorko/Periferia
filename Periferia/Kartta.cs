@@ -10,7 +10,7 @@ namespace Periferia
     {
         public const int KARTTALEVEYS = 60;
         public const int KARTTAKORKEUS = 14;
-
+        public static int karttageneraattori_vesilähteet = 2;
         private const int KARTTAGENERAATTORI_PUUTIHEYS = 1;
 
         static int seuraavaVapaaId = 0;
@@ -39,6 +39,7 @@ namespace Periferia
             }
 
             PiirräEntiteetit();
+            Konsoli.Hahmoruutu.PiirräEntiteettienTiedot(Konsoli.HahmoRuutuOffset_Vasen, Konsoli.HahmoRuutuOffset_Ylä);
         }
 
         public void PiirräEntiteetit()
@@ -47,7 +48,7 @@ namespace Periferia
             Ruudut[Moottori.Pelaaja.Rivi, Moottori.Pelaaja.Sarake].Entiteetti = Moottori.Pelaaja;
 
             if (Entiteetit != null)
-                foreach(IPiirrettävä p in Entiteetit.Where(e => e is Vihollinen && (e as Vihollinen).Elossa))
+                foreach(IPiirrettävä p in Entiteetit.Where(e => (e is Vihollinen && (e as Vihollinen).Elossa) || e is Tavara))
                 {
                     Ruudut[p.Rivi, p.Sarake].Entiteetti = p;
                     PiirräEntiteetti(p);
@@ -69,7 +70,7 @@ namespace Periferia
             {
                 x = Vihollinen.Rnd.Next(0, KARTTALEVEYS - 1);
                 y = Vihollinen.Rnd.Next(0, KARTTAKORKEUS - 1);
-            } while (!k.Ruudut[y, x].Käveltävä);
+            } while (!k.Ruudut[y, x].TekoälyKäveltävä);
 
             return new Tuple<int, int>(y,x);
         }
@@ -78,6 +79,7 @@ namespace Periferia
         {
             Kartta k = new Kartta();
             Random rnd = new Random();
+            
 
             SUUNTA? sisään = null, ulos = null;
             List<SUUNTA> sallitutUlosmenot = new List<SUUNTA>() { SUUNTA.YLÄ, SUUNTA.ALA, SUUNTA.VASEN, SUUNTA.OIKEA };
@@ -187,6 +189,14 @@ namespace Periferia
 
             k.Ulosmenosuunta = ulos;
 
+            for(int i=0; i< karttageneraattori_vesilähteet; i++)
+            {
+                Tuple<int, int> YX = RandomiVapaaRuutu(k);
+                Tavara vesi = new Tavara("vesi") { Merkki = 'V', Väri = ConsoleColor.Blue, Rivi = YX.Item1, Sarake = YX.Item2 };
+                k.Entiteetit.Add(vesi);
+                k.Ruudut[YX.Item1, YX.Item2].Entiteetti = vesi;
+            }
+            
             return k;
             
         }

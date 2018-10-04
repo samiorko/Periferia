@@ -9,6 +9,7 @@ namespace Periferia
     public class Pelaaja : Hahmo, IPiirrettävä
     {
         public event EventHandler NesteMuuttunut;
+        public event EventHandler StatsitMuuttunut;
 
         private int _nesteytys;
         public int TappoPisteet { get; set; }
@@ -53,6 +54,47 @@ namespace Periferia
                     Nopeus++;
                     Onnekkuus++;
                 }
+            }
+        }
+
+        private int _taso;
+        public override int Taso
+        {
+            get { return _taso; }
+            set
+            {
+                _taso = value;
+                StatsitMuuttunut?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        private int _voima;
+        public override int Voima
+        {
+            get { return _voima; }
+            set
+            {
+                _voima = value;
+                StatsitMuuttunut?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        private int _nopeus;
+        public override int Nopeus
+        {
+            get { return _nopeus; }
+            set
+            {
+                _nopeus = value;
+                StatsitMuuttunut?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        private int _onnekkuus;
+        public override int Onnekkuus
+        {
+            get { return _onnekkuus; }
+            set
+            {
+                _onnekkuus = value;
+                StatsitMuuttunut?.Invoke(this, EventArgs.Empty);
             }
         }
 
