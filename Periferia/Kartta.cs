@@ -11,6 +11,8 @@ namespace Periferia
         public const int KARTTALEVEYS = 60;
         public const int KARTTAKORKEUS = 14;
         public static int karttageneraattori_vesilähteet = 2;
+        public static int minPelastusKartanNumero = 0;
+        public static float pelastusTodennäköisyysProsentti = 100f; 
         private const int KARTTAGENERAATTORI_PUUTIHEYS = 1;
 
         static int seuraavaVapaaId = 0;
@@ -189,6 +191,7 @@ namespace Periferia
 
             k.Ulosmenosuunta = ulos;
 
+            //Varataan karttaruudut vesilähteille
             for(int i=0; i< karttageneraattori_vesilähteet; i++)
             {
                 Tuple<int, int> YX = RandomiVapaaRuutu(k);
@@ -196,7 +199,23 @@ namespace Periferia
                 k.Entiteetit.Add(vesi);
                 k.Ruudut[YX.Item1, YX.Item2].Entiteetti = vesi;
             }
-            
+
+            // Määritetään pelastuksen sijainti
+            if(k.Id > minPelastusKartanNumero)
+            {
+                Random r = new Random();
+                int randomLuku = r.Next(1, 100);
+                if (randomLuku < pelastusTodennäköisyysProsentti)
+                {
+                    Tuple<int, int> YX = RandomiVapaaRuutu(k);
+                    k.Ruudut[YX.Item1, YX.Item2].Tyyppi = Karttaruutu.Ruututyypit.PELASTUS;
+                    k.Ruudut[YX.Item1, YX.Item2].Väri = ConsoleColor.DarkMagenta;
+                    k.Ruudut[YX.Item1, YX.Item2].Merkki = '\u25B2';
+                    Konsoli.Viestiloki.Lisää("\u25B2 \u25B2 \u25B2 PELASTUS NÄKÖPIIRISSÄ! PELASTUS NÄKÖPIIRISSÄ! \u25B2 \u25B2 \u25B2", ConsoleColor.DarkMagenta);
+                    Konsoli.Viestiloki.Lisää("\u25B2 \u25B2 \u25B2 PELASTUS NÄKÖPIIRISSÄ! PELASTUS NÄKÖPIIRISSÄ! \u25B2 \u25B2 \u25B2", ConsoleColor.DarkMagenta);
+                }
+            }
+
             return k;
             
         }

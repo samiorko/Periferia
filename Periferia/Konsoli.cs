@@ -142,6 +142,37 @@ namespace Periferia
             }
             Konsoli.UusiRivi(20);
             Console.Write($"{Moottori.Pelaaja.Nimi} heitti veivit seuraavilla statseilla:");
+            TulostaLopetusStatsit();
+        }
+        
+        public static void PiirräPelastus()
+        {
+            TyhjennäKonsoli();
+            Console.ResetColor();
+            string teksti = @"
+ _    _     _      _                     _ _       _ 
+| |  | |   (_)_   (_)_                  | (_)     | |
+| |  | |__  _| |_  _| |_     ____   ____| |_ ____ | |
+ \ \/ / _ \| |  _)| |  _)   |  _ \ / _  ) | |  _ \|_|
+  \  / |_| | | |__| | |__   | | | ( (/ /| | | | | |_ 
+   \/ \___/|_|\___)_|\___)  | ||_/ \____)_|_|_| |_|_|
+                            |_|                      
+";
+            PiirräReunatStringBuilder(4, 2, KonsoliKorkeus - 3, KonsoliLeveys - 5);
+            Console.SetCursorPosition(14, 8);
+            string[] rivit = teksti.Split('\n');
+            foreach (var rivi in rivit)
+            {
+                Console.Write(rivi);
+                Konsoli.UusiRivi(14);
+            }
+            Konsoli.UusiRivi(20);
+            Console.Write($"{Moottori.Pelaaja.Nimi} voitti pelin seuraavilla statseilla:");
+            TulostaLopetusStatsit();
+        }
+
+        public static void TulostaLopetusStatsit()
+        {
             Konsoli.UusiRivi(20);
             Konsoli.UusiRivi(20);
             Console.Write($"\tLVL:\t\t\t{Moottori.Pelaaja.Taso}");
@@ -156,7 +187,6 @@ namespace Periferia
                 Konsoli.UusiRivi(20);
             }
         }
-
         public static void TyhjennäKonsoli()
         {
             Console.Clear();

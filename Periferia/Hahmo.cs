@@ -320,6 +320,15 @@ namespace Periferia
                     
                     return false;
                 }
+
+                if (this is Pelaaja && ur.Tyyppi is Karttaruutu.Ruututyypit.PELASTUS)
+                {
+                    Konsoli.Viestiloki.Lisää("Voiti");
+                    Moottori.Pelijatkuu = false;
+
+                    return false;
+                }
+
                 return false;
 
 

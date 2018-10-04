@@ -71,7 +71,14 @@ namespace Periferia
                 if(Moottori.Pelaaja.Elossa) vihollistenVuoro();
 
             }
-            Konsoli.PiirräGameOver();
+            if (Moottori.Pelaaja.Elossa)
+            {
+                Konsoli.PiirräPelastus();
+            } else
+            {
+                Konsoli.PiirräGameOver();
+            }
+            
         }
 
         static void pelaajanVuoro()
