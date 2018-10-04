@@ -41,6 +41,7 @@ namespace Periferia
 
             Moottori.Pelaaja.HpMuuttunut += Konsoli.Hahmoruutu.PelaajanHPMuuttunut;
             Moottori.Pelaaja.NesteMuuttunut += Konsoli.Hahmoruutu.PelaajanNesteytysMuuttunut;
+            Moottori.Pelaaja.StatsitMuuttunut += Konsoli.Hahmoruutu.PelaajanStatsitMuuttuneet;
 
             Moottori.NykyinenKartta = Kartta.LuoKartta();
 

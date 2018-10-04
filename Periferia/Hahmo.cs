@@ -10,10 +10,10 @@ namespace Periferia
     {
         public event EventHandler HpMuuttunut;
 
-        public int Taso { get; set; }
-        public int Voima { get; set; }
-        public int Nopeus { get; set; }
-        public int Onnekkuus { get; set; }
+        public virtual int Taso { get; set; }
+        public virtual int Voima { get; set; }
+        public virtual int Nopeus { get; set; }
+        public virtual int Onnekkuus { get; set; }
 
         private int hp;
 
@@ -69,8 +69,7 @@ namespace Periferia
         {
             // (1) Tarkistetaan, osuuko hyökkäys
             if (osuukoHyökkäysNopeus(kohde) || osuukoHyökkäysOnni(kohde))
-            {
-                // (2) Kuinka paljon vahinkoa tehdään?
+            {                // (2) Kuinka paljon vahinkoa tehdään?
                 int vahinko = laskeVahinko();
                 // (3) Onko kriittinen vahinko?
                 if (onkoKriittinenOsuma(kohde))
