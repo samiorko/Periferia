@@ -91,8 +91,6 @@ namespace Periferia
             {
                 Konsoli.Viestiloki.Lisää($"{this.Nimi} olennon isku meni ohi {kohde.Nimi}-olennon!", ConsoleColor.DarkCyan);
             }
-
-
         }
 
         private bool onkoKriittinenOsuma(Hahmo kohde)
