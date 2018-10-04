@@ -280,7 +280,7 @@ namespace Periferia
         private bool liiku(Karttaruutu vr, Karttaruutu ur)
         {
 
-            if (!ur.Käveltävä)
+            if (this is Vihollinen ? !ur.TekoälyKäveltävä : !ur.Käveltävä)
             {
                 // Pelaajan hyökkäys
                 if (ur.Entiteetti is Vihollinen && (this is Pelaaja))

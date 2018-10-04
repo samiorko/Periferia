@@ -69,7 +69,7 @@ namespace Periferia
             {
                 x = Vihollinen.Rnd.Next(0, KARTTALEVEYS - 1);
                 y = Vihollinen.Rnd.Next(0, KARTTAKORKEUS - 1);
-            } while (!k.Ruudut[y, x].Käveltävä);
+            } while (!k.Ruudut[y, x].TekoälyKäveltävä);
 
             return new Tuple<int, int>(y,x);
         }
