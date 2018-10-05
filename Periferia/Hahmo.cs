@@ -356,17 +356,19 @@ namespace Periferia
                 {
                     case ("vesi"):
                         Moottori.Pelaaja.Nesteytys += Moottori.VedenPisteet;
-                        Konsoli.Viestiloki.Lisää($"Löysit vettä +{Moottori.VedenPisteet}!", ConsoleColor.Blue);
+                        Konsoli.Viestiloki.Lisää($"Löysit vesilähteen +{Moottori.VedenPisteet}!", ConsoleColor.Blue);
                         break;
                     case ("taikajuoma"):
                         Moottori.Pelaaja.HP += Moottori.TaikajuomanPisteet;
                         Konsoli.Viestiloki.Lisää($"Löysit taikajuomaa +{Moottori.TaikajuomanPisteet}!", ConsoleColor.DarkRed);
+                        Moottori.NykyinenKartta.Entiteetit.Remove(ur.Entiteetti);
                         break;
                 }
 
-                if((ur.Entiteetti as Tavara).Poimittava) // Jos poimittava tavara
+                if((ur.Entiteetti as Tavara).Poimittava && Moottori.Pelaaja.Reppu.Count < Moottori.REPPUKOKO) // Jos poimittava tavara
                 {
                     Tavara t = (Tavara)ur.Entiteetti;
+                    Moottori.NykyinenKartta.Entiteetit.Remove(ur.Entiteetti);
                     Moottori.Pelaaja.Reppu.Add(t); // Lisätään reppuun
                     string lisätiedot = "";
                     if (t.BoostaaStatseja)
@@ -387,16 +389,27 @@ namespace Periferia
                         lisätiedot += ")";
                     }
                     Konsoli.Viestiloki.Lisää($"Löysit tavaran {t.Nimi}{lisätiedot}!", t.Väri);
+                } 
+                else if ((ur.Entiteetti as Tavara).Poimittava && Moottori.Pelaaja.Reppu.Count >= Moottori.REPPUKOKO)
+                {
+                    Tavara t = (Tavara)ur.Entiteetti;
+                    Konsoli.Viestiloki.Lisää($"Yritit poimia tavaran {t.Nimi}, mutta reppuuun ei mahdu.");
                 }
                 
                 
             }
             ur.Entiteetti = vr.Entiteetti;
-            vr.Entiteetti = null;
+            // Katsotaan jääkö ruutuun tavaraa ja jos jää, asetetaan se vanhan ruudun entiteetiksi
+            Tavara t2 = null;
 
+            try {
+                t2 = Moottori.NykyinenKartta.Entiteetit.Where(e => e.Rivi == vr.Rivi && e.Sarake == vr.Sarake)?.First() as Tavara;
+            } catch (Exception) { /* ei onnistunu, ihan sama */ }
+
+            vr.Entiteetti = (t2 != null) ? t2 : null;
 
             return true;
-        }
+            }
 
         public void Piirrä()
         {

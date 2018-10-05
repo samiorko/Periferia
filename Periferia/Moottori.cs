@@ -61,9 +61,9 @@ namespace Periferia
             Moottori.Kartat.Add(Moottori.NykyinenKartta);
 
             Konsoli.PiirräHahmoRuutu();
+            Konsoli.Viestiloki.Lisää("Peli alkaa!");
             Konsoli.PiirräKartta(Moottori.NykyinenKartta);
 
-            Konsoli.Viestiloki.Lisää("Peli alkaa!");
 
             while (Pelijatkuu)
             {

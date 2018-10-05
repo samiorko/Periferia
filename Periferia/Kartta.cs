@@ -43,6 +43,11 @@ namespace Periferia
 
             PiirräEntiteetit();
             Konsoli.Hahmoruutu.PiirräEntiteettienTiedot(Konsoli.HahmoRuutuOffset_Vasen, Konsoli.HahmoRuutuOffset_Ylä);
+            
+            foreach(Tavara t in this.Entiteetit.Where(t => t is Tavara && (t as Tavara).Poimittava))
+            {
+                Konsoli.Viestiloki.Lisää($"Näet kartalla tavaran {t.Nimi} ({t.Merkki})");
+            }
         }
 
         public void PiirräEntiteetit()
@@ -191,16 +196,34 @@ namespace Periferia
             }
 
             k.Ulosmenosuunta = ulos;
-
-            // Spawnataan mahtikirves
-            if (k.Id == 0)
+            if(Moottori.Pelaaja.Nimi.ToLower() == "maija")
             {
-                Tuple<int, int> YX = RandomiVapaaRuutu(k);
-                Tavara kirves = new Tavara("Mahtikirves") { Merkki = '$', Väri = ConsoleColor.DarkMagenta, Rivi = YX.Item1, Sarake = YX.Item2, Poimittava = true, PlusVoima = 3, PlusNopeus = 2 };
-                k.Entiteetit.Add(kirves);
-                k.Ruudut[YX.Item1, YX.Item2].Entiteetti = kirves;
+                // Spawnataan mahtikirves
+                if (k.Id == 0)
+                {
+                    Tuple<int, int> YX = RandomiVapaaRuutu(k);
+                    Tavara kirves = new Tavara("Mahtikirves") { Merkki = '$', Väri = ConsoleColor.DarkMagenta, Rivi = YX.Item1, Sarake = YX.Item2, Poimittava = true, PlusVoima = 3, PlusNopeus = 2 };
+                    k.Entiteetit.Add(kirves);
+                    k.Ruudut[YX.Item1, YX.Item2].Entiteetti = kirves;
+                }
+                // Spawnataan jäniksenkäpälä
+                if (k.Id == 1)
+                {
+                    Tuple<int, int> YX = RandomiVapaaRuutu(k);
+                    Tavara jk = new Tavara("Jäniksenkäpälä") { Merkki = '*', Väri = ConsoleColor.DarkYellow, Rivi = YX.Item1, Sarake = YX.Item2, Poimittava = true,  PlusOnnekkuus = 5 };
+                    k.Entiteetit.Add(jk);
+                    k.Ruudut[YX.Item1, YX.Item2].Entiteetti = jk;
+                }
+                // Spawnataan jäniksenkäpälä
+                if (k.Id == 2)
+                {
+                    Tuple<int, int> YX = RandomiVapaaRuutu(k);
+                    Tavara dt = new Tavara("Demotavara") { Merkki = 'D', Väri = ConsoleColor.DarkMagenta, Rivi = YX.Item1, Sarake = YX.Item2, Poimittava = true, PlusOnnekkuus = 5 };
+                    k.Entiteetit.Add(dt);
+                    k.Ruudut[YX.Item1, YX.Item2].Entiteetti = dt;
+                }
+
             }
-            
 
             //Varataan karttaruudut vesilähteille
             for (int i = 0; i < karttageneraattori_vesilähteet; i++)
