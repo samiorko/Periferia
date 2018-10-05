@@ -355,7 +355,7 @@ namespace Periferia
                 switch (ur.Entiteetti.Nimi) // Kovakoodatut tavarat
                 {
                     case ("vesi"):
-                        Moottori.Pelaaja.Nesteytys += Moottori.VedenPisteet;
+                        Moottori.Pelaaja.Nesteytys = 100;
                         Konsoli.Viestiloki.Lisää($"Löysit vesilähteen +{Moottori.VedenPisteet}!", ConsoleColor.Blue);
                         break;
                     case ("taikajuoma"):
