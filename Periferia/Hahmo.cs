@@ -352,7 +352,7 @@ namespace Periferia
             // Jos liikkuminen onnistuu, suoritetaan alla olevat rivit
             if (ur.Entiteetti is Tavara && this is Pelaaja)
             {
-                switch (ur.Entiteetti.Nimi) // Kovakoodatut nimet
+                switch (ur.Entiteetti.Nimi) // Kovakoodatut tavarat
                 {
                     case ("vesi"):
                         Moottori.Pelaaja.Nesteytys += Moottori.VedenPisteet;
@@ -382,7 +382,7 @@ namespace Periferia
                         }
                         if (t.PlusOnnekkuus > 0)
                         {
-                            lisätiedot += $" +{t.PlusOnnekkuus} voima";
+                            lisätiedot += $" +{t.PlusOnnekkuus} onnekkuus";
                         }
                         lisätiedot += ")";
                     }

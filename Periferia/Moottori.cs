@@ -14,6 +14,7 @@ namespace Periferia
         static public List<Kartta> Kartat = new List<Kartta>();
         static public float VaikeusKerroin { get => ((float)Vaikeustaso)/10.0f; }
         static public Vaikeustasot Vaikeustaso { get; set; } = Vaikeustasot.HELPPO;
+        public const int REPPUKOKO = 3;
 
         static public Kartta NykyinenKartta;
         static public List<VihollisMalli> VihollisMallit = new List<VihollisMalli>();
